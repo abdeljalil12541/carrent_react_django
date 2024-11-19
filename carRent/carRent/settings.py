@@ -146,18 +146,23 @@ REST_FRAMEWORK = {
 
 
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5173',  # Your React app
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:5173',  # Local React app URL
+    'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = False  # Change to False since you're not using HTTPS in development
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True  # Change to False since you're not using HTTPS in development
 CORS_ALLOW_ALL_ORIGINS = False
 # settings.py
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:5173']  # Add your frontend URL
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',  # Local React app URL
+    'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
+]
 CORS_ALLOW_CREDENTIALS = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
