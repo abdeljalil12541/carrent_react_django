@@ -127,38 +127,35 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
 
-
-
-
 CORS_ALLOWED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',  # Your React app
-    'https://carrentreactdjango-production.up.railway.app'
+    'https://carrent-react-django.vercel.app',  # Your React app production
+    'http://127.0.0.1:5173',  # Your React app local development
+    'http://127.0.0.1:8000',  # Your Django backend local development
+    'https://carrentreactdjango-production.up.railway.app'  # Your Django backend production
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SAMESITE = 'None'  # or 'None' if needed
-SESSION_COOKIE_SAMESITE = 'None'  # or 'None' if needed
+
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = True  # Use True for HTTPS
-# settings.py
-CORS_ALLOW_CREDENTIALS = True
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',  # Add your frontend URL
-    'https://carrentreactdjango-production.up.railway.app'  # Ensure this is included
+    'https://carrent-react-django.vercel.app',  # Your React app production
+    'http://127.0.0.1:5173',  # Your React app local development
+    'http://127.0.0.1:8000',  # Your Django backend local development
+    'https://carrentreactdjango-production.up.railway.app'  # Your Django backend production
 ]
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),  # Add your static files directory here
-# ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
