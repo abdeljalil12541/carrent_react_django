@@ -154,10 +154,9 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 CSRF_COOKIE_HTTPONLY = False
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 
-CSRF_COOKIE_SECURE = True  # Change to False since you're not using HTTPS in development
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 # settings.py
 CSRF_TRUSTED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Local React app URL
