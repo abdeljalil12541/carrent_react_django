@@ -60,13 +60,12 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         try {
             const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-info/', { withCredentials: true });
             setAuthenticatedUser(response.data.user);
-            
+            console.log('Authenticated User:', response.data.user); // Log user info
+
             // Check if profile and avatar exist before setting the URL
             if (response.data.user.user_profile?.avatar) {
                 setUserAvatar(`https://carrentreactdjango-production.up.railway.app${response.data.user.user_profile.avatar}`);
             }
-            console.log('response', response.data.user.user_profile?.avatar);
-            console.log('user avatar', userAvatar);
         } catch (error) {
             console.log('Error fetching user info:', error);
         }
