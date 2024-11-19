@@ -147,7 +147,6 @@ CSRF_COOKIE_SECURE = False  # Set to True if using HTTPS
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = 'None'  # Allows CSRF cookie in cross-site requests
 
-
 CSRF_TRUSTED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Your React app production
     'http://127.0.0.1:5173',  # Your React app local development
