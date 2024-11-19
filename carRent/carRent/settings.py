@@ -143,7 +143,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_COOKIE_SECURE = True  # Only works if your site uses HTTPS
+CSRF_COOKIE_SECURE = False  # Set to True if using HTTPS
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = 'None'  # Allows CSRF cookie in cross-site requests
 
