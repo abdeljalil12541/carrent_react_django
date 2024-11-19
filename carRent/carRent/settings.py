@@ -146,7 +146,7 @@ REST_FRAMEWORK = {
 
 
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5173',  # Local React app URL
+    'https://carrentreactdjango-production.up.railway.app',  # Local React app URL
     'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
 ]
 
@@ -160,7 +160,7 @@ CSRF_COOKIE_SECURE = True  # Change to False since you're not using HTTPS in dev
 CORS_ALLOW_ALL_ORIGINS = False
 # settings.py
 CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:5173',  # Local React app URL
+    'https://carrentreactdjango-production.up.railway.app',  # Local React app URL
     'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
 ]
 CORS_ALLOW_CREDENTIALS = True
