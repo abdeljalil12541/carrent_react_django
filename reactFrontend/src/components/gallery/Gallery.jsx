@@ -86,7 +86,7 @@ const Gallery = () => {
                 <div className='aboutUsBg'></div>
                 <div className='aboutUsContent w-full flex justify-center items-center'>
                     <div>
-                        <p className='text-3xl sm:text-4xl md:text-5xl font-semibold text-white'>Galerie</p>
+                        <p className='text-3xl sm:text-4xl md:text-5xl font-semibold text-white'>Galeqsdqrie</p>
                         <p className='text-center mt-4 font-semibold text-white'>Home / <span className='text-red-600'>Contact Us</span></p>
                     </div>
                 </div>
