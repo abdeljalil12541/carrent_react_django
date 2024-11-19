@@ -23,6 +23,13 @@ const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }
 
+const getCSRFToken = () => {
+    const name = 'csrftoken'; // This should match the name of your CSRF cookie
+    const cookieValue = `; ${document.cookie}`;
+    const parts = cookieValue.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+};
+
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,12 +53,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     }, []);
 
 
-    const getCSRFToken = () => {
-        const name = 'csrftoken'; // This should match the name of your CSRF cookie
-        const cookieValue = `; ${document.cookie}`;
-        const parts = cookieValue.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    };
+    
 
     // Fetch user info
     const [userAvatar, setUserAvatar] = useState('');

@@ -12,19 +12,6 @@ from django.shortcuts import get_object_or_404
 from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarSerializer, ContactSerializer, GalleryCategorySerializer, GallerySerializer, InboxSerializer, LatestOffersSerializer, ReviewSerializer, UpdateUserSerializer, ProfileSerializer, ChangePasswordSerializer, CategorySerializer, PickupFeatureSerializer, CarFeatureSerializer, DefaultEquipmentSerializer, WishlistSerializer
 
 # Create your views here.
-
-
-class CheckAuthenticatedView(APIView):
-    def get(self, request, format=None):
-        print("User:", request.user)  # Log the user object
-        print("Is Authenticated:", request.user.is_authenticated)  # Log authentication status
-        if request.user.is_authenticated:
-            print("Authentication check passed.")
-            return Response({'isAuthenticated': True}, status=status.HTTP_200_OK)
-        else:
-            print("Authentication check failed.")
-            return Response({'isAuthenticated': False}, status=status.HTTP_200_OK)
-
             
             
 
@@ -82,28 +69,31 @@ from django.contrib import auth
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 
+@method_decorator(csrf_protect, name='dispatch')
+class CheckAuthenticatedView(APIView):
+    def get(self, request, format=None):
+        print("User:", request.user)  # Log the user object
+        print("Is Authenticated:", request.user.is_authenticated)  # Log authentication status
+        if request.user.is_authenticated:
+            return Response({'isAuthenticated': True}, status=status.HTTP_200_OK)
+        return Response({'isAuthenticated': False}, status=status.HTTP_200_OK)
+
+# User logout view
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         try:
-            print("Logout attempt started")  # Debug print
             auth.logout(request)
-            # request.session.flush()
-            print('gg - Logout successful')  # Debug print
             return Response({'success': "Logged out successfully"}, status=status.HTTP_200_OK)
         except Exception as e:
-            print(f"Logout error: {str(e)}")  # Debug print
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
 
-
+# Set CSRF token
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class GetCSRFToken(APIView):
-    permission_classes = (permissions.AllowAny,)
-    
-    def get(self, request, Format=None):
-        return Response({'success': 'CSRF cookie set'})
-
+    permission_classes = []
+    def get(self, request, format=None):
+        return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
 
 
 class UserInfos(APIView):
