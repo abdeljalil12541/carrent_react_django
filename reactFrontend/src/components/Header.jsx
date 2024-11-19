@@ -147,7 +147,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         try {
             const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-login/', 
                 { loginEmail, loginPassword },
-                { headers: { 'X-CSRFToken': getCSRFToken() }, withCredentials: true } // Include CSRF token and credentials
+                { headers: { 'X-CSRFToken': getCSRFToken() }, withCredentials: true }
             );
             console.log('User Login', response.data);
             setLoginEmail('');

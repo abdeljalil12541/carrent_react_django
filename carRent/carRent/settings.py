@@ -156,9 +156,11 @@ SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = True  # Use True for HTTPS
 # settings.py
-CSRF_TRUSTED_ORIGINS = ['https://carrent-react-django.vercel.app']  # Add your frontend URL
 CORS_ALLOW_CREDENTIALS = True
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://carrent-react-django.vercel.app',  # Add your frontend URL
+    'https://carrentreactdjango-production.up.railway.app'  # Ensure this is included
+]
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
