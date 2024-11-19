@@ -17,7 +17,7 @@ const Gallery = () => {
     useEffect(() => {
         const GelleryCategory = async () => {
             try{
-                const response = await axios.get('http://127.0.0.1:8000/api/gallery-categroy/')
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/gallery-categroy/')
                 setGalleriesCategory(response.data)
                 console.log('galleries category', response.data)
             }
@@ -31,7 +31,7 @@ const Gallery = () => {
     useEffect(() => {
         const Gellery = async () => {
             try{
-                const response = await axios.get('http://127.0.0.1:8000/api/gallery/')
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/gallery/')
                 setGalleries(response.data)
                 console.log('galleries', response.data)
             }
@@ -56,7 +56,7 @@ const Gallery = () => {
 
     const images = galleries.map(gallery => ({
         id: gallery.id,
-        src: `http://127.0.0.1:8000${gallery.image}`,
+        src: `https://carrentreactdjango-production.up.railway.app/${gallery.image}`,
         category: gallery.category.title,
         alt: gallery.title,
     }))
