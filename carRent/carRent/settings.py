@@ -128,15 +128,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
-    # 'DEFAULT_RENDERER_CLASSES': [
-    #     'rest_framework.renderers.JSONRenderer',
-    # ],
-    # 'DEFAULT_PARSER_CLASSES': [
-    #     'rest_framework.parsers.JSONParser',
-    # ],
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated'
-    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
     ]
@@ -151,8 +142,8 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
-SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
+CSRF_COOKIE_SAMESITE = 'None'  # or 'None' if needed
+SESSION_COOKIE_SAMESITE = 'None'  # or 'None' if needed
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = True  # Use True for HTTPS
 # settings.py
