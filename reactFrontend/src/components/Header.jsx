@@ -14,21 +14,20 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate } from 'react-router-dom';
 
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
-axios.defaults.withCredentials = true
-
-
-const classNames = (...classes) => {
-    return classes.filter(Boolean).join(' ')
-}
-
+// Fetch CSRF token function
 const getCSRFToken = () => {
-    const name = 'csrftoken'; // This should match the name of your CSRF cookie
-    const cookieValue = `; ${document.cookie}`;
-    const parts = cookieValue.split(`; ${name}=`);
+    const name = 'csrftoken';
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
+
+// Set up Axios to send CSRF token and credentials with each request
+axios.defaults.withCredentials = true;
+axios.interceptors.request.use(config => {
+    config.headers['X-CSRFToken'] = getCSRFToken(); // Attach CSRF token
+    return config;
+});
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)

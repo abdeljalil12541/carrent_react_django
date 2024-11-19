@@ -134,25 +134,24 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',  # Your React app production
-    'http://127.0.0.1:5173',  # Your React app local development
-    'http://127.0.0.1:8000',  # Your Django backend local development
-    'https://carrentreactdjango-production.up.railway.app'  # Your Django backend production
-]
+# CSRF and Cookie Settings
+CSRF_COOKIE_SECURE = True  # Ensures the CSRF cookie is only sent over HTTPS
+SESSION_COOKIE_SECURE = True  # Ensures the session cookie is only sent over HTTPS
+CSRF_COOKIE_SAMESITE = 'None'  # Allows cross-origin requests
+SESSION_COOKIE_SAMESITE = 'None'  # Same setting for session cookies
 
+# CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
-
-CSRF_COOKIE_SECURE = os.environ.get('DJANGO_USE_HTTPS', 'False') == 'True'  # Set to True in production
-CSRF_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SAMESITE = 'None'  # Allows CSRF cookie in cross-site requests
+CORS_ALLOWED_ORIGINS = [
+    'https://carrent-react-django.vercel.app',  # Production React App
+    'https://carrentreactdjango-production.up.railway.app'  # Django production backend
+]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',  # Your React app production
-    'http://127.0.0.1:5173',  # Your React app local development
-    'http://127.0.0.1:8000',  # Your Django backend local development
-    'https://carrentreactdjango-production.up.railway.app'  # Your Django backend production
+    'https://carrent-react-django.vercel.app',
+    'https://carrentreactdjango-production.up.railway.app'
 ]
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
