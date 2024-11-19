@@ -147,21 +147,18 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Your React app
-    'https://carrentreactdjango-production.up.railway.app'  # Production React app
+    'https://carrentreactdjango-production.up.railway.app'
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
+SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SECURE = True  # Use True for HTTPS
 # settings.py
+CSRF_TRUSTED_ORIGINS = ['https://carrent-react-django.vercel.app']  # Add your frontend URL
 CORS_ALLOW_CREDENTIALS = True
 
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',
-    'https://carrentreactdjango-production.up.railway.app'  # Added production URL
-]
-
-CSRF_COOKIE_SECURE = True  # Use True for HTTPS
-SESSION_COOKIE_SAMESITE = 'None'  # For cross-site cookies
-CSRF_COOKIE_SAMESITE = 'None'  # For cross-site cookies
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
