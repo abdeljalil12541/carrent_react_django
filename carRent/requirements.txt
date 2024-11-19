@@ -88,14 +88,12 @@ pyfiglet==1.0.2
 Pygments==2.16.1
 PyJWT==2.8.0
 pykakasi==2.2.1
-pypiwin32==223
 python-dateutil==2.8.2
 python-decouple==3.8
 python-slugify==8.0.4
 python-telegram-bot==20.6
 pytube==15.0.0
 pytz==2023.3.post1
-pywin32==306
 PyYAML==6.0.1
 rapidfuzz==3.9.0
 redis==5.0.4
@@ -113,7 +111,6 @@ spotipy==2.23.0
 sqlparse==0.4.2
 starlette==0.27.0
 stripe==8.5.0
-sudo==1.0.0
 sympy==1.12
 syncedlyrics==0.7.0
 termcolor==1.1.0
