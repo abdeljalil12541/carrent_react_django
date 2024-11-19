@@ -1,0 +1,159 @@
+.home {
+    background-image: url('https://pictures.dealer.com/f/fredbeansautorent/1196/531580b545d2013d35d6dc917976e0c3x.jpg?impolicy=downsize_bkpt&w=2500');
+    height: 82vh;
+}
+
+.bgHome{
+    background-color: black;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+}
+
+.chooseUsItems:hover svg{
+    background-color: #c53030;
+    fill: #fff;
+}
+.chooseUsItems:hover svg path,
+.chooseUsItems:hover svg line,
+.chooseUsItems:hover svg circle {
+    stroke: #fff;
+}
+
+
+.react-datepicker__calendar-icon{
+    margin-top: 5px !important;
+    margin-left: -1px !important;
+}
+
+/* Hide default arrow */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* For IE/Edge */
+select::-ms-expand {
+    display: none;
+}
+
+/* Change arrow color and rotation on focus */
+select:focus + div div {
+    border-color: rgb(220, 38, 38); /* red-600 */
+}
+
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.custom-select::-ms-expand {
+    display: none;
+}
+
+/* Custom styles for the calendar date picker */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+    background-color: rgb(220, 38, 38) !important; /* Tailwind's red-600 */
+    color: white !important;
+}
+
+.pickup-datepicker-popper{
+    margin-left: 10px !important;
+}
+
+.dropoff-datepicker-popper{
+    margin-left: 280px !important;
+}
+
+/* Hover state */
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--keyboard-selected:hover {
+    background-color: rgb(185, 28, 28) !important; /* Tailwind's red-700 for hover */
+}
+
+/* Today's date */
+.react-datepicker__day--today {
+    font-weight: bold;
+    color: rgb(220, 38, 38) !important;
+}
+
+/* Optional: Change the header background color as well */
+.react-datepicker__header {
+    background-color: rgb(254, 242, 242) !important; /* Tailwind's red-50 */
+}
+
+/* Optional: Change the month/year selection color */
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+    color: rgb(220, 38, 38) !important;
+}
+
+/* input of select homepage */
+.css-n2fesy-control {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important; /* shadow-sm equivalent */
+}
+
+/* Shadow when focused */
+.css-n2fesy-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important; /* Adjust the color and spread as needed */
+    outline: none !important; /* Optional: Remove default focus outline */
+}
+
+/* Hover state for cursor */
+
+.css-1wy0on6,
+.css-1u9des2-indicatorSeparator,
+.css-1flk9b8-indicatorContainer{
+    display: none !important;
+}
+
+
+
+.chooseUsItemsAboutPage:hover svg{
+    background-color: #0a0a0a;
+    fill: #fff;
+}
+.chooseUsItemsAboutPage:hover svg path,
+.chooseUsItemsAboutPage:hover svg line,
+.chooseUsItemsAboutPage:hover svg circle {
+    stroke: #fff;
+}
+
+@media (min-width: 1118px){
+    .home {
+        height: 87vh;
+    }
+}
+
+@media (min-width: 1023px) and (max-width: 1117px){
+    .home {
+        height: 100vh;
+    }
+}
+
+
+@media (max-width: 622px) {
+    .home {
+        background-image: url('https://pictures.dealer.com/f/fredbeansautorent/1196/531580b545d2013d35d6dc917976e0c3x.jpg?impolicy=downsize_bkpt&w=2500');
+        height: 1200px;
+        background-size: cover;
+        background-position: 1000px;
+    }
+}
+
+@media (min-width: 623px) and (max-width: 1023px) {
+    .home {
+        background-image: url('https://pictures.dealer.com/f/fredbeansautorent/1196/531580b545d2013d35d6dc917976e0c3x.jpg?impolicy=downsize_bkpt&w=2500');
+        height: 900px;
+        background-size: cover;
+        background-position: 1100px;
+    }
+}

@@ -1,0 +1,53 @@
+.slider-container {
+    width: 100%;
+    margin: 10px auto;
+    font-family: Arial, sans-serif;
+}
+.slider {
+    position: relative;
+    height: 10px;
+    background: #ddd;
+}
+.slider .thumb {
+    width: 6px;
+    height: 20px;
+    position: absolute;
+    background: #dc2626;
+    cursor: pointer;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+.slider .fill {
+    position: absolute;
+    height: 100%;
+    background: #dc2626;
+    z-index: 1;
+}
+.scale {
+    position: relative;
+    height: 30px;
+    margin-top: 10px;
+}
+.tick {
+    position: absolute;
+    width: 1px;
+    background: #e5e7eb;
+    top: 0;
+}
+.tick.small {
+    height: 5px;
+}
+.tick.long {
+    height: 10px;
+}
+.tick-label {
+    position: absolute;
+    top: 12px;
+    transform: translateX(-50%);
+    font-size: 10px;
+}
+
+.active{
+    fill: #c53030;
+}

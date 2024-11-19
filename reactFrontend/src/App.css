@@ -1,0 +1,447 @@
+.swiper-button-prev,
+.swiper-button-next {
+  z-index: 10;
+  background-color: rgba(255, 0, 0, 0.7);
+  padding: 7px;
+  height: 25px;
+}
+
+.swiper-button-prev {
+  margin-right: auto; /* Pushes the previous button to the left */
+}
+
+.swiper-button-next {
+  margin-left: auto; /* Pushes the next button to the right */
+}
+
+.swiper-pagination-bullet {
+  background-color: red;
+  color: red;
+}
+
+.swiper-pagination {
+  padding-top: 10px; /* Adjust padding as needed */
+  display: flex;
+  position: relative !important;
+  bottom: 1px !important;
+  z-index: 9999 !important;
+  justify-content: center; /* Center the pagination */
+  padding-top: 24px; /* Pushes pagination to the bottom */
+}
+
+.brandsImg{
+  opacity: .4;
+  transition: .5s;
+}
+
+.brandsImg:hover{
+  opacity: 1;
+}
+
+.MuiButtonBase-root :active{
+  background-color: white !important;
+}
+
+.MuiPaginationItem-previousNext{
+  background-color: #dc2626 !important;
+
+}
+.MuiPaginationItem-previousNext:active svg{
+  background-color: #dc2626 !important;
+  fill: #fff !important;
+
+}
+.MuiPaginationItem-icon  {
+  fill: white !important;
+}
+
+.MuiButtonBase-root.Mui-selected{
+  background-color: #dc2626!important;
+  color: white !important;
+}
+
+.css-1ahfael-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+  background-color: rgb(252, 88, 88) !important;
+}
+
+.react-datepicker__calendar-icon {
+  fill: #828282;
+  margin-top: 3px;
+}
+
+
+.react-time-picker{
+  border: none !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.react-time-picker__wrapper{
+  border: none !important;
+  border-left: 1px solid #4b5563 !important;
+}
+
+
+.aboutUsBg{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #2d3e52;
+  opacity: .5;
+}
+
+.aboutUsContent{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.BannerMoroccoBg{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .4;
+}
+
+.commentBg{
+  background-image: url('./styles/images/map-pattern.png');
+  width: 300px;
+  height: 300px;
+  background-color: black;
+}
+
+
+.contactBorderLine{
+  border: 1px solid #dc2626;
+}
+
+
+.borderDotted{
+  background-image: linear-gradient(to right, rgb(109, 109, 109) 33%, rgba(255,255,255,0) 0%);
+background-position: bottom;
+background-size: 6px 1px;
+background-repeat: repeat-x;
+
+}
+
+
+
+.Heart {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.heartHover {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  position: absolute; /* Position it on top of the previous heart */
+  left: 10px;
+  top: 8px;
+}
+
+button:hover .heartHover {
+  opacity: 1;
+}
+
+@media screen and (min-width: 692px) and (max-width: 767px) {
+  .reviewswiper {
+    padding-left: 200px;
+  }
+}
+
+@media screen and (min-width: 592px) and (max-width: 692px) {
+  .reviewswiper {
+    padding-left: 150px;
+  }
+}
+
+@media screen and (min-width: 556px) and (max-width: 639px) {
+  .reviewswiper {
+    padding-left: 120px;
+  }
+}
+
+
+@media screen and (min-width: 400px) and (max-width: 556px) {
+  .reviewswiper {
+    padding-left: 60px;
+  }
+}
+
+
+
+@media screen and (min-width: 1023px) and (max-width: 1279px) {
+  .searcherRes {
+    padding: 0px !important;
+  }
+}
+
+
+
+/* datepickers */
+
+
+@media screen and (max-width: 264px) {
+  .datepickers {
+    width: 80px;
+  }
+}
+
+
+
+@media screen and (min-width: 347px) and (max-width: 447px) {
+  .datepickers {
+    width: 240px;
+  }
+}
+
+
+
+@media screen and (min-width: 447px) and (max-width: 607px) {
+  .datepickers {
+    width: 340px;
+  }
+}
+
+
+
+@media screen and (min-width: 543px) and (max-width: 700px) {
+  .datepickers {
+    width: 436px;
+  }
+}
+
+
+
+
+
+@media screen and (min-width: 700px) and (max-width: 768px) {
+  .datepickers {
+    width: 436px;
+  }
+}
+
+
+
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 886px) {
+  .datepickers {
+    width: 100px;
+  }
+
+  .destinations{
+    width: 150px;
+  }
+}
+
+
+
+.dropoff-datepicker-popper {
+  margin-left: 5px !important;
+}
+
+
+
+@media screen and (max-width: 240px) {
+
+  .dialogFormRes{
+    width: 190px;
+  }
+}
+
+
+
+@media screen and (min-width: 1120px) and (max-width: 1278px) {
+
+  .WidthLgCheckoutCartRes{
+    margin-left: -60px;
+  }
+}
+
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.menu-responsive-header {
+  display: block;
+  cursor: pointer;
+}
+
+.menu-title-responsive-header:hover:before {
+  border-top-color: #8db842;
+}
+
+.menu-title-responsive-header:after {
+  content: "";
+  display: block;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-bottom: 0 solid #ebebeb;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 101;
+  transition: 0.2s border-bottom ease-in;
+}
+
+.menu-responsive-header:hover > .menu-title-responsive-header:after {
+  border-bottom-width: 5px;
+  transition: 0.2s 0.2s border-bottom-width ease-out;
+}
+
+.menu-dropdown-responsive-header {
+  min-width: 100%;
+  padding: 15px 0;
+  position: absolute;
+  background: #ebebeb;
+  z-index: 100;
+  transition: 0.5s padding, 0.5s background;
+}
+
+
+.menu-responsive-header:not(:hover) > .menu-dropdown-responsive-header {
+  padding: 4px 0;
+  background: #dddddd;
+  z-index: 99;
+}
+
+.menu-responsive-header:not(:hover) > .menu-dropdown-responsive-header:after {
+  border-top-color: #dddddd;
+}
+
+.menu-responsive-header:not(:hover) > .menu-title-responsive-header:after {
+  border-bottom-color: #dddddd;
+}
+
+
+.hList-responsive-header > * {
+  float: left;
+}
+
+.hList-responsive-header > * + * {
+  margin-left: 0;
+}
+
+
+/* dropdownMenuHeaderRes */
+@media screen and (min-width: 208px) and (max-width: 227px) {
+  .dropdownMenuHeaderRes {
+    width: 220px;
+  }
+}
+
+@media screen and (min-width: 227px) and (max-width: 250px) {
+  .dropdownMenuHeaderRes {
+    width: 238px;
+  }
+}
+@media screen and (min-width: 250px) and (max-width: 280px) {
+  .dropdownMenuHeaderRes {
+    width: 270px;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 300px) {
+  .dropdownMenuHeaderRes {
+    width: 290px;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 320px) {
+  .dropdownMenuHeaderRes {
+    width: 311px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 350px) {
+  .dropdownMenuHeaderRes {
+    width: 341px;
+  }
+}
+
+@media screen and (min-width: 350px) and (max-width: 380px) {
+  .dropdownMenuHeaderRes {
+    width: 371px;
+  }
+}
+
+@media screen and (min-width: 380px) and (max-width: 400px) {
+  .dropdownMenuHeaderRes {
+    width: 401px;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 430px) {
+  .dropdownMenuHeaderRes {
+    width: 431px;
+  }
+}
+
+@media screen and (min-width: 430px) and (max-width: 460px) {
+  .dropdownMenuHeaderRes {
+    width: 461px;
+  }
+}
+
+@media screen and (min-width: 460px) and (max-width: 490px) {
+  .dropdownMenuHeaderRes {
+    width: 491px;
+  }
+}
+
+@media screen and (min-width: 490px) and (max-width: 520px) {
+  .dropdownMenuHeaderRes {
+    width: 521px;
+  }
+}
+
+@media screen and (min-width: 520px) and (max-width: 550px) {
+  .dropdownMenuHeaderRes {
+    width: 551px;
+  }
+}
+
+@media screen and (min-width: 550px) and (max-width: 580px) {
+  .dropdownMenuHeaderRes {
+    width: 581px;
+  }
+}
+
+@media screen and (min-width: 580px) and (max-width: 610px) {
+  .dropdownMenuHeaderRes {
+    width: 611px;
+  }
+}
+
+@media screen and (min-width: 610px) and (max-width: 640px) {
+  .dropdownMenuHeaderRes {
+    width: 641px;
+  }
+}

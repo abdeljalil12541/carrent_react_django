@@ -1,0 +1,63 @@
+.dropDownBtn button{
+    font-size: 12px !important;
+    text-decoration: underline;
+}
+.dropDownBtn button svg{
+    height: 15px !important;
+    width: 15px !important;
+}
+
+.dropDownBtn:hover svg,
+.dropDownBtn:hover  {
+  text-decoration: none;
+  color: #c53030;
+  transition: .3s;
+}
+.profileHover:hover img{
+  border: 2px solid #c53030;
+}
+.profileHover:hover p{
+  color: #c53030;
+}
+
+.Logout:hover{
+  color: #c53030;
+}
+
+
+
+.scrollingNavbar {
+    transition: opacity .1s ease, transform 0.1s ease; /* Smooth transition for opacity and transform */
+}
+
+.scrollingNavbar.fixed {
+    opacity: 1; /* Fully visible */
+    transform: translateY(-80px); /* Move to original position */
+    width: 100%;
+}
+
+.scrollingNavbar.hiddenn {
+  transition: opacity 0s ease, transform 0s ease; /* No transition when hiding */
+}
+
+
+.dropDownBtn2 button{
+    font-size: 12px !important;
+    text-decoration: underline;
+}
+.dropDownBtn2 button svg{
+    height: 15px !important;
+    width: 15px !important;
+}
+
+.dropDownBtn2:hover svg,
+.dropDownBtn2:hover  {
+  text-decoration: none;
+  color: #c53030;
+  transition: .3s;
+}
+
+
+.navBorder {
+  border-bottom: 2px solid #c53030;
+}
