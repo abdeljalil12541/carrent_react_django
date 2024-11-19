@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ze6!@52@3ewv0(3j)$tyimsts))-x*&-u2c0&+kepfsd-_5#l_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -160,8 +160,8 @@ CORS_ALLOW_ALL_ORIGINS = False
 # settings.py
 CSRF_TRUSTED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Local React app URL
+    'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
 ]
-CORS_ALLOW_CREDENTIALS = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
