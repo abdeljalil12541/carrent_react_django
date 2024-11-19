@@ -63,7 +63,7 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
   useEffect(() => {
     const fetchPriceFilter = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/price-filter/');
+        const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/price-filter/');
         setMinPrice(response.data.min_price);
         setMaxPrice(response.data.max_price);
       } catch (error) {

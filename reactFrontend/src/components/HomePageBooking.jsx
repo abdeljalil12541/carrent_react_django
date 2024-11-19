@@ -134,7 +134,7 @@ const HomePageBooking = () => {
         );
 
         try {
-            const response = await axios.get("http://127.0.0.1:8000/api/available-cars/", {
+            const response = await axios.get("https://carrentreactdjango-production.up.railway.app/api/available-cars/", {
                 params: {
                     pickup_datetime: pickupDateTime,
                     dropoff_datetime: dropoffDateTime,
@@ -175,7 +175,7 @@ const handleChangeOptionDestination2 = (option) => {
   useEffect(() => {
     const fetchPickupFeatures = async () => {
         try{
-            const response = await axios.get('http://127.0.0.1:8000/api/pick-up-features/')
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/pick-up-features/')
             setPickupFeatures(response.data.data)
         }
         catch(error) {

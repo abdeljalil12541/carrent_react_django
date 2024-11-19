@@ -10,7 +10,7 @@ const FeaturesFilter = ({ activeIndices, contentRef1, showFilter, onFeatureChang
         const fetchFeatures = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://127.0.0.1:8000/api/features/');
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/features/');
                 setFeatures(response.data.data.map((feature) => feature.name))
                 } catch (error) {
                 console.error('Error fetching features:', error);

@@ -276,11 +276,11 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
       const fetchHomeCardCar = async () => {
           try {
               setLoading(true);
-              const response = await axios.get('http://127.0.0.1:8000/api/home-car-card/');
+              const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/home-car-card/');
               const formattedCars = response.data.data.map(car => ({
                   id: car.id,
                   name: car.name,
-                  image: `http://127.0.0.1:8000${car.image}`,
+                  image: `https://carrentreactdjango-production.up.railway.app${car.image}`,
                   is_available: car.is_available,
                   slug: car.slug,
                   car_size: car.car_size_display,

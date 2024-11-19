@@ -23,13 +23,13 @@ const SettingsDashboard = () => {
     useEffect(() => {
     const FetchUserDashboard = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/user-dashboard/', { withCredentials: true });
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-dashboard/', { withCredentials: true });
             console.log('response user dashboard', response.data);
 
             setUsername(response.data.user_data.username);
             setEmail(response.data.user_data.email);
             setPhoneNumber(response.data.user_data.user_profile.phone_number);
-            setAvatar(`http://127.0.0.1:8000${response.data.user_data.user_profile.avatar}`);
+            setAvatar(`https://carrentreactdjango-production.up.railway.app${response.data.user_data.user_profile.avatar}`);
             setBio(response.data.user_data.user_profile.bio);
 
             setUsernameId(response.data.user_data.username);
@@ -54,7 +54,7 @@ const UpdateUser = async (e) => {
     e.preventDefault();
     try {
         const response = await axios.put(
-            `http://127.0.0.1:8000/api/user-update/${usernameId}/`,
+            `https://carrentreactdjango-production.up.railway.app/api/user-update/${usernameId}/`,
             { username, email },
             {
                 headers: { 'X-CSRFToken': getCSRFToken() },
@@ -86,7 +86,7 @@ const UpdateProfile = async (e) => {
         }
         
         const response = await axios.put(
-            `http://127.0.0.1:8000/api/update-profile/${usernameId}/`,
+            `https://carrentreactdjango-production.up.railway.app/api/update-profile/${usernameId}/`,
             formData,
             {
                 headers: { 
@@ -119,7 +119,7 @@ const UpdatePassword = async (e) => {
     
     try {
         const response = await axios.put(
-            'http://127.0.0.1:8000/api/update-password/',  // Note: no username in URL
+            'https://carrentreactdjango-production.up.railway.app/api/update-password/',  // Note: no username in URL
             {
                 old_password: currentPassword,
                 new_password: newPassword

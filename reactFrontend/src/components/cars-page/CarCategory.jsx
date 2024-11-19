@@ -10,7 +10,7 @@ const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange
         const fetchCategories = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://127.0.0.1:8000/api/categories/');
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/categories/');
                 setCategories(response.data.data.map((category) => category.name));
             } catch (error) {
                 console.error('Error fetching categories:', error);

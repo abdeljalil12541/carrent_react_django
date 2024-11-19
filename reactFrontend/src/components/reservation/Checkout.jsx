@@ -93,7 +93,7 @@ const Checkout = ({ selectedCurrency }) => {
   useEffect(() => {
       const checkAuthStatus = async () => {
           try {
-              const response = await axios.get('http://127.0.0.1:8000/api/check_authentication/', { withCredentials: true });
+              const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
               setIsAuthenticated(response.data.isAuthenticated);
               if (response.data.isAuthenticated) {
                   getUserInfo(); // Fetch user info if authenticated
@@ -109,7 +109,7 @@ const Checkout = ({ selectedCurrency }) => {
   // Fetch authenticated user info
   const getUserInfo = async () => {
       try {
-          const response = await axios.get('http://127.0.0.1:8000/api/user-info/', { withCredentials: true });
+          const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-info/', { withCredentials: true });
           setAuthenticatedUser(response.data.user);
       } catch (error) {
           console.error('Error fetching user info:', error);
@@ -242,7 +242,7 @@ const CreateBoking = async (e) => {
     
     setTimeout(async () => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/create-booking/", {
+            const response = await fetch("https://carrentreactdjango-production.up.railway.app/api/create-booking/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

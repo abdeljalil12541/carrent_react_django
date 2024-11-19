@@ -435,7 +435,7 @@ const handleChangeOptionDestination2 = (option) => {
   useEffect(() => {
     const fetchPickupFeatures = async () => {
         try{
-            const response = await axios.get('http://127.0.0.1:8000/api/pick-up-features/')
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/pick-up-features/')
             setPickupFeatures(response.data.data)
         }
         catch(error) {
@@ -599,7 +599,7 @@ const [loader, setLoader] = useState(false);
 useEffect(() => {
     const checkAuthStatus = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/check_authentication/', { withCredentials: true });
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
             setIsAuthenticated(response.data.isAuthenticated);
             if (response.data.isAuthenticated) {
                 getUserInfo(); // Fetch user info if authenticated
@@ -615,7 +615,7 @@ useEffect(() => {
 // Fetch authenticated user info
 const getUserInfo = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:8000/api/user-info/', { withCredentials: true });
+        const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-info/', { withCredentials: true });
         setAuthenticatedUser(response.data.user);
     } catch (error) {
         console.error('Error fetching user info:', error);
@@ -632,7 +632,7 @@ const getCSRFToken = () => {
 useEffect(() => {
     const fetchWishlistStatus = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/get-wishlist-status/${car.id}/${authenticatedUser.id}/`, {
+            const response = await axios.get(`https://carrentreactdjango-production.up.railway.app/api/get-wishlist-status/${car.id}/${authenticatedUser.id}/`, {
                 withCredentials: true,
                 headers: {
                     "X-CSRFToken": getCSRFToken(),
@@ -656,7 +656,7 @@ const addWishlist = async () => {
     try {
         if (!isAdded) {
             // Add to wishlist
-            const response = await axios.post('http://127.0.0.1:8000/api/add-wishlist/', {
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/add-wishlist/', {
                 user: authenticatedUser.id,
                 car: car.id,
                 is_added: true,
@@ -671,7 +671,7 @@ const addWishlist = async () => {
             toast.success('Added to wishlist!');
         } else {
             // Remove from wishlist
-            await axios.delete(`http://127.0.0.1:8000/api/remove-wishlist/${car.id}/${authenticatedUser.id}/`, {
+            await axios.delete(`https://carrentreactdjango-production.up.railway.app/api/remove-wishlist/${car.id}/${authenticatedUser.id}/`, {
                 withCredentials: true,
                 headers: {
                     "X-CSRFToken": getCSRFToken(),

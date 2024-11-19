@@ -55,7 +55,7 @@ const ReservationHistoryDashboard = ({ selectedCurrency }) => {
   const fetchBookingHistoriesInfo = async () => {
     try {
       const apiStatus = STATUS_MAP[selectedStatus];
-      const response = await axios.get(`http://127.0.0.1:8000/api/booking-info/`, {
+      const response = await axios.get(`https://carrentreactdjango-production.up.railway.app/api/booking-info/`, {
         params: { status: apiStatus }
       });
       setBookingCarsHistories(response.data);

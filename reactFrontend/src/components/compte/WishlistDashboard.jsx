@@ -59,14 +59,14 @@ const WishlistDashboard = ({ selectedCurrency }) => {
   useEffect(() => {
     const FetchWishlistObjects = async () => {
       try{
-        const response = await axios.get('http://127.0.0.1:8000/api/get-wishlist-objects/')
+        const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-wishlist-objects/')
 
         const formattedWishlistCars = response.data.map(item => ({
           id: item.car.id,
           name: item.car.name,
           category: item.car.category.name,
           slug: item.car.slug,
-          image: `http://127.0.0.1:8000${item.car.image}`,
+          image: `https://carrentreactdjango-production.up.railway.app${item.car.image}`,
           is_available: item.car.is_available,
           model: item.car.model,
           car_size: item.car.car_size,

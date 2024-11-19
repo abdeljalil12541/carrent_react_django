@@ -39,7 +39,7 @@ const ContactUsPage = () => {
                 message: message,
             });
 
-            const response = await axios.post('http://127.0.0.1:8000/api/contact-us/', 
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/contact-us/', 
                 {
                     first_name: firstName,
                     last_name: lastName,

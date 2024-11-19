@@ -56,7 +56,7 @@ const Ratings = () => {
         setLoader(true);
         
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/add-review/', 
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/add-review/', 
             { name, review, stars, country },
             {
                 withCredentials: true,

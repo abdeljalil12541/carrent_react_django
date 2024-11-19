@@ -32,7 +32,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/check_authentication/', { withCredentials: true });
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
@@ -58,12 +58,12 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
 
     const getUserInfo = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/user-info/', { withCredentials: true });
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-info/', { withCredentials: true });
             setAuthenticatedUser(response.data.user);
             
             // Check if profile and avatar exist before setting the URL
             if (response.data.user.user_profile?.avatar) {
-                setUserAvatar(`http://127.0.0.1:8000${response.data.user.user_profile.avatar}`);
+                setUserAvatar(`https://carrentreactdjango-production.up.railway.app${response.data.user.user_profile.avatar}`);
             }
             console.log('response', response.data.user.user_profile?.avatar);
             console.log('user avatar', userAvatar);
@@ -103,7 +103,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/user-creation/',
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-creation/',
             { username, email, password, full_name },
             { headers: { 'X-CSRFToken': getCSRFToken() }, withCredentials: true }
             );
@@ -146,7 +146,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/user-login/', 
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-login/', 
                 { loginEmail, loginPassword },
                 { headers: { 'X-CSRFToken': getCSRFToken() }, withCredentials: true } // Include CSRF token and credentials
             );
@@ -210,7 +210,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     useEffect(() => {
         const fetchCSRFToken = async () => {
             try {
-                await axios.get('http://127.0.0.1:8000/api/get-csrf-token/');
+                await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/');
             } catch (error) {
                 console.error("Error fetching CSRF token", error);
             }
@@ -244,7 +244,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             // Get CSRF token from cookie
             const csrfToken = getCookie('csrftoken')
     
-            const response = await axios.post('http://127.0.0.1:8000/api/logout/', {}, {
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {}, {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken,

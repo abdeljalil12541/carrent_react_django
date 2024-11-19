@@ -57,7 +57,7 @@ const LatestOffers = ({ selectedCurrency }) => {
     useEffect(() => {
         const fetchLatestOffers = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/latest-offers/');
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
                 setLatestOffers(response.data);
                 console.log('data...', response.data);
             } catch (error) {
@@ -97,7 +97,7 @@ const LatestOffers = ({ selectedCurrency }) => {
                     default_equipements: offer.car.default_equipment ? offer.car.default_equipment.map(equipement => equipement.name) : [],
                     pickup_features: offer.car.pickup_features ? offer.car.pickup_features.map(pickup_feature => pickup_feature.name) : [],
                     price: offer.car.price_per_day,
-                    image: `http://127.0.0.1:8000${offer.car.image}`,
+                    image: `https://carrentreactdjango-production.up.railway.app${offer.car.image}`,
                     current_location: offer.car.current_location.name,
                     car_size: offer.car.car_size
                 };
@@ -110,7 +110,7 @@ const LatestOffers = ({ selectedCurrency }) => {
                             
                             {/* Main background image */}
                             <img 
-                                src={`http://127.0.0.1:8000${offer.image}`}
+                                src={`https://carrentreactdjango-production.up.railway.app${offer.image}`}
                                 alt={offer.title}
                                 className="w-full h-full object-cover scale-x-[-1]"
                             />

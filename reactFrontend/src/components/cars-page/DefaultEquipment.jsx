@@ -9,7 +9,7 @@ const DefaultEquipment = ({ activeIndices, contentRef5, showFilter, onDefaultEqu
         const fetchDefaultEquipments = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://127.0.0.1:8000/api/default-equipment/');
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/default-equipment/');
                 setDefaultEquipments(response.data.data.map((defaultEquipment) => defaultEquipment.name))
                 } catch (error) {
                 console.error('Error fetching categories:', error);

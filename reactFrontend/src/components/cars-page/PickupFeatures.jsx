@@ -9,7 +9,7 @@ const PickupFeatures = ({ activeIndices, contentRef4, showFilter, onPickupFeatur
         const fetchPickupFeatures = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://127.0.0.1:8000/api/pick-up-features/');
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/pick-up-features/');
                 setPickUpFeatures(response.data.data.map((pickUpFeatures) => pickUpFeatures.name))
                 } catch (error) {
                 console.error('Error fetching pick up features:', error);

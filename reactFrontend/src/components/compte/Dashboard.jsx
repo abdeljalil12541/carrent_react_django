@@ -19,7 +19,7 @@ const Dashboard = ({ selectedCurrency }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/check_authentication/', { withCredentials: true });
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
@@ -35,7 +35,7 @@ const Dashboard = ({ selectedCurrency }) => {
     // Fetch authenticated user info
     const getUserInfo = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/api/user-info/', { withCredentials: true });
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-info/', { withCredentials: true });
             setAuthenticatedUser(response.data.user);
         } catch (error) {
             console.error('Error fetching user info:', error);
@@ -45,7 +45,7 @@ const Dashboard = ({ selectedCurrency }) => {
     useEffect(() => {
         const FetchInboxCount = async () => {
         try{
-            const response = await axios.get('http://127.0.0.1:8000/api/get-notif-count/')
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-notif-count/')
             console.log('fetching inboxs successfully...', response.data.notif_count)
             setInboxsCount(response.data.notif_count)
         }catch(error) {
@@ -70,7 +70,7 @@ const Dashboard = ({ selectedCurrency }) => {
     
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/reset-notif-count/${authenticatedUser.id}/`,
+                `https://carrentreactdjango-production.up.railway.app/api/reset-notif-count/${authenticatedUser.id}/`,
                 {}, // Pass an empty object as the body
                 {
                     withCredentials: true,
@@ -96,12 +96,12 @@ const Dashboard = ({ selectedCurrency }) => {
     useEffect(() => {
         const FetchUserDashboar = async () => {
             try{
-                const response = await axios.get('http://127.0.0.1:8000/api/user-dashboard/', { withCredentials: true })
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-dashboard/', { withCredentials: true })
                 .then((response) => {
                     console.log('response user dashboard', response.data)
 
                     setavUsernameDashboar(response.data.user_data.username)
-                    setavAtarDashboar(`http://127.0.0.1:8000${response.data.user_data.user_profile.avatar}`)
+                    setavAtarDashboar(`https://carrentreactdjango-production.up.railway.app${response.data.user_data.user_profile.avatar}`)
                 })
                 
             }catch(error){
