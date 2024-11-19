@@ -2,7 +2,8 @@ agora_token_builder==1.0.0
 amqp==5.2.0
 annotated-types==0.6.0
 anyio==3.7.1
-asgiref==3.4.1
+asgiref>=3.5.0,<4
+channels==4.0.0
 atom==0.10.0
 awsebcli==3.20.10
 beautifulsoup4==4.12.3
@@ -13,7 +14,6 @@ bs4==0.0.1
 celery==5.4.0
 cement==2.8.2
 certifi==2023.7.22
-channels==4.0.0
 charset-normalizer==3.3.0
 click==8.1.7
 click-didyoumean==0.3.1
