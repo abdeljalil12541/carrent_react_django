@@ -1,0 +1,2 @@
+web: gunicorn carRent.wsgi --log-file -
+web: python manage.py migrate && gunicorn carRent.wsgi
