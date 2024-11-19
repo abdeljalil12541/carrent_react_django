@@ -146,6 +146,7 @@ REST_FRAMEWORK = {
 
 
 CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5173',
     'https://carrent-react-django.vercel.app',  # Local React app URL
     'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
 ]
@@ -156,9 +157,10 @@ SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SECURE = False
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 # settings.py
 CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',
     'https://carrent-react-django.vercel.app',  # Local React app URL
     'https://carrentreactdjango-production.up.railway.app',  # Production React app URL
 ]
