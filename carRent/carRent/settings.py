@@ -147,7 +147,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Your React app
-    'http://127.0.0.1:8000'
+    'https://carrentreactdjango-production.up.railway.app'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
