@@ -209,7 +209,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     useEffect(() => {
         const fetchCSRFToken = async () => {
             try {
-                await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/');
+                await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', { withCredentials: true });
             } catch (error) {
                 console.error("Error fetching CSRF token", error);
             }
