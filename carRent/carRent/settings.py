@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ze6!@52@3ewv0(3j)$tyimsts))-x*&-u2c0&+kepfsd-_5#l_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
+DEBUG = False
+ALLOWED_HOSTS = [
+    'carrent-react-django.vercel.app', 
+    'carrentreactdjango-production.up.railway.app'
+]
 
 
 # Application definition
@@ -150,13 +152,10 @@ CORS_ALLOWED_ORIGINS = [
     'https://carrentreactdjango-production.up.railway.app'
 ]
 
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
-SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
-CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = False  # Change to False since you're not using HTTPS in development
-# settings.py
-CSRF_TRUSTED_ORIGINS = ['https://carrent-react-django.vercel.app']  # Add your frontend URL
+CSRF_TRUSTED_ORIGINS = ['https://carrent-react-django.vercel.app']
+CSRF_COOKIE_SECURE = True  # Use True for HTTPS
+SESSION_COOKIE_SAMESITE = 'None'  # For cross-site cookies
+CSRF_COOKIE_SAMESITE = 'None'  # For cross-site cookies
 CORS_ALLOW_CREDENTIALS = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
