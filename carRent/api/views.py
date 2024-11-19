@@ -14,15 +14,17 @@ from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarS
 # Create your views here.
 
 
-@method_decorator(csrf_protect, name='dispatch')
 class CheckAuthenticatedView(APIView):
     def get(self, request, format=None):
         print("User:", request.user)  # Log the user object
         print("Is Authenticated:", request.user.is_authenticated)  # Log authentication status
         if request.user.is_authenticated:
+            print("Authentication check passed.")
             return Response({'isAuthenticated': True}, status=status.HTTP_200_OK)
         else:
+            print("Authentication check failed.")
             return Response({'isAuthenticated': False}, status=status.HTTP_200_OK)
+
             
             
 
