@@ -146,7 +146,7 @@ REST_FRAMEWORK = {
 
 
 CORS_ALLOWED_ORIGINS = [
-    'https://carrent-react-django.vercel.app/',  # Your React app
+    'https://carrent-react-django.vercel.app',  # Your React app
     'http://127.0.0.1:8000'
 ]
 
@@ -156,7 +156,7 @@ SESSION_COOKIE_SAMESITE = 'Lax'  # or 'None' if needed
 CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = False  # Change to False since you're not using HTTPS in development
 # settings.py
-CSRF_TRUSTED_ORIGINS = ['https://carrent-react-django.vercel.app/']  # Add your frontend URL
+CSRF_TRUSTED_ORIGINS = ['https://carrent-react-django.vercel.app']  # Add your frontend URL
 CORS_ALLOW_CREDENTIALS = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
