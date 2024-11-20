@@ -52,6 +52,12 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         return cookieValue;
 }
     
+useEffect(() => {
+    const csrfToken = getCookie('csrftoken');
+    console.log('CSRF Token (by me): ', csrfToken);
+    console.log('All cookies:', document.cookie);
+
+}, [])
 
     const checkCookies = () => {
         const csrfToken = getCookie('csrftoken');
@@ -293,10 +299,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                 'https://carrentreactdjango-production.up.railway.app/api/logout/', 
                 {}, 
                 { 
-                    withCredentials: true,
                     headers: {
-                        'X-CSRFToken': csrfTokenFromBackend,
-                        'Content-Type': 'application/json'
+                        'X-CSRFToken': getCookie('csrftoken'),
                     }
                 }
             );
