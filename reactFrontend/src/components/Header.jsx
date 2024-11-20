@@ -283,41 +283,21 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            const csrfToken = await getAndStoreCSRFToken();
-            console.log('CSRF Token:', csrfToken); // Debug log
-
-            const response = await fetch('https://carrentreactdjango-production.up.railway.app/api/logout/', {
-                method: 'POST',
+            const csrfToken = getCookie('csrftoken'); // Function to get CSRF token from cookies
+            await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {}, {
                 headers: {
-                    'X-CSRFToken': csrfToken, // Include CSRF token
+                    'X-CSRFToken': csrfToken,
                 },
-                credentials: 'include', // Ensure cookies are sent
             });
-            
-
-            if (response.ok) {
-                toast.success('Logged out successfully');
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 2000);
-            } else {
-                const errorData = await response.json();
-                console.error('Logout error:', errorData);
-                toast.error('Logout failed. Please try again.');
-                console.log('CSRF Token before logout request:', csrfToken);
-                console.log('CSRF Token before logout request2:', getCSRFToken());
-
-            }
+            console.log("Logged out successfully");
         } catch (error) {
-            console.error('Logout error:', error);
-            toast.error('Logout failed. Please try again.');
+            console.error("Logout error:", error.response.data);
         }
     };
     
     // Initialize CSRF token when the app loads
     useEffect(() => {
         getAndStoreCSRFToken().catch(console.error);
-        axios.defaults.headers.common['X-CSRFToken'] = await getAndStoreCSRFToken();
     }, []);
     
     

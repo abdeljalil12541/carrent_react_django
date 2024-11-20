@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 
 from django.shortcuts import get_object_or_404
 from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarSerializer, ContactSerializer, GalleryCategorySerializer, GallerySerializer, InboxSerializer, LatestOffersSerializer, ReviewSerializer, UpdateUserSerializer, ProfileSerializer, ChangePasswordSerializer, CategorySerializer, PickupFeatureSerializer, CarFeatureSerializer, DefaultEquipmentSerializer, WishlistSerializer
-
+            
 # Create your views here.
             
             
@@ -61,13 +61,7 @@ class UserLoginView(APIView):
                 return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
         except User.DoesNotExist:
             return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
-            
-    from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib import auth
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.utils.decorators import method_decorator
+
 
 @method_decorator(csrf_protect, name='dispatch')
 class CheckAuthenticatedView(APIView):
@@ -85,6 +79,7 @@ class GetCSRFToken(APIView):
         return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
     
 # User logout view
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         print("Before logout:", request.user)
