@@ -241,8 +241,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         console.log('Attempting logout...');
     
         try {
-            // Fetch the CSRF token
-            const csrfToken = await getCSRFToken();
+            // Fetch the CSRF token using getCookie
+            const csrfToken = getCookie('csrftoken');
     
             if (!csrfToken) {
                 console.error('CSRF token missing. Cannot proceed with logout.');

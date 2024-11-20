@@ -4,6 +4,20 @@ import { MapPin, Mail, Phone } from 'lucide-react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 
+
+const getCSRFToken = () => {
+    const name = 'csrftoken';
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+};
+
+axios.defaults.withCredentials = true;
+axios.interceptors.request.use(config => {
+    config.headers['X-CSRFToken'] = getCSRFToken(); // Attach CSRF token
+    return config;
+});
+
 const ContactUsPage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -16,13 +30,6 @@ const ContactUsPage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
-    const getCSRFToken = () => {
-        const name = 'csrftoken';
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    };
 
     const handleContactSubmit = async (e) => {
         e.preventDefault();
