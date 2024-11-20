@@ -15,12 +15,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 
+// Set up Axios to send CSRF token and credentials with each request
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
-    // Set up Axios to send CSRF token and credentials with each request
-    axios.defaults.withCredentials = true;
-    axios.defaults.xsrfCookieName = 'csrftoken';
-    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
     const [loader, setLoader] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false);
