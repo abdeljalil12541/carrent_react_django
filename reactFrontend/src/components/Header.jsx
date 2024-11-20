@@ -280,13 +280,17 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
-        console.log('Attempting logout...');
-    
+        
         try {
-            // Ensure we have a CSRF token
-            const csrfToken = await getAndStoreCSRFToken();
+            // Get CSRF token directly from cookie before making request
+            const csrfToken = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken='))
+                ?.split('=')[1];
     
-            console.log('Making logout request with token:', csrfToken); // Debug log
+            if (!csrfToken) {
+                throw new Error('No CSRF token found');
+            }
     
             const response = await axios({
                 method: 'post',
@@ -294,33 +298,29 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                 withCredentials: true,
                 headers: {
                     'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                // Add empty data object to ensure proper POST request
-                data: {}
+                data: {} // Empty object required for POST request
             });
-    
-            console.log('Logout response:', response); // Debug log
     
             if (response.status === 200) {
-                // Clear stored token after successful logout
-                memoryCsrfToken = null;
                 toast.success('Logout successful');
+                
+                // Short delay before redirect to allow toast to show
                 setTimeout(() => {
-                    navigate('/', { replace: true });
-                    window.location.reload();
-                }, 2000);
+                    window.location.href = '/';  // Using href instead of navigate for full page refresh
+                }, 1000);
             }
         } catch (error) {
-            console.error('Logout error details:', {
-                message: error.message,
-                response: error.response?.data,
-                status: error.response?.status,
-                cookies: document.cookie,
-                storedToken: memoryCsrfToken
-            });
-            toast.error('Logout failed: ' + (error.response?.data?.error || 'Unknown error'));
+            console.error('Logout error:', error);
+            
+            // If error is due to missing session, treat as successful logout
+            if (error.response?.status === 403) {
+                window.location.href = '/';
+                return;
+            }
+            
+            toast.error('Logout failed. Please try again.');
         }
     };
     
