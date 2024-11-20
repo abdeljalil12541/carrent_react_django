@@ -90,7 +90,7 @@ class LogoutView(APIView):
         if not request.user.is_authenticated:
             return Response({"error": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
         try:
-            django_logout(request)  # Log out the user
+            auth.logout(request)  # Log out the user
             return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -52,6 +52,21 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         }
     };
     
+    useEffect(() => {
+        const checkCookies = async () => {
+            const csrfToken = getCookie('csrftoken');
+            const sessionId = getCookie('sessionid');
+            
+            console.log('Detailed cookie check:', {
+                csrfToken,
+                sessionId,
+                allCookies: document.cookie
+            });
+        };
+
+        checkCookies();
+    }, []);
+    
     // Call this function after login or when the app loads
     useEffect(() => {
         checkCookies();
