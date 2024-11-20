@@ -18,6 +18,15 @@ import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = 'csrftoken';
+// Function to get CSRF token from cookies
+const getCookie = (name) => {
+    const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith(`${name}=`))
+        ?.split('=')[1];
+    console.log(`${name} cookie:`, cookieValue);
+    return cookieValue;
+};
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
@@ -45,6 +54,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         const checkAuthStatus = async () => {
             try {
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
+                console.log('CSRF Token:', getCookie('csrftoken'));
+                console.log('Session ID:', getCookie('sessionid'));
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
@@ -225,23 +236,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         fetchCSRFToken();
     }, []);
 
-    // Function to get CSRF token from cookies
-    const getCookie = (name) => {
-        try {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) {
-                const cookieValue = parts.pop().split(';').shift();
-                console.log(`Found ${name} cookie:`, cookieValue); // Debug log
-                return cookieValue;
-            }
-            console.log(`Cookie ${name} not found`); // Debug log
-            return null;
-        } catch (error) {
-            console.error('Error getting cookie:', error);
-            return null;
-        }
-    };
+    
 
     const fetchCSRFToken = async () => {
         try {
