@@ -268,6 +268,15 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
+
+
+    useEffect(() => {
+        const csrfToken = getCookie('csrftoken');
+        const sessionId = getCookie('sessionid');
+        if (!csrfToken || !sessionId) {
+            console.warn('Missing csrfToken or sessionId:', { csrfToken, sessionId });
+        }
+    }, []);
     
     
     

@@ -80,14 +80,14 @@ class GetCSRFToken(APIView):
     
 # User logout view
 class LogoutView(APIView):
-    def post(self, request, format=None):
-        print("Before logout:", request.user)
-        auth.logout(request)
-        print("After logout:", request.user)
-
-        return Response({
-            'success': 'Logged out successfully'
-        }, status=status.HTTP_200_OK)
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return Response({"error": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            django_logout(request)  # Log out the user
+            return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UserInfos(APIView):
     def get(self, request, format=None):
