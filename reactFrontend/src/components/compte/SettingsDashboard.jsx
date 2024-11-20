@@ -2,6 +2,7 @@ import { User, Mail, Phone, Image, Lock, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import { useCookies } from 'react-cookie';
 
 const SettingsDashboard = () => {
     const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
@@ -9,7 +10,7 @@ const SettingsDashboard = () => {
     axios.defaults.xsrfCookieName = 'csrftoken';
     axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-    
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
