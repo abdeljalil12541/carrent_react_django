@@ -290,7 +290,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            const csrfToken = getCookie('csrftoken');
+            const csrfToken = getCSRFToken();
             console.log('CSRF Token for Logout:', csrfToken);
     
             const response = await axios.post(
