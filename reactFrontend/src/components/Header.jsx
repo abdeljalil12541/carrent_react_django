@@ -272,7 +272,11 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         
         try {
             // The CSRF token will automatically be included in the headers
-            await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {});
+            await axios.post(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                {}, // POST request body (empty in this case)
+                { withCredentials: true } // Ensures cookies (including CSRF) are sent
+            );
             console.log("Logged out successfully");
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
