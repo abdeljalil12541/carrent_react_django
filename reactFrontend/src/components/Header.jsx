@@ -300,7 +300,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                     withCredentials: true,
                     headers: {
                     'X-CSRFToken': getCSRFToken(),
-                        
+                    'Content-Type': 'application/json'
                     }
                 }
             );
