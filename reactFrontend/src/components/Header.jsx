@@ -321,13 +321,14 @@ useEffect(() => {
                         withCredentials: true,  // Ensure cookies are sent
                     }
                 );
-                toast.success("Logged out successfully")
                 console.log("Logged out successfully", response.data);
                 navigate('/');  // Redirect to home page
                 window.location.reload();  // Optionally reload the page
             }, 1000);
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
+        }finally{
+            toast.success("Logged out successfully")
         }
     };
     
