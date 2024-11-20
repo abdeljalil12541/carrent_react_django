@@ -135,14 +135,12 @@ REST_FRAMEWORK = {
 }
 
 # CSRF and Cookie Settings
-CSRF_COOKIE_SECURE = True  # Ensures the CSRF cookie is only sent over HTTPS
-CSRF_COOKIE_HTTPONLY = False
-
-SESSION_COOKIE_SECURE = True  # Ensures the session cookie is only sent over HTTPS
-CSRF_COOKIE_SAMESITE = 'None'  # Allows cross-origin requests
-SESSION_COOKIE_SAMESITE = 'None'  # Same setting for session cookies
+CSRF_COOKIE_SECURE = False  # Set to True only if using HTTPS
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to CSRF cookie
-CSRF_USE_SESSIONS = False     # Store CSRF token in cookie instead of session
+CSRF_COOKIE_SAMESITE = 'None'  # Allows cross-origin requests
+SESSION_COOKIE_SECURE = False  # Set to True only if using HTTPS
+SESSION_COOKIE_SAMESITE = 'None'  # Same setting for session cookies
+CSRF_USE_SESSIONS = False  # Store CSRF token in cookie instead of session
 CSRF_COOKIE_NAME = 'csrftoken'
 
 # CORS Configuration

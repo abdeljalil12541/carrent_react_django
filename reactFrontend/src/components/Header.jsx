@@ -291,22 +291,28 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            const csrfToken = csrfTokenFromBackend;
-            console.log('CSRF Token for Logout:', csrfTokenFromBackend);
-    
+            const csrfToken = getCookie('csrftoken');
+            if (!csrfToken) {
+                console.error('CSRF token not found');
+                return;
+            }
+
             const response = await axios.post(
                 'https://carrentreactdjango-production.up.railway.app/api/logout/', 
                 {}, 
                 { 
                     withCredentials: true,
                     headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
+                        'X-CSRFToken': csrfToken,
+                        'Content-Type': 'application/json'
                     }
                 }
             );
             
-            // Rest of logout logic
+            console.log("Logged out successfully", response.data);
+            setIsAuthenticated(false);
+            navigate('/');
+            window.location.reload();
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
@@ -320,6 +326,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             console.warn('Missing csrfToken or sessionId:', { csrfToken, sessionId });
         }
     }, []);
+    
+    
     
     
     
