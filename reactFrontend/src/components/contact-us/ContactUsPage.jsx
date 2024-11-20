@@ -18,9 +18,9 @@ const ContactUsPage = () => {
     }, []);
 
     const getCSRFToken = () => {
-        const name = 'csrftoken'; // This should match the name of your CSRF cookie
-        const cookieValue = `; ${document.cookie}`;
-        const parts = cookieValue.split(`; ${name}=`);
+        const name = 'csrftoken';
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     };
 
