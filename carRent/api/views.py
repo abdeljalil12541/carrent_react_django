@@ -84,8 +84,8 @@ class GetCSRFToken(APIView):
     def get(self, request, format=None):
         return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
     
+# User logout view
 @method_decorator(csrf_protect, name='dispatch')
-@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         try:
@@ -93,6 +93,8 @@ class LogoutView(APIView):
             return Response({'success': "Logged out successfully"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
 class UserInfos(APIView):
     def get(self, request, format=None):

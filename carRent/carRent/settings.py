@@ -135,12 +135,12 @@ REST_FRAMEWORK = {
 }
 
 # CSRF and Cookie Settings
-CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = True  # Ensures the CSRF cookie is only sent over HTTPS
 SESSION_COOKIE_SECURE = True  # Ensures the session cookie is only sent over HTTPS
 CSRF_COOKIE_SAMESITE = 'None'  # Allows cross-origin requests
 SESSION_COOKIE_SAMESITE = 'None'  # Same setting for session cookies
-
+CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to CSRF cookie
+CSRF_USE_SESSIONS = False     # Store CSRF token in cookie instead of session
 # CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
@@ -153,6 +153,27 @@ CSRF_TRUSTED_ORIGINS = [
     'https://carrentreactdjango-production.up.railway.app'
 ]
 
+# Additional CORS settings
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

@@ -16,9 +16,11 @@ import Checkout from "./components/reservation/Checkout";
 import SuccessBooking from "./components/SuccessBooking";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 function App() {
   const [selectedCurrency, setSelectedCurrency] = useState('MAD dh');
+  setupCSRF();  // Call this after axios is imported
 
   const handleCurrencyChange = (currency) => {
     setSelectedCurrency(currency);
