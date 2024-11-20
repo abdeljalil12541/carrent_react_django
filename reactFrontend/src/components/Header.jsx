@@ -21,9 +21,10 @@ const getCSRFToken = () => {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
-
-// Set up Axios to send CSRF token and credentials with each request
 axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = 'csrftoken';
+// Set up Axios to send CSRF token and credentials with each request
 axios.interceptors.request.use(config => {
     config.headers['X-CSRFToken'] = getCSRFToken(); // Attach CSRF token
     return config;
