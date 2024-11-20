@@ -69,7 +69,6 @@ from django.contrib import auth
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 
-@method_decorator(csrf_protect, name='dispatch')
 class CheckAuthenticatedView(APIView):
     def get(self, request, format=None):
         print("User:", request.user)  # Log the user object
@@ -78,14 +77,12 @@ class CheckAuthenticatedView(APIView):
             return Response({'isAuthenticated': True}, status=status.HTTP_200_OK)
         return Response({'isAuthenticated': False}, status=status.HTTP_200_OK)
 # Set CSRF token
-@method_decorator(ensure_csrf_cookie, name='dispatch')
 class GetCSRFToken(APIView):
     permission_classes = []
     def get(self, request, format=None):
         return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
     
 # User logout view
-@method_decorator(csrf_protect, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         try:
@@ -155,7 +152,6 @@ class UserDashboard(APIView):
     
     
     
-@method_decorator(csrf_protect, name='dispatch')
 class UpdateUser(generics.UpdateAPIView):
     serializer_class = UpdateUserSerializer
     permission_classes = (permissions.IsAuthenticated,)
