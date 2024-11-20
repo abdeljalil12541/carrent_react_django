@@ -33,7 +33,6 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
      const getCSRFToken = async () => {
         try {
             const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', { withCredentials: true });
-            // Set CSRF token in cookies if it exists
             const csrfToken = response.data.csrfToken;
             if (csrfToken) {
                 setCookie('csrftoken', csrfToken, { path: '/', sameSite: 'None', secure: true });
@@ -42,6 +41,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             console.error('Error fetching CSRF token', error);
         }
     };
+    
 
     // Run this effect only once to fetch and set the CSRF token
     useEffect(() => {
@@ -59,6 +59,15 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
      console.log('CSRF Token:', csrfToken);  // CSRF token fetched from cookie
      console.log('Session ID:', sessionId);  // Session ID fetched from cookie
 
+
+     useEffect(() => {
+        const sessionId = getCookie('sessionid');
+        if (!sessionId) {
+            console.warn('Session ID is missing. Ensure that the server is setting cookies correctly.');
+        } else {
+            console.log('Session ID:', sessionId);
+        }
+     }, [])
 
     // Function to get CSRF token from cookies
     function getCookie(name) {
