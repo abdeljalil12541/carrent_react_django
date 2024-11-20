@@ -14,22 +14,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate } from 'react-router-dom';
 
-// Fetch CSRF token function
+// Set up Axios to send CSRF token and credentials with each request
 axios.defaults.withCredentials = true;
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = 'csrftoken';
-
-const getCSRFToken = () => {
-    const name = 'csrftoken';
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-};
-// Set up Axios to send CSRF token and credentials with each request
-axios.interceptors.request.use(config => {
-    config.headers['X-CSRFToken'] = getCSRFToken(); // Attach CSRF token
-    return config;
-});
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
@@ -149,24 +137,24 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         }
 
         try {
+            // The CSRF token will automatically be included in the headers
             const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-login/', 
-                { loginEmail, loginPassword },
-                { headers: { 'X-CSRFToken': getCSRFToken() }, withCredentials: true }
+                { loginEmail, loginPassword }
             );
             console.log('User Login', response.data);
             setLoginEmail('');
             setLoginPassword('');
             toast.success('User logged in successfully');
-            setOpen(false)
+            setOpen(false);
 
             setTimeout(() => {
-                navigate('/', {replace: true});
+                navigate('/', { replace: true });
                 window.location.reload();
-            }, 2000)
+            }, 2000);
         } catch (error) {
             toast.error("Invalid Password!");
         }
-    }
+    };
             // Login Form End
     
 
@@ -283,15 +271,11 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            const csrfToken = getCookie('csrftoken'); // Function to get CSRF token from cookies
-            await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {}, {
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                },
-            });
+            // The CSRF token will automatically be included in the headers
+            await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {});
             console.log("Logged out successfully");
         } catch (error) {
-            console.error("Logout error:", error.response.data);
+            console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
     
@@ -299,6 +283,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     useEffect(() => {
         getAndStoreCSRFToken().catch(console.error);
     }, []);
+    
+    
     
     
     
