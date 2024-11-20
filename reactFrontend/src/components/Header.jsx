@@ -11,12 +11,14 @@ import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
 
 import { useNavigate } from 'react-router-dom';
 
 
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
+    const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
     // Set up Axios to send CSRF token and credentials with each request
     axios.defaults.withCredentials = true;
     axios.defaults.xsrfCookieName = 'csrftoken';
@@ -27,12 +29,35 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [authenticatedUser, setAuthenticatedUser] = useState({}); // Initialize as an object
 
     
-    const getCSRFToken = () => {
-        const name = 'csrftoken'; // This should match the name of your CSRF cookie
-        const cookieValue = `; ${document.cookie}`;
-        const parts = cookieValue.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+     // Function to fetch CSRF token from the backend
+     const getCSRFToken = async () => {
+        try {
+            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', { withCredentials: true });
+            // Set CSRF token in cookies if it exists
+            const csrfToken = response.data.csrfToken;
+            if (csrfToken) {
+                setCookie('csrftoken', csrfToken, { path: '/', sameSite: 'None', secure: true });
+            }
+        } catch (error) {
+            console.error('Error fetching CSRF token', error);
+        }
     };
+
+    // Run this effect only once to fetch and set the CSRF token
+    useEffect(() => {
+        // Check if the CSRF token is already set in the cookies
+        if (!cookies.csrftoken) {
+            getCSRFToken();
+        }
+    }, [cookies, setCookie]); // Only call the effect if csrfToken is not already set
+
+
+     // Access the CSRF token and session ID from cookies
+     const csrfToken = cookies.csrftoken;
+     const sessionId = cookies.sessionid;
+ 
+     console.log('CSRF Token:', csrfToken);  // CSRF token fetched from cookie
+     console.log('Session ID:', sessionId);  // Session ID fetched from cookie
 
 
     // Function to get CSRF token from cookies
