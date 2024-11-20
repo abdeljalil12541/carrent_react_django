@@ -221,64 +221,112 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     }, []);
 
     // Function to get CSRF token from cookies
-const getCookie = (name) => {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+    const getCookie = (name) => {
+        try {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) {
+                const cookieValue = parts.pop().split(';').shift();
+                console.log(`Found ${name} cookie:`, cookieValue); // Debug log
+                return cookieValue;
             }
+            console.log(`Cookie ${name} not found`); // Debug log
+            return null;
+        } catch (error) {
+            console.error('Error getting cookie:', error);
+            return null;
         }
-    }
-    return cookieValue;
-};
-
-// Function to ensure CSRF token is set in axios defaults
-const setupCSRF = () => {
-    const csrfToken = getCookie('csrftoken');
-    if (csrfToken) {
-        axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-    }
-};
-
-// Call setupCSRF when your app initializes
-setupCSRF();
-
-// Updated logout function
-const logout = async (e) => {
-    e.preventDefault();
-    console.log('Attempting logout...');
-
-    try {
-        // Refresh CSRF token setup before making the request
-        setupCSRF();
-        
-        const response = await axios({
-            method: 'post',
-            url: 'https://carrentreactdjango-production.up.railway.app/api/logout/',
-            withCredentials: true,
-            headers: {
-                'Content-Type': 'application/json',
+    };
+    
+    // Store CSRF token in memory as backup
+    let memoryCsrfToken = null;
+    
+    // Function to get and store CSRF token
+    const getAndStoreCSRFToken = async () => {
+        try {
+            // First try to get from cookie
+            let csrfToken = getCookie('csrftoken');
+            
+            if (!csrfToken && !memoryCsrfToken) {
+                // If no token in cookie or memory, fetch from server
+                const response = await axios.get(
+                    'https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/',
+                    { withCredentials: true }
+                );
+                csrfToken = getCookie('csrftoken'); // Try to get the new cookie
+                if (!csrfToken && response.data.csrfToken) {
+                    csrfToken = response.data.csrfToken;
+                }
             }
-        });
-
-        if (response.status === 200) {
-            toast.success('Logout successful');
-            setTimeout(() => {
-                navigate('/', { replace: true });
-                window.location.reload();
-            }, 2000);
+    
+            // Use memory token as fallback
+            csrfToken = csrfToken || memoryCsrfToken;
+    
+            if (csrfToken) {
+                memoryCsrfToken = csrfToken; // Store in memory
+                axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+                console.log('CSRF token set:', csrfToken); // Debug log
+                return csrfToken;
+            }
+            
+            throw new Error('Could not obtain CSRF token');
+        } catch (error) {
+            console.error('Error getting CSRF token:', error);
+            throw error;
         }
-    } catch (error) {
-        console.log('All cookies:', document.cookie);
-        console.log('CSRF token:', getCookie('csrftoken'));
-        console.error('Logout error:', error);
-        toast.error('Logout failed: ' + (error.response?.data?.error || 'Unknown error'));
-    }
-};
+    };
+    
+    // Updated logout function
+    const logout = async (e) => {
+        e.preventDefault();
+        console.log('Attempting logout...');
+    
+        try {
+            // Ensure we have a CSRF token
+            const csrfToken = await getAndStoreCSRFToken();
+    
+            console.log('Making logout request with token:', csrfToken); // Debug log
+    
+            const response = await axios({
+                method: 'post',
+                url: 'https://carrentreactdjango-production.up.railway.app/api/logout/',
+                withCredentials: true,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                // Add empty data object to ensure proper POST request
+                data: {}
+            });
+    
+            console.log('Logout response:', response); // Debug log
+    
+            if (response.status === 200) {
+                // Clear stored token after successful logout
+                memoryCsrfToken = null;
+                toast.success('Logout successful');
+                setTimeout(() => {
+                    navigate('/', { replace: true });
+                    window.location.reload();
+                }, 2000);
+            }
+        } catch (error) {
+            console.error('Logout error details:', {
+                message: error.message,
+                response: error.response?.data,
+                status: error.response?.status,
+                cookies: document.cookie,
+                storedToken: memoryCsrfToken
+            });
+            toast.error('Logout failed: ' + (error.response?.data?.error || 'Unknown error'));
+        }
+    };
+    
+    // Initialize CSRF token when the app loads
+    useEffect(() => {
+        getAndStoreCSRFToken().catch(console.error);
+    }, []);
     
     
     
