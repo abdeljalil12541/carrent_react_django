@@ -249,13 +249,22 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
+            // Explicitly fetch CSRF token before logout
+            await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', { withCredentials: true });
+            
+            const csrfToken = getCookie('csrftoken');
+            if (!csrfToken) {
+                console.error('CSRF token not found');
+                return;
+            }
+    
             const response = await axios.post(
                 'https://carrentreactdjango-production.up.railway.app/api/logout/', 
                 {}, 
                 { 
                     withCredentials: true,
                     headers: {
-                        'X-CSRFToken': getCookie('csrftoken')
+                        'X-CSRFToken': csrfToken
                     }
                 }
             );
@@ -263,7 +272,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             console.log("Logged out successfully", response.data);
             setIsAuthenticated(false);
             navigate('/');
-            window.location.reload(); // Optional: full page reload
+            window.location.reload();
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }

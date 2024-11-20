@@ -149,10 +149,12 @@ CSRF_COOKIE_NAME = 'csrftoken'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Production React App
+    'https://carrentreactdjango-production.up.railway.app'  # Django production backend
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://carrent-react-django.vercel.app',
+    'https://carrentreactdjango-production.up.railway.app'
 ]
 
 # Additional CORS settings
