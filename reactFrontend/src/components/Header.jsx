@@ -23,7 +23,22 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [authenticatedUser, setAuthenticatedUser] = useState({}); // Initialize as an object
-    const API_BASE_URL = 'https://carrentreactdjango-production.up.railway.app/api';
+
+    const checkCookies = () => {
+        const csrfToken = getCookie('csrftoken');
+        const sessionId = getCookie('sessionid');
+    
+        if (csrfToken && sessionId) {
+            console.log("Cookies are set correctly:", { csrfToken, sessionId });
+        } else {
+            console.error("Cookies are not set correctly.");
+        }
+    };
+    
+    // Call this function after login or when the app loads
+    useEffect(() => {
+        checkCookies();
+    }, []);
 
     // Check authentication status on component mount
     useEffect(() => {
@@ -271,22 +286,32 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            // The CSRF token will automatically be included in the headers
-            await axios.post(
+            // Explicitly get and set CSRF token before logout
+            const csrfToken = getCookie('csrftoken');
+            
+            if (!csrfToken) {
+                await getAndStoreCSRFToken(); // Force token refresh
+            }
+    
+            const response = await axios.post(
                 'https://carrentreactdjango-production.up.railway.app/api/logout/', 
-                {}, // POST request body (empty in this case)
-                { withCredentials: true } // Ensures cookies (including CSRF) are sent
+                {}, 
+                { 
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': csrfToken || getCookie('csrftoken')
+                    }
+                }
             );
+            
+            // Handle successful logout
             console.log("Logged out successfully");
+            setIsAuthenticated(false);
+            navigate('/');
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
-    
-    // Initialize CSRF token when the app loads
-    useEffect(() => {
-        getAndStoreCSRFToken().catch(console.error);
-    }, []);
     
     
     
