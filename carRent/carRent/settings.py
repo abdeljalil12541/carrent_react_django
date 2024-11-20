@@ -44,10 +44,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Ensure this is at the top
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Ensure this is at the top
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',  # CSRF middleware
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -141,6 +141,8 @@ CSRF_COOKIE_SAMESITE = 'None'  # Allows cross-origin requests
 SESSION_COOKIE_SAMESITE = 'None'  # Same setting for session cookies
 CSRF_COOKIE_HTTPONLY = False  # Allow JavaScript access to CSRF cookie
 CSRF_USE_SESSIONS = False     # Store CSRF token in cookie instead of session
+CSRF_COOKIE_NAME = 'csrftoken'
+
 # CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [

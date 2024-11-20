@@ -272,6 +272,8 @@ const logout = async (e) => {
             }, 2000);
         }
     } catch (error) {
+        console.log('All cookies:', document.cookie);
+        console.log('CSRF token:', getCookie('csrftoken'));
         console.error('Logout error:', error);
         toast.error('Logout failed: ' + (error.response?.data?.error || 'Unknown error'));
     }
