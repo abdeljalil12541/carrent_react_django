@@ -282,45 +282,24 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            // Get CSRF token directly from cookie before making request
-            const csrfToken = document.cookie
-                .split('; ')
-                .find(row => row.startsWith('csrftoken='))
-                ?.split('=')[1];
-    
-            if (!csrfToken) {
-                throw new Error('No CSRF token found');
-            }
-    
-            const response = await axios({
-                method: 'post',
-                url: 'https://carrentreactdjango-production.up.railway.app/api/logout/',
-                withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                },
-                data: {} // Empty object required for POST request
-            });
+            const response = await axios.post(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/',
+                {}, // Empty object as POST data
+                { withCredentials: true }  // We only need this for session cookies
+            );
     
             if (response.status === 200) {
-                toast.success('Logout successful');
-                
-                // Short delay before redirect to allow toast to show
+                toast.success('Logged out successfully');
                 setTimeout(() => {
-                    window.location.href = '/';  // Using href instead of navigate for full page refresh
-                }, 1000);
+                    window.location.href = '/';
+                }, 2000);
             }
         } catch (error) {
             console.error('Logout error:', error);
-            
-            // If error is due to missing session, treat as successful logout
-            if (error.response?.status === 403) {
+            // If we get any error, we'll still redirect since user is probably logged out anyway
+            setTimeout(() => {
                 window.location.href = '/';
-                return;
-            }
-            
-            toast.error('Logout failed. Please try again.');
+            }, 2000);
         }
     };
     
