@@ -291,21 +291,20 @@ useEffect(() => {
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
-        
+    
         try {
-            
-
-            const response = await axios.post(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
-                {}, 
-                { 
+            // Use GET instead of POST
+            const response = await axios.get(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/',
+                {
                     headers: {
-                        'X-CSRFToken': getCookie('csrftoken'),
-                    }
+                        'X-CSRFToken': csrfTokenFromBackend, // Send the CSRF token
+                    },
+                    withCredentials: true, // Ensure cookies are sent
                 }
             );
-            
-            console.log("Logged out successfully", response.data);
+    
+            console.log("Logged out successfully:", response.data);
             setIsAuthenticated(false);
             navigate('/');
             window.location.reload();
@@ -313,6 +312,7 @@ useEffect(() => {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
+    
 
 
     useEffect(() => {

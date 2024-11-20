@@ -84,9 +84,10 @@ class GetCSRFToken(APIView):
         }, status=status.HTTP_200_OK)
     
 # User logout view
+# Add this decorator to allow CSRF cookies
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
-    def post(self, request, format=None):
+    def get(self, request, format=None):  # Change from `post` to `get`
         if not request.user.is_authenticated:
             return Response({"error": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
         try:
@@ -94,6 +95,7 @@ class LogoutView(APIView):
             return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 class UserInfos(APIView):
     def get(self, request, format=None):
