@@ -130,7 +130,7 @@ const CheckoutCart = ({ selectedCurrency }) => {
                     </div>
                 </div>
 
-                <div className='col-span-4 md:col-span-1 -mt-9 sm:-mt-0 ml-2 md:ml-0 mb-96 lg:ml-2'>
+                <div className='col-span-4 md:col-span-1 -mt-9 sm:-mt-0 ml-2 md:ml-0 mb-6 lg:ml-2'>
                     <p className='text-2xl font-md sm:text-[39.99px] sm:text-[34.99px] lg:text-[39.99px] sm:font-light text-gray-600 mt-8'>Total panier</p>
                         
                     <div className='mr-1 md:mr-0 lg:mr-10 mt-2 md:mt-4 lg:mt-3'>
@@ -138,7 +138,7 @@ const CheckoutCart = ({ selectedCurrency }) => {
                         <div className='border-b border-x border-gray-300 font-semibold rounded-b px-2 text-gray-500 py-2 flex justify-between items-cente'><p>Total</p> <p className='mr-1'>{displayTotalPrice}</p></div>
                     </div>
 
-                    <button onClick={handlePassingData} className='mb-4 bg-red-600 text-gray-100 px-2 sm:px-4 md:px-1 lg:px-4 sm:font-semibold py-2 sm:py-3 mt-4 rounded'>Valider la commande</button>
+                    <button onClick={handlePassingData} className='bg-red-600 text-gray-100 px-2 sm:px-4 md:px-1 lg:px-4 sm:font-semibold py-2 sm:py-3 mt-4 rounded'>Valider la commande</button>
                 </div>
             </div>
         </section>

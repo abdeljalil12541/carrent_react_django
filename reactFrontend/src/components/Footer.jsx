@@ -3,7 +3,7 @@ import '../styles/css/footer.css'
 
 const Footer = () => {
     return(
-        <footer className='relative mx-auto p-0 md:px-0 xl:px-0'>
+        <footer className='relative mx-auto p-0 md:px-0 xl:px-0 overflow-hidden'>
         <div className='relative bg-neutral-950 footerBgColor' style={{height: '55vh'}}>
                 <div class="container absolute mx-auto p-0 md:px-8 xl:px-0">
                     <div class="mx-auto max-w-7xl pl-6 pb-10 pt-16">
