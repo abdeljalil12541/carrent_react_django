@@ -151,6 +151,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://carrent-react-django.vercel.app',
+    'https://carrentreactdjango-production.up.railway.app',  # Add this for the new origin
 ]
 CORS_ALLOW_CREDENTIALS = True
 
