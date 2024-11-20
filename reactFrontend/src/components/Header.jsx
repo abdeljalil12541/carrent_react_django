@@ -317,27 +317,31 @@ useEffect(() => {
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
-    
+        
         try {
-            // Use GET instead of POST
-            const response = await axios.get(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/',
-                {
+            const csrfToken = getCookie('csrftoken');  // CSRF token from cookies
+    
+            // Perform the logout request with CSRF token
+            const response = await axios.post(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                {}, 
+                { 
                     headers: {
-                        'X-CSRFToken': csrfTokenFromBackend, // Send the CSRF token
+                        'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
                     },
-                    withCredentials: true, // Ensure cookies are sent
+                    withCredentials: true,  // Ensure cookies are sent
                 }
             );
-    
-            console.log("Logged out successfully:", response.data);
-            setIsAuthenticated(false);
-            navigate('/');
-            window.location.reload();
+            
+            console.log("Logged out successfully", response.data);
+            setIsAuthenticated(false);  // Update auth state
+            navigate('/');  // Redirect to home page
+            window.location.reload();  // Optionally reload the page
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
+    
     
 
 
