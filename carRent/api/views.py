@@ -84,8 +84,9 @@ class GetCSRFToken(APIView):
         }, status=status.HTTP_200_OK)
     
 # User logout view
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
-    def post(self, request, *args, **kwargs):
+    def post(self, request, format=None):
         if not request.user.is_authenticated:
             return Response({"error": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
         try:

@@ -20,13 +20,30 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = 'csrftoken';
 // Function to get CSRF token from cookies
 const getCookie = (name) => {
+    console.log('All cookies:', document.cookie);
     const cookieValue = document.cookie
         .split('; ')
         .find(row => row.startsWith(`${name}=`))
         ?.split('=')[1];
-    console.log(`${name} cookie:`, cookieValue);
+    console.log(`Searching for ${name} cookie`);
+    console.log(`${name} cookie value:`, cookieValue);
     return cookieValue;
 };
+
+useEffect(() => {
+    const checkCookies = async () => {
+        const csrfToken = getCookie('csrftoken');
+        const sessionId = getCookie('sessionid');
+        
+        console.log('Detailed cookie check:', {
+            csrfToken,
+            sessionId,
+            allCookies: document.cookie
+        });
+    };
+
+    checkCookies();
+}, []);
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
