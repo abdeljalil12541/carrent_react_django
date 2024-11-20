@@ -242,6 +242,23 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             return null;
         }
     };
+
+    const fetchCSRFToken = async () => {
+        try {
+            const response = await axios.get(
+                'https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', 
+                { withCredentials: true }
+            );
+            console.log('CSRF Token Retrieved:', response.data.csrfToken);
+        } catch (error) {
+            console.error("CSRF token fetch failed", error);
+        }
+    };
+    
+    // Call this before any authenticated request
+    useEffect(() => {
+        fetchCSRFToken();
+    }, []);
     
     
     // Updated logout function

@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.contrib import auth
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
-
+from django.middleware.csrf import get_token
 from django.shortcuts import get_object_or_404
 from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarSerializer, ContactSerializer, GalleryCategorySerializer, GallerySerializer, InboxSerializer, LatestOffersSerializer, ReviewSerializer, UpdateUserSerializer, ProfileSerializer, ChangePasswordSerializer, CategorySerializer, PickupFeatureSerializer, CarFeatureSerializer, DefaultEquipmentSerializer, WishlistSerializer
             
@@ -75,8 +75,13 @@ class CheckAuthenticatedView(APIView):
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class GetCSRFToken(APIView):
     permission_classes = []
+    
     def get(self, request, format=None):
-        return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
+        csrf_token = get_token(request)  # Add this line
+        return Response({
+            'success': 'CSRF cookie set', 
+            'csrfToken': csrf_token  # Return the actual token
+        }, status=status.HTTP_200_OK)
     
 # User logout view
 class LogoutView(APIView):
