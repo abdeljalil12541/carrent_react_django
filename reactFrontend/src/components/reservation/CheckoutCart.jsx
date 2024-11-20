@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import { FaCar, FaArrowCircleRight } from "react-icons/fa"
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 
@@ -50,13 +50,9 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 const CheckoutCart = ({ selectedCurrency }) => {
-
+    const navigate = useNavigate();
     const { state } = useLocation();
-    const car = state?.car
-    const DateTimeStateFrom = state?.FinalDateTimeStateFrom
-    const finalDestination = state?.finalDestinationState
-    const totalPrice = state?.totalPrice
-    const selectedAddOns = state?.selectedAddOns
+    const { car, DateTimeStateFrom, finalDestination, totalPrice, selectedAddOns } = location.state || {};
 
 
     useEffect(() => {
