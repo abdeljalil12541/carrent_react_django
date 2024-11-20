@@ -52,7 +52,12 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 const CheckoutCart = ({ selectedCurrency }) => {
     const navigate = useNavigate();
     const { state } = useLocation();
-    const { car, DateTimeStateFrom, finalDestination, totalPrice, selectedAddOns } = location.state || {};
+    const car = state?.car || {}
+    const DateTimeStateFrom = state?.FinalDateTimeStateFrom || {}
+    const finalDestination = state?.finalDestinationState || {}
+    const totalPrice = state?.totalPrice || 0
+    const selectedAddOns = state?.selectedAddOns || {}
+
 
 
     useEffect(() => {
