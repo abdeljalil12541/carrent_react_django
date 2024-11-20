@@ -249,22 +249,19 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             // First try to get from cookie
             let csrfToken = getCookie('csrftoken');
             
-            if (!csrfToken && !memoryCsrfToken) {
-                // If no token in cookie or memory, fetch from server
+            if (!csrfToken) {
+                // If no token in cookie, fetch from server
                 const response = await axios.get(
                     'https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/',
                     { withCredentials: true }
                 );
                 console.log('CSRF token fetch response:', response.data); // Debug log
                 csrfToken = getCookie('csrftoken'); // Try to get the new cookie
-                if (!csrfToken && response.data.csrfToken) {
-                    csrfToken = response.data.csrfToken;
-                }
             }
-    
+
             // Use memory token as fallback
             csrfToken = csrfToken || memoryCsrfToken;
-    
+
             if (csrfToken) {
                 memoryCsrfToken = csrfToken; // Store in memory
                 axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
@@ -331,6 +328,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     useEffect(() => {
         getAndStoreCSRFToken().catch(console.error);
     }, []);
+    
     
     
     
