@@ -130,8 +130,6 @@ useEffect(() => {
         const checkAuthStatus = async () => {
             try {
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
-                console.log('CSRF Token:', getCookie('csrftoken'));
-                console.log('Session ID:', getCookie('sessionid'));
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
