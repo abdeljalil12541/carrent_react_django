@@ -87,7 +87,10 @@ class GetCSRFToken(APIView):
 # User logout view
 class LogoutView(APIView):
     def post(self, request, format=None):
+        print("Before logout:", request.user)
         auth.logout(request)
+        print("After logout:", request.user)
+
         return Response({
             'success': 'Logged out successfully'
         }, status=status.HTTP_200_OK)

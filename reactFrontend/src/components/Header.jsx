@@ -270,6 +270,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             }
             
             throw new Error('Could not obtain CSRF token');
+            
         } catch (error) {
             console.error('Error getting CSRF token:', error);
             toast.error('Failed to obtain CSRF token. Please try again.'); // Improved error handling
@@ -282,17 +283,17 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            const csrfToken = getCSRFToken(); // Ensure CSRF token is fetched
+            const csrfToken = await getAndStoreCSRFToken();
             console.log('CSRF Token:', csrfToken); // Debug log
 
             const response = await fetch('https://carrentreactdjango-production.up.railway.app/api/logout/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken, // Include CSRF token
                 },
                 credentials: 'include', // Ensure cookies are sent
             });
+            
 
             if (response.ok) {
                 toast.success('Logged out successfully');
@@ -303,6 +304,9 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                 const errorData = await response.json();
                 console.error('Logout error:', errorData);
                 toast.error('Logout failed. Please try again.');
+                console.log('CSRF Token before logout request:', csrfToken);
+                console.log('CSRF Token before logout request2:', getCSRFToken());
+
             }
         } catch (error) {
             console.error('Logout error:', error);
@@ -313,7 +317,10 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     // Initialize CSRF token when the app loads
     useEffect(() => {
         getAndStoreCSRFToken().catch(console.error);
+        axios.defaults.headers.common['X-CSRFToken'] = await getAndStoreCSRFToken();
     }, []);
+    
+    
     
     
     
