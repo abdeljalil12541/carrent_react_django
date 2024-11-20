@@ -7,7 +7,12 @@ from django.utils import timezone
 from django.contrib import auth
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib import auth
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
 from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarSerializer, ContactSerializer, GalleryCategorySerializer, GallerySerializer, InboxSerializer, LatestOffersSerializer, ReviewSerializer, UpdateUserSerializer, ProfileSerializer, ChangePasswordSerializer, CategorySerializer, PickupFeatureSerializer, CarFeatureSerializer, DefaultEquipmentSerializer, WishlistSerializer
 
@@ -41,55 +46,100 @@ class CreateUserView(APIView):
             return Response({"error": "Invalid data"}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class GetCSRFToken(APIView):
+    permission_classes = []
+    
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request, format=None):
+        token = get_token(request)  # Explicitly get the token
+        return Response({
+            'success': 'CSRF cookie set',
+            'csrfToken': token
+        }, status=status.HTTP_200_OK)
+
+@method_decorator(csrf_protect, name='dispatch')
+class LogoutView(APIView):
+    def post(self, request, format=None):
+        if not request.user.is_authenticated:
+            return Response({
+                'error': 'Not authenticated'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            # Get the session key before logout
+            session_key = request.session.session_key
+            
+            # Perform logout
+            auth.logout(request)
+            
+            # Explicitly delete the session
+            if session_key:
+                from django.contrib.sessions.models import Session
+                Session.objects.filter(session_key=session_key).delete()
+            
+            response = Response({
+                'success': 'Logged out successfully'
+            }, status=status.HTTP_200_OK)
+            
+            # Clear session cookie in response
+            response.delete_cookie('sessionid')
+            
+            return response
+            
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@method_decorator(csrf_protect, name='dispatch')
+class CheckAuthenticatedView(APIView):
+    def get(self, request, format=None):
+        is_authenticated = request.user.is_authenticated
+        print(f"User: {request.user}, Is Authenticated: {is_authenticated}")
+        print(f"Session ID: {request.session.session_key}")
+        
+        return Response({
+            'isAuthenticated': is_authenticated
+        }, status=status.HTTP_200_OK)
+
+@method_decorator(csrf_protect, name='dispatch')
 class UserLoginView(APIView):
     def post(self, request, format=None):
         userMail = request.data.get('loginEmail')
         userPass = request.data.get('loginPassword')
         
         if not userMail or not userPass:
-            return Response(
-                {"error": "Both email and password are required"}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        try:
-            user = User.objects.get(email=userMail)  # Get user by email
-            if user.check_password(userPass):  # Check password
-                auth.login(request, user)  # Log the user in
-                return Response({"message": "User Authenticated Successfully"}, status=status.HTTP_200_OK)
-            else:
-                return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
-        except User.DoesNotExist:
-            return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({
+                "error": "Both email and password are required"
+            }, status=status.HTTP_400_BAD_REQUEST)
             
-    from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib import auth
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.utils.decorators import method_decorator
-
-class CheckAuthenticatedView(APIView):
-    def get(self, request, format=None):
-        print("User:", request.user)  # Log the user object
-        print("Is Authenticated:", request.user.is_authenticated)  # Log authentication status
-        if request.user.is_authenticated:
-            return Response({'isAuthenticated': True}, status=status.HTTP_200_OK)
-        return Response({'isAuthenticated': False}, status=status.HTTP_200_OK)
-# Set CSRF token
-class GetCSRFToken(APIView):
-    permission_classes = []
-    def get(self, request, format=None):
-        return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
-    
-# User logout view
-class LogoutView(APIView):
-    def post(self, request, format=None):
         try:
-            auth.logout(request)
-            return Response({'success': "Logged out successfully"}, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            user = User.objects.get(email=userMail)
+            
+            if user.check_password(userPass):
+                auth.login(request, user)
+                
+                # Ensure session is created and saved
+                request.session.save()
+                
+                response = Response({
+                    "message": "User Authenticated Successfully",
+                    "sessionId": request.session.session_key
+                }, status=status.HTTP_200_OK)
+                
+                # Ensure CSRF token is included in response
+                response['X-CSRFToken'] = get_token(request)
+                
+                return response
+            else:
+                return Response({
+                    "error": "Invalid credentials"
+                }, status=status.HTTP_401_UNAUTHORIZED)
+                
+        except User.DoesNotExist:
+            return Response({
+                "error": "Invalid credentials"
+            }, status=status.HTTP_401_UNAUTHORIZED)
 
 
 
@@ -152,6 +202,7 @@ class UserDashboard(APIView):
     
     
     
+@method_decorator(csrf_protect, name='dispatch')
 class UpdateUser(generics.UpdateAPIView):
     serializer_class = UpdateUserSerializer
     permission_classes = (permissions.IsAuthenticated,)
