@@ -74,9 +74,10 @@ useEffect(() => {
         const checkCookies = async () => {
             const csrfToken = getCookie('csrftoken');
             const sessionId = getCookie('sessionid');
-            
+            const getcsrftoken= getCSRFToken()
             console.log('Detailed cookie check:', {
                 csrfToken,
+                getcsrftoken,
                 sessionId,
                 allCookies: document.cookie
             });
