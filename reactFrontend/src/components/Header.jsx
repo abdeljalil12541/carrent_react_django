@@ -255,7 +255,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                 { 
                     withCredentials: true,
                     headers: {
-                        'X-CSRFToken': getCookie('csrftoken')
+                        'X-CSRFToken': getCSRFToken()
                     }
                 }
             );
