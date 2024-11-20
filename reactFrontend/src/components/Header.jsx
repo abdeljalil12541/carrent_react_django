@@ -261,13 +261,14 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     }, []);
 
     
-
+    const [csrfTokenFromBackend, setCsrfTokenFromBackend] = useState('')
     const fetchCSRFToken = async () => {
         try {
             const response = await axios.get(
                 'https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', 
                 { withCredentials: true }
             );
+            setCsrfTokenFromBackend(response.data.csrfToken)
             console.log('CSRF Token Retrieved:', response.data.csrfToken);
         } catch (error) {
             console.error("CSRF token fetch failed", error);
@@ -290,8 +291,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         e.preventDefault();
         
         try {
-            const csrfToken = getCSRFToken();
-            console.log('CSRF Token for Logout:', csrfToken);
+            const csrfToken = csrfTokenFromBackend;
+            console.log('CSRF Token for Logout:', csrfTokenFromBackend);
     
             const response = await axios.post(
                 'https://carrentreactdjango-production.up.railway.app/api/logout/', 
@@ -299,7 +300,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                 { 
                     withCredentials: true,
                     headers: {
-                    'X-CSRFToken': getCSRFToken(),
+                    'X-CSRFToken': csrfToken,
                     'Content-Type': 'application/json'
                     }
                 }
