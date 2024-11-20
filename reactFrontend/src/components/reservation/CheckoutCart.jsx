@@ -75,6 +75,20 @@ const CheckoutCart = ({ selectedCurrency }) => {
     // Format price with currency symbol
     const displayTotalPrice = formatPrice(convertPrice(totalPrice, 'MAD dh', currencyCode), currencyCode);
 
+    const handlePassingData = (e) => {
+        e.preventDefault();
+
+        navigate('/checkout', { 
+            state: { 
+                car: car, 
+                DateTimeStateFrom: DateTimeStateFrom, 
+                finalDestination: finalDestination, 
+                totalPrice: totalPrice, 
+                selectedAddOns: selectedAddOns 
+            }
+        });
+    }
+
     return(
         <section className='container mx-auto'>
             <div className="flex text-sm mt-4 ml-6">
@@ -124,9 +138,7 @@ const CheckoutCart = ({ selectedCurrency }) => {
                         <div className='border-b border-x border-gray-300 font-semibold rounded-b px-2 text-gray-500 py-2 flex justify-between items-cente'><p>Total</p> <p className='mr-1'>{displayTotalPrice}</p></div>
                     </div>
 
-                    <div className='mt-5 mb-4'>
-                        <Link to="/checkout" state={{car, DateTimeStateFrom, finalDestination, totalPrice, selectedAddOns}} className='bg-red-600 text-gray-100 px-2 sm:px-4 md:px-1 lg:px-4 sm:font-semibold py-2 sm:py-3 mt-4 rounded'>Valider la commande</Link>
-                    </div>
+                        <button onClick={handlePassingData} className='bg-red-600 text-gray-100 px-2 sm:px-4 md:px-1 lg:px-4 sm:font-semibold py-2 sm:py-3 mt-4 rounded'>Valider la commande</button>
                 </div>
             </div>
         </section>
