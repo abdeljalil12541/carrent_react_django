@@ -4,6 +4,12 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 
 const SettingsDashboard = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+    
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');

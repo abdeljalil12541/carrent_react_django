@@ -298,27 +298,6 @@ useEffect(() => {
         };
     }, []);
 
-    const [csrfTokenFromBackend, setCsrfTokenFromBackend] = useState('')
-    useEffect(() => {
-        const fetchCSRFToken = async () => {
-            try {
-                await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', { withCredentials: true });
-                
-                // Store the token in state or a more persistent storage
-                setCsrfTokenFromBackend(response.data.csrfToken);
-
-                // Optionally set the token in a cookie
-                document.cookie = `csrftoken=${response.data.csrfToken}; path=/; SameSite=None; Secure`;
-            } catch (error) {
-                console.error("Error fetching CSRF token", error);
-            }
-        };
-
-        fetchCSRFToken();
-    }, []);
-
-    
-
     
     
     // Updated logout function
@@ -328,28 +307,33 @@ useEffect(() => {
         try {
             const csrfToken = getCookie('csrftoken');  // CSRF token from cookies
     
-            // Perform the logout request with CSRF token
-            const response = await axios.post(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
-                {}, 
-                { 
-                    headers: {
-                        'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
-                    },
-                    withCredentials: true,  // Ensure cookies are sent
-                }
-            );
-            
-            console.log("Logged out successfully", response.data);
-            setIsAuthenticated(false);  // Update auth state
-            navigate('/');  // Redirect to home page
-            window.location.reload();  // Optionally reload the page
+            setLoader(true);
+            setTimeout(async () => {
+
+                // Perform the logout request with CSRF token
+                const response = await axios.post(
+                    'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                    {}, 
+                    { 
+                        headers: {
+                            'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
+                        },
+                        withCredentials: true,  // Ensure cookies are sent
+                    }
+                );
+                toast.success("Logged out successfully")
+                console.log("Logged out successfully", response.data);
+                navigate('/');  // Redirect to home page
+                window.location.reload();  // Optionally reload the page
+            }, 1000);
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
     
-    
+    console.log('CSRF Token:', csrfToken);  // CSRF token fetched from cookie
+    console.log('Session ID:', sessionId);  // Session ID fetched from cookie
+
 
 
     useEffect(() => {
