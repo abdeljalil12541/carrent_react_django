@@ -86,16 +86,7 @@ const UpdateProfile = async (e) => {
         }
         
         const response = await axios.put(
-            `https://carrentreactdjango-production.up.railway.app/api/update-profile/${usernameId}/`,
-            formData,
-            {
-                headers: { 
-                    'X-CSRFToken': getCSRFToken(),
-                    'Content-Type': 'multipart/form-data'  // Important for file upload
-                },
-                withCredentials: true
-            }
-        );
+            `https://carrentreactdjango-production.up.railway.app/api/update-profile/${usernameId}/`, formData);
         console.log('profile updated successfully', response.data);
 
     } catch (error) {
