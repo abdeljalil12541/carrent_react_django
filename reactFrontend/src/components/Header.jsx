@@ -14,33 +14,44 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useNavigate } from 'react-router-dom';
 
-// Set up Axios to send CSRF token and credentials with each request
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
+    // Set up Axios to send CSRF token and credentials with each request
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
     const [loader, setLoader] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [authenticatedUser, setAuthenticatedUser] = useState({}); // Initialize as an object
+
+    
+    const getCSRFToken = () => {
+        const name = 'csrftoken'; // This should match the name of your CSRF cookie
+        const cookieValue = `; ${document.cookie}`;
+        const parts = cookieValue.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+
+
+    // Function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+}
+    
 
     const checkCookies = () => {
         const csrfToken = getCookie('csrftoken');
@@ -280,12 +291,9 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         fetchCSRFToken();
     }, []);
     
-    const getCSRFToken = () => {
-        const name = 'csrftoken'; // This should match the name of your CSRF cookie
-        const cookieValue = `; ${document.cookie}`;
-        const parts = cookieValue.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    };
+
+    
+    
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
