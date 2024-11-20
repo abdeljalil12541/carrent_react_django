@@ -256,7 +256,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                     { withCredentials: true }
                 );
                 console.log('CSRF token fetch response:', response.data); // Debug log
-                csrfToken = getCookie('sessionid'); // Try to get the new cookie
+                csrfToken = getCookie('csrftoken'); // Try to get the new cookie
                 if (!csrfToken && response.data.csrfToken) {
                     csrfToken = response.data.csrfToken;
                 }
@@ -275,6 +275,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             throw new Error('Could not obtain CSRF token');
         } catch (error) {
             console.error('Error getting CSRF token:', error);
+            toast.error('Failed to obtain CSRF token. Please try again.'); // Improved error handling
             throw error;
         }
     };
