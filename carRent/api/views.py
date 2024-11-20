@@ -79,7 +79,6 @@ class GetCSRFToken(APIView):
         return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
     
 # User logout view
-@method_decorator(csrf_protect, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         print("Before logout:", request.user)
