@@ -239,34 +239,46 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const logout = async (e) => {
         e.preventDefault();
         console.log('Attempting logout...');
-        const csrfToken = getCookie('csrftoken');
-        console.log('CSRF Token:', csrfToken);
     
         try {
+            // Fetch the CSRF token
+            const csrfToken = await getCSRFToken();
+    
+            if (!csrfToken) {
+                console.error('CSRF token missing. Cannot proceed with logout.');
+                return;
+            }
+    
+            // Log the CSRF token for verification
+            console.log('CSRF Token:', csrfToken);
+    
+            // Proceed with logout request
             const response = await axios.post(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/',
-                {},
+                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                {}, 
                 {
                     withCredentials: true,
                     headers: {
-                        'X-CSRFToken': csrfToken,
+                        'X-CSRFToken': csrfToken,  // Attach CSRF token to request headers
                         'Content-Type': 'application/json',
                     },
                 }
             );
     
-            toast.success('Logout successful');
-            console.log('Logout successful:', response.data);
-    
+            // Navigate and reload after successful logout
             setTimeout(() => {
                 navigate('/', { replace: true });
                 window.location.reload();
             }, 2000);
+    
+            toast.success('Logout successful');
+            console.log('Logout successful:', response.data);
+    
         } catch (error) {
             console.error('Logout error:', error.response || error);
-            toast.error("Logout failed. Please try again.");
         }
     };
+    
     
     
     const [isOpen, setIsOpen] = useState(false);
