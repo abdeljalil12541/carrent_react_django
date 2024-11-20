@@ -77,9 +77,15 @@ class CheckAuthenticatedView(APIView):
         if request.user.is_authenticated:
             return Response({'isAuthenticated': True}, status=status.HTTP_200_OK)
         return Response({'isAuthenticated': False}, status=status.HTTP_200_OK)
-
-# User logout view
+# Set CSRF token
 @method_decorator(ensure_csrf_cookie, name='dispatch')
+class GetCSRFToken(APIView):
+    permission_classes = []
+    def get(self, request, format=None):
+        return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
+    
+# User logout view
+@method_decorator(csrf_protect, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         try:
@@ -88,12 +94,6 @@ class LogoutView(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# Set CSRF token
-@method_decorator(ensure_csrf_cookie, name='dispatch')
-class GetCSRFToken(APIView):
-    permission_classes = []
-    def get(self, request, format=None):
-        return Response({'success': 'CSRF cookie set'}, status=status.HTTP_200_OK)
 
 
 class UserInfos(APIView):

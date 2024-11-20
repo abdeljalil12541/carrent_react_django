@@ -219,51 +219,55 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         fetchCSRFToken();
     }, []);
 
-    function getCookie(name) {
+    const getCookie = (name) => {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             const cookies = document.cookie.split(';');
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                if (cookie.startsWith(name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                     break;
                 }
             }
         }
         return cookieValue;
-    }
+    };
+    
 
     
     const logout = async (e) => {
         e.preventDefault();
         console.log('Attempting logout...');
-        
-        try {
-            // Get CSRF token from cookie
-            const csrfToken = getCookie('csrftoken')
+        const csrfToken = getCookie('csrftoken');
+        console.log('CSRF Token:', csrfToken);
     
-            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {}, {
-                withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json',
+        try {
+            const response = await axios.post(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/',
+                {},
+                {
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': csrfToken,
+                        'Content-Type': 'application/json',
+                    },
                 }
-            });
-            
-            setTimeout(() => {
-                navigate('/', {replace: true});
-                window.location.reload();
-            }, 2000)
-            toast.success('Logout successful')
+            );
+    
+            toast.success('Logout successful');
             console.log('Logout successful:', response.data);
-            // Handle successful logout here (e.g., redirect or state update)
-            
+    
+            setTimeout(() => {
+                navigate('/', { replace: true });
+                window.location.reload();
+            }, 2000);
         } catch (error) {
             console.error('Logout error:', error.response || error);
+            toast.error("Logout failed. Please try again.");
         }
     };
+    
     
     const [isOpen, setIsOpen] = useState(false);
     const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
