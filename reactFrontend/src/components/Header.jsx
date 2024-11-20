@@ -243,71 +243,27 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
         }
     };
     
-    // Store CSRF token in memory as backup
-    let memoryCsrfToken = null;
-    
-    // Function to get and store CSRF token
-    const getAndStoreCSRFToken = async () => {
-        try {
-            // First try to get from cookie
-            let csrfToken = getCookie('csrftoken');
-            
-            if (!csrfToken) {
-                // If no token in cookie, fetch from server
-                const response = await axios.get(
-                    'https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/',
-                    { withCredentials: true }
-                );
-                console.log('CSRF token fetch response:', response.data); // Debug log
-                csrfToken = getCookie('csrftoken'); // Try to get the new cookie
-            }
-
-            // Use memory token as fallback
-            csrfToken = csrfToken || memoryCsrfToken;
-
-            if (csrfToken) {
-                memoryCsrfToken = csrfToken; // Store in memory
-                axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-                console.log('CSRF token set:', csrfToken); // Debug log
-                return csrfToken;
-            }
-            
-            throw new Error('Could not obtain CSRF token');
-            
-        } catch (error) {
-            console.error('Error getting CSRF token:', error);
-            toast.error('Failed to obtain CSRF token. Please try again.'); // Improved error handling
-            throw error;
-        }
-    };
     
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
         
         try {
-            // Explicitly get and set CSRF token before logout
-            const csrfToken = getCookie('csrftoken');
-            
-            if (!csrfToken) {
-                await getAndStoreCSRFToken(); // Force token refresh
-            }
-    
             const response = await axios.post(
                 'https://carrentreactdjango-production.up.railway.app/api/logout/', 
                 {}, 
                 { 
                     withCredentials: true,
                     headers: {
-                        'X-CSRFToken': csrfToken || getCookie('csrftoken')
+                        'X-CSRFToken': getCookie('csrftoken')
                     }
                 }
             );
             
-            // Handle successful logout
-            console.log("Logged out successfully");
+            console.log("Logged out successfully", response.data);
             setIsAuthenticated(false);
             navigate('/');
+            window.location.reload(); // Optional: full page reload
         } catch (error) {
             console.error("Logout error:", error.response ? error.response.data : error.message);
         }
