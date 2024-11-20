@@ -84,8 +84,7 @@ class GetCSRFToken(APIView):
         }, status=status.HTTP_200_OK)
     
 # User logout view
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt # add this decorator
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
     def post(self, request, format=None):
         if not request.user.is_authenticated:
