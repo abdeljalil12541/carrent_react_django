@@ -285,24 +285,28 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
             const csrfToken = getCSRFToken(); // Ensure CSRF token is fetched
             console.log('CSRF Token:', csrfToken); // Debug log
 
-            const response = await axios.post(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/',
-                {}, // Empty object as POST data
-                { headers: { 'X-CSRFToken': csrfToken }, withCredentials: true }  // Ensure CSRF token is sent
-            );
+            const response = await fetch('https://carrentreactdjango-production.up.railway.app/api/logout/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken, // Include CSRF token
+                },
+                credentials: 'include', // Ensure cookies are sent
+            });
 
-            if (response.status === 200) {
+            if (response.ok) {
                 toast.success('Logged out successfully');
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 2000);
+            } else {
+                const errorData = await response.json();
+                console.error('Logout error:', errorData);
+                toast.error('Logout failed. Please try again.');
             }
         } catch (error) {
             console.error('Logout error:', error);
-            toast.error('Logout failed. Please try again.'); // Improved error handling
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 2000);
+            toast.error('Logout failed. Please try again.');
         }
     };
     
@@ -310,6 +314,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     useEffect(() => {
         getAndStoreCSRFToken().catch(console.error);
     }, []);
+    
     
     
     

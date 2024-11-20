@@ -87,16 +87,10 @@ class GetCSRFToken(APIView):
 # User logout view
 class LogoutView(APIView):
     def post(self, request, format=None):
-        try:
-            auth.logout(request)
-            return Response({
-                'success': 'Logged out successfully'
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({
-                'error': str(e)
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        auth.logout(request)
+        return Response({
+            'success': 'Logged out successfully'
+        }, status=status.HTTP_200_OK)
 
 class UserInfos(APIView):
     def get(self, request, format=None):
