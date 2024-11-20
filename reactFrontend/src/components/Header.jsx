@@ -15,15 +15,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 // Fetch CSRF token function
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = 'csrftoken';
+
 const getCSRFToken = () => {
     const name = 'csrftoken';
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.xsrfCookieName = 'csrftoken';
 // Set up Axios to send CSRF token and credentials with each request
 axios.interceptors.request.use(config => {
     config.headers['X-CSRFToken'] = getCSRFToken(); // Attach CSRF token
@@ -34,7 +35,8 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [authenticatedUser, setAuthenticatedUser] = useState({}); // Initialize as an object
-    
+    const API_BASE_URL = 'https://carrentreactdjango-production.up.railway.app/api';
+
     // Check authentication status on component mount
     useEffect(() => {
         const checkAuthStatus = async () => {
@@ -253,6 +255,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
                     'https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/',
                     { withCredentials: true }
                 );
+                console.log('CSRF token fetch response:', response.data); // Debug log
                 csrfToken = getCookie('csrftoken'); // Try to get the new cookie
                 if (!csrfToken && response.data.csrfToken) {
                     csrfToken = response.data.csrfToken;
