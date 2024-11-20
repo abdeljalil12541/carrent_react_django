@@ -15,35 +15,26 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 // Set up Axios to send CSRF token and credentials with each request
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 // Function to get CSRF token from cookies
-const getCookie = (name) => {
-    console.log('All cookies:', document.cookie);
-    const cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith(`${name}=`))
-        ?.split('=')[1];
-    console.log(`Searching for ${name} cookie`);
-    console.log(`${name} cookie value:`, cookieValue);
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
     return cookieValue;
-};
+}
 
-useEffect(() => {
-    const checkCookies = async () => {
-        const csrfToken = getCookie('csrftoken');
-        const sessionId = getCookie('sessionid');
-        
-        console.log('Detailed cookie check:', {
-            csrfToken,
-            sessionId,
-            allCookies: document.cookie
-        });
-    };
-
-    checkCookies();
-}, []);
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [loader, setLoader] = useState(false)
@@ -276,34 +267,30 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
+        console.log('Attempting logout...');
         
         try {
-            // Explicitly fetch CSRF token before logout
-            await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-csrf-token/', { withCredentials: true });
-            
-            const csrfToken = getCookie('csrftoken');
-            if (!csrfToken) {
-                console.error('CSRF token not found');
-                return;
-            }
+            // Get CSRF token from cookie
+            const csrfToken = getCookie('csrftoken')
     
-            const response = await axios.post(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
-                {}, 
-                { 
-                    withCredentials: true,
-                    headers: {
-                        'X-CSRFToken': csrfToken
-                    }
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {}, {
+                withCredentials: true,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json',
                 }
-            );
+            });
             
-            console.log("Logged out successfully", response.data);
-            setIsAuthenticated(false);
-            navigate('/');
-            window.location.reload();
+            setTimeout(() => {
+                navigate('/', {replace: true});
+                window.location.reload();
+            }, 2000)
+            toast.success('Logout successful')
+            console.log('Logout successful:', response.data);
+            // Handle successful logout here (e.g., redirect or state update)
+            
         } catch (error) {
-            console.error("Logout error:", error.response ? error.response.data : error.message);
+            console.error('Logout error:', error.response || error);
         }
     };
 
