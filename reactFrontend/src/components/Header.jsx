@@ -56,9 +56,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
      const csrfToken = cookies.csrftoken;
      const sessionId = cookies.sessionid;
  
-     console.log('CSRF Token:', csrfToken);  // CSRF token fetched from cookie
-     console.log('Session ID:', sessionId);  // Session ID fetched from cookie
-
+     
 
      useEffect(() => {
         const sessionId = getCookie('sessionid');
@@ -130,6 +128,8 @@ useEffect(() => {
         const checkAuthStatus = async () => {
             try {
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/check_authentication/', { withCredentials: true });
+                console.log('CSRF Token:', getCookie('csrftoken'));
+                console.log('Session ID:', getCookie('sessionid'));
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
