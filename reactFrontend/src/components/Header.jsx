@@ -282,30 +282,25 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
     // Updated logout function
     const logout = async (e) => {
         e.preventDefault();
-        console.log('Attempting logout...');
         
         try {
-            // Get CSRF token from cookie
-            const csrfToken = getCookie('csrftoken')
+            const csrfToken = getCookie('csrftoken');
+            console.log('CSRF Token for Logout:', csrfToken);
     
-            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/logout/', {}, {
-                withCredentials: true,
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json',
+            const response = await axios.post(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                {}, 
+                { 
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    }
                 }
-            });
+            );
             
-            setTimeout(() => {
-                navigate('/', {replace: true});
-                window.location.reload();
-            }, 2000)
-            toast.success('Logout successful')
-            console.log('Logout successful:', response.data);
-            // Handle successful logout here (e.g., redirect or state update)
-            
+            // Rest of logout logic
         } catch (error) {
-            console.error('Logout error:', error.response || error);
+            console.error("Logout error:", error.response ? error.response.data : error.message);
         }
     };
 
