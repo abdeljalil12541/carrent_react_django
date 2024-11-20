@@ -146,7 +146,6 @@ CSRF_USE_SESSIONS = False     # Store CSRF token in cookie instead of session
 CSRF_COOKIE_NAME = 'csrftoken'
 
 # CORS Configuration
-CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'https://carrent-react-django.vercel.app',  # Production React App
     'https://carrentreactdjango-production.up.railway.app'  # Django production backend
@@ -156,6 +155,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://carrent-react-django.vercel.app',
     'https://carrentreactdjango-production.up.railway.app'
 ]
+CORS_ALLOW_CREDENTIALS = True
 
 # Additional CORS settings
 CORS_ALLOW_METHODS = [
