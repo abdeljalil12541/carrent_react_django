@@ -248,6 +248,7 @@ useEffect(() => {
             setLoginPassword('');
             toast.success('User logged in successfully');
             setOpen(false);
+            setLoader(true)
 
             setTimeout(() => {
                 navigate('/', { replace: true });
