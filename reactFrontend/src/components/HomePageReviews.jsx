@@ -3,7 +3,7 @@ import { FaStar } from "react-icons/fa";
 import Dialog from '@mui/material/Dialog';
 import ReactStars from "react-rating-stars-component";
 import axios from 'axios';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';  // Import Swiper modules
 

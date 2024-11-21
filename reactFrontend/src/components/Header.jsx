@@ -9,7 +9,7 @@ import logo from '../styles/images/logo.png';
 import { NavLink, replace } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 

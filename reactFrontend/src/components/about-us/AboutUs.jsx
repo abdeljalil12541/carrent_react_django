@@ -9,7 +9,7 @@ import { FaStar } from "react-icons/fa"
 import Dialog from '@mui/material/Dialog';
 import { useState, useRef, useEffect } from "react";
 import ReactStars from "react-rating-stars-component";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from 'axios';
 import HomePageReviews from '../HomePageReviews'
 import HomePageMoroccoBaner from '../HomePageMoroccoBanner'

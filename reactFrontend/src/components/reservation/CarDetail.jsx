@@ -8,7 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import Select from 'react-select';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 
@@ -1159,7 +1159,6 @@ const addWishlist = async () => {
                 </Dialog>
                 }
 
-                <ToastContainer />
 
             </section>
     )

@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { FaCalendar } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 
@@ -530,7 +530,6 @@ const CreateBoking = async (e) => {
             <div className="loaderBg"></div>
             <span class="loader"></span>
         </div>
-        <ToastContainer />
     </div>
   );
 };

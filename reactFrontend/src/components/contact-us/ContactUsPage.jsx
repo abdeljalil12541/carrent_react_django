@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import AboutHeaderImg from '../../styles/images/about-header.jpg';
 import { MapPin, Mail, Phone } from 'lucide-react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const getCSRFToken = () => {
@@ -170,7 +170,6 @@ const ContactUsPage = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
 
             <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
                 <div className="loaderBg"></div>

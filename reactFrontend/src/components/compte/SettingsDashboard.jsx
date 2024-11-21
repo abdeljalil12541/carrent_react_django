@@ -1,7 +1,7 @@
 import { User, Mail, Phone, Image, Lock, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useCookies } from 'react-cookie';
 
 const SettingsDashboard = () => {
@@ -174,7 +174,6 @@ const FormSubmit = (e) => {
 
     return(
         <div className="w-full mb-6 sm:px-6 mt-6">
-            <ToastContainer autoClose={1000} position='bottom-right' />
             <p className="text-4xl font-light border-b pb-4 text-gray-600 mb-4">Paramètres</p>    
             <div className="max-w-4xl  py-4 px-2 mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
