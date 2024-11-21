@@ -60,9 +60,9 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   };
 
   return (
-    <div className="max-w-5xl w-full py-0 mx-auto mt-9 mr-4 tracking-wide">
+    <div className="max-w-5xl w-full py-0 mx-auto mt-2 md:mt-9 mr-4 tracking-wide">
       {/* Accordion */}
-      <div className="rounded grid pt-8 mb-4 text-lg bg-neutral-950 leading-6 text-gray-100 md:gap-0 md:grid-cols-1">
+      <div className="rounded grid pt-8 md:mb-4 text-sm md:text-lg bg-neutral-950 leading-6 text-gray-100 md:gap-0 md:grid-cols-1">
         {/* Accordion Item 1 */}
         <CarsCategory
           activeIndices={activeIndices}

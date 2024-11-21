@@ -477,12 +477,12 @@ const CarsPage = ({ selectedCurrency }) => {
         </h2>
         <a onClick={(event) => { event.preventDefault(); setSearchFormVisible(true); }} className={`${SearchFormVisible? 'hidden': ''} text-red-600 cursor-pointer text-sm ml-1 inline-block`}>Changer la recherche</a>
         
-        <div className={`${!SearchFormVisible? 'hidden': ''} w-full bg-neutral-950 rounded-md py-6 px-4 mt-6`}>
-            <form onSubmit={handleCarsFormBookingSubmit} className="sm:flex items-center justify-center space-x-4">
+        <div className={`${!SearchFormVisible? 'hidden': ''} w-full bg-neutral-950 rounded-md pb-2 sm:pb-6 pt-6 px-4 mt-6`}>
+            <form onSubmit={handleCarsFormBookingSubmit} className="md:flex items-center justify-center space-x-4">
                 <div className="flex mb-3 flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-1 md:space-x-4 mr-1">
                     {/* "Départ de" Input */}
                     <div className="flex flex-col">
-                        <label htmlFor="inp1" className="text-gray-200 mb-2">Lieu de ramassage</label>
+                        <label htmlFor="inp1" className="text-gray-200 text-sm sm:text-[16px] mb-2">Lieu de ramassage</label>
                         <div className="relative w-full lg:w-56">
                             {/* Overlay SVG icon */}
                             <svg fill="#828282" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 395.71 395.71" xmlSpace="preserve" stroke="#828282" className="absolute left-3 top-2.5 w-5 h-5 pointer-events-none">
@@ -513,7 +513,7 @@ const CarsPage = ({ selectedCurrency }) => {
 
                     {/* "Retour à" Input */}
                     <div className="flex flex-col">
-                        <label htmlFor="inp2" className="text-gray-200 mb-2">Lieu de dépôt</label>
+                        <label htmlFor="inp2" className="text-gray-200 text-sm sm:text-[16px] mb-2">Lieu de dépôt</label>
                         <div className="relative w-full lg:w-56">
                                 {/* Overlay SVG icon */}
                                 <svg fill="#828282" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 395.71 395.71" xmlSpace="preserve" stroke="#828282" className="absolute left-3 top-2.5 w-5 h-5 pointer-events-none">
@@ -545,11 +545,11 @@ const CarsPage = ({ selectedCurrency }) => {
 
                     {/* Date and Time Inputs */}
                     <div className="flex flex-col">
-                        <label className="text-gray-200 mb-2">Date de ramassage</label>
+                        <label className="text-gray-200 text-sm sm:text-[16px] mb-2">Date de ramassage</label>
                         <div className="flex space-x-2">
-                        <div className='flex'>
+                        <div className='flex w-full'>
                             <DatePicker required placeholderText="mm/dd/yyyy" selected={pickupDate} onChange={(date) => setPickupDate(date)} className={`datepickers w-36 sm:w-24 lg:w-36 ${isFocused ? 'border-y border-l': 'border'} h-[39px] border-gray-600 focus:outline-none bg-transparent text-gray-400 focus:border-red-600`} showIcon />
-                            <div className="relative">
+                            <div className="relative w-full">
                                     <select
                                         required
                                         value={pickupHour}
@@ -579,11 +579,11 @@ const CarsPage = ({ selectedCurrency }) => {
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <label className="text-gray-200 mb-2">Date de dépôt</label>
+                        <label className="text-gray-200 text-sm sm:text-[16px] mb-2">Date de dépôt</label>
                         <div className="flex space-x-2">
-                            <div className="flex">
+                            <div className="flex w-full">
                                 <DatePicker required placeholderText="mm/dd/yyyy" selected={dropoffDate} onChange={(date) => setDropoffDate(date)} className={`datepickers w-36 sm:w-24 lg:w-36 ${isFocused2 ? 'border-y border-l': 'border'} h-[39px] border-gray-600 focus:outline-none bg-transparent text-gray-400 focus:border-red-600`} showIcon />
-                                <div className="relative">
+                                <div className="relative w-full">
                                     <select
                                         required
                                         value={dropoffHour}
@@ -615,14 +615,14 @@ const CarsPage = ({ selectedCurrency }) => {
                 </div>
 
                 {/* Search Button */}
-                <button type="submit" className="w-full sm:w-auto">
+                <button type="submit" className="w-full buttonCarsRentFormRes -mt-3 sm:-mt-3 sm:w-auto">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="w-14 h-14 -ml-4 md:-ml-4 lg:ml-0 text-white bg-red-600 p-3.5 mt-3 rounded-md hover:bg-red-500 focus:outline-none"
+                        className="w-full md:w-14 h-14 -ml-4 md:-ml-4 lg:ml-0 text-white bg-red-600 p-3.5 mt-3 rounded-md hover:bg-red-500 focus:outline-none"
                     >
                         <path
                             strokeLinecap="round"
