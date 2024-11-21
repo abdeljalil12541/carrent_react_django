@@ -138,7 +138,7 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
     const closestThumb = determineClosestThumb(percent);
     isDraggingRef.current = closestThumb;
     setPosition(closestThumb, percent);
-  };y
+  };
 
   const onMouseMove = (e) => {
     // Normalize the events to support both mouse and touch events
