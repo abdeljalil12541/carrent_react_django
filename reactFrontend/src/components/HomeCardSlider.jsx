@@ -219,7 +219,7 @@ const HomeCardSlider = ({ selectedCurrency }) => {
                 slidesPerView={1}
                 speed={2000}
                 autoplay={{
-                    delay: 4000,
+                    delay: 2000,
                 }}
                 loop={true}
                 modules={[Navigation, Pagination, Autoplay]}
