@@ -52,7 +52,10 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 const Checkout = ({ selectedCurrency }) => {
-
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+    
   const [loader, setLoader] = useState(false)
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -240,6 +243,10 @@ const CreateBoking = async (e) => {
 
     setLoader(true);
     
+    // Newsletter checkbox logic
+    const newsletterCheckbox = document.getElementById('newsletter');
+    const isNewsletterChecked = newsletterCheckbox?.checked;
+
     setTimeout(async () => {
         try {
             const response = await fetch("https://carrentreactdjango-production.up.railway.app/api/create-booking/", {
@@ -264,6 +271,22 @@ const CreateBoking = async (e) => {
             } else {
                 const createdBooking = await response.json();
                 console.log("Booking created successfully:", createdBooking);
+
+                // If the newsletter checkbox is checked, submit the email
+                if (isNewsletterChecked) {
+                    try {
+                        const newsletterResponse = await axios.post(
+                            'https://carrentreactdjango-production.up.railway.app/api/add-news-letter/',
+                            { email: emailAddress },
+                            { withCredentials: true }
+                        );
+                        console.log('Newsletter added successfully', newsletterResponse.data);
+                        toast.success('Newsletter added successfully');
+                    } catch (error) {
+                        console.error('Newsletter submission error:', error);
+                    }
+                }
+
                 navigate('/success-booking', {
                     state: {
                         car: carForBooking,
@@ -283,7 +306,6 @@ const CreateBoking = async (e) => {
     }, 2000);
 
 };
-
 
 
 

@@ -727,9 +727,9 @@ const addWishlist = async () => {
                 <div className="grid grid-cols-4">
                     <div className="col-span-4 sm:col-span-1 mb-4 border border-red-600 rounded mx-2 sm:mx-0 lg:mr-0">
                         <div className="flex justify-center w-full">
-                        <img src={brand} className="w-32" alt="" />
+                        <img src={car.brand} className="w-32 -mb-6" alt="" />
                         </div>
-                        <p className="text-center text-2xl -mt-2 mb-2 text-gray-600">MG Motor</p>
+                        <p className={`text-center text-xl mt-4  mb-2 text-gray-600`}>{car.name}</p>
 
                         <div className="w-full pl-6 sm:pl-1 lg:pl-6">
 

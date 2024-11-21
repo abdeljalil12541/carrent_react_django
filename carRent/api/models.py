@@ -241,3 +241,6 @@ class Inbox(models.Model):
     def __str__(self):
         return f'{self.user} - {self.inbox_type}'
     
+class NewsLetter(models.Model):
+    email = models.CharField(max_length=150)
+    created_at = models.DateTimeField(auto_now_add=True)

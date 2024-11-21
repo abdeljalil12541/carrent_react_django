@@ -98,6 +98,7 @@ const LatestOffers = ({ selectedCurrency }) => {
                     pickup_features: offer.car.pickup_features ? offer.car.pickup_features.map(pickup_feature => pickup_feature.name) : [],
                     price: offer.car.price_per_day,
                     image: `https://carrentreactdjango-production.up.railway.app${offer.car.image}`,
+                    brand: `https://carrentreactdjango-production.up.railway.app${offer.car.brand}`,
                     current_location: offer.car.current_location.name,
                     car_size: offer.car.car_size
                 };

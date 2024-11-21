@@ -1,7 +1,28 @@
 import logo from '../styles/images/logo.png'
 import '../styles/css/footer.css'
+import axios from 'axios'
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Footer = () => {
+    axios.defaults.withCredentials = true;
+    axios.defaults.xsrfCookieName = 'csrftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+    
+    const [email, setEmail] = useState('');
+
+    const handleNewsLetterForm = async (e) => {
+        e.preventDefault();
+        try{
+            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/add-news-letter/', {email}, {withCredentials: true})
+            console.log('news letter added successfully', response.data);
+            toast.success('news letter added successfully')
+            setEmail('')
+    }catch (error) {
+            console.error('error', error)
+        }
+    }
+
     return(
         <footer className='relative mx-auto p-0 md:px-0 xl:px-0 overflow-hidden'>
         <div className='relative bg-neutral-950 footerBgColor' style={{height: '55vh'}}>
@@ -150,17 +171,25 @@ const Footer = () => {
                                             <li className='w-full'>
                                                 <h1 className='text-md leading-6 text-gray-400'>Subscribe to our newsletter to get anything new</h1>
                                             </li>
-                                            <li>
-                                                <div>
-                                                    <input type="text" class="inputButton bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-gray-600 outline-none dark:placeholder-gray-400 dark:text-white duration-300 dark:focus:ring-blue-500" placeholder="example345@gmail.com" required />
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="#_" class="inline-flex Subscribebutton items-center hover:border-white justify-center w-full pl-4 pr-3 py-2 mb-2 text-md text-white bg-[#c53030] rounded-md hover:bg-red-500 duration-150 sm:w-auto sm:mb-0">
-                                                    Subscribe
-                                                    <svg class="w-4 h-4 ml-1 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                </a>
-                                            </li>
+                                            <form onSubmit={(e) => handleNewsLetterForm(e)}>
+                                                <li>
+                                                    <div>
+                                                        <input 
+                                                            value={email} 
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            type="email" 
+                                                            class="inputButton bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-gray-600 outline-none dark:placeholder-gray-400 dark:text-white duration-300 dark:focus:ring-blue-500" 
+                                                            placeholder="example345@gmail.com" 
+                                                            required />
+                                                    </div>
+                                                </li>
+                                                <li className='mt-3'>
+                                                    <button type='submit' class="inline-flex Subscribebutton items-center hover:border-white justify-center w-full pl-4 pr-3 py-2 mb-2 text-md text-white bg-[#c53030] rounded-md hover:bg-red-500 duration-150 sm:w-auto sm:mb-0">
+                                                        Subscribe
+                                                        <svg class="w-4 h-4 ml-1 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                    </button>
+                                                </li>
+                                            </form>
                                         </ul>
                                     </div>
                                 </div>

@@ -69,7 +69,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 
-const Card = ({ id, name, slug, is_available, image, model, car_size, category, price, mileage, seats, transmission, fuel_type, current_location, car_features, default_equipements, pickup_features, selectedCurrency }) => {
+const Card = ({ id, name, slug, is_available, image, model, car_size, category, brand, price, mileage, seats, transmission, fuel_type, current_location, car_features, default_equipements, pickup_features, selectedCurrency }) => {
     
     // Extract currency code from selectedCurrency or default to MAD
     const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
@@ -91,6 +91,7 @@ const Card = ({ id, name, slug, is_available, image, model, car_size, category, 
         model,
         car_size,
         category,
+        brand,
         price,
         mileage,
         seats,
@@ -175,6 +176,7 @@ const HomeCardSlider = ({ selectedCurrency }) => {
                     id: car.id,
                     name: car.name,
                     category: car.category.name,
+                    brand: `https://carrentreactdjango-production.up.railway.app${car.brand}`,
                     slug: car.slug,
                     image: `https://carrentreactdjango-production.up.railway.app${car.image}`,
                     is_available: car.is_available,

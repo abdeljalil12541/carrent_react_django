@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Car, CarBooking, CarFeature, Category, Contact, DefaultEquipment, Gallery, GalleryCategory, Inbox, LatestOffers, PickupFeature, Profile, Review, Wishlist
+from .models import Car, CarBooking, CarFeature, Category, Contact, DefaultEquipment, Gallery, GalleryCategory, Inbox, LatestOffers, NewsLetter, PickupFeature, Profile, Review, Wishlist
 from django.contrib.auth.models import User
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -92,6 +92,12 @@ class LatestOffersSerializer(serializers.ModelSerializer):
         fields = ('id', 'car', 'title', 'image', 'description', 'price_per_day')
         
         
+
+class NewsLetterSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = NewsLetter
+        fields = ('id', 'email', 'created_at')
         
 class GalleryCategorySerializer(serializers.ModelSerializer):
     class Meta:

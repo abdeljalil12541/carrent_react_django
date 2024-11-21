@@ -9,7 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.utils.decorators import method_decorator
 from django.middleware.csrf import get_token
 from django.shortcuts import get_object_or_404
-from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarSerializer, ContactSerializer, GalleryCategorySerializer, GallerySerializer, InboxSerializer, LatestOffersSerializer, ReviewSerializer, UpdateUserSerializer, ProfileSerializer, ChangePasswordSerializer, CategorySerializer, PickupFeatureSerializer, CarFeatureSerializer, DefaultEquipmentSerializer, WishlistSerializer
+from .serializers import CarBookingHistorySerializer, CarBookingSerializer, CarSerializer, ContactSerializer, GalleryCategorySerializer, GallerySerializer, InboxSerializer, LatestOffersSerializer, NewsLetterSerializer, ReviewSerializer, UpdateUserSerializer, ProfileSerializer, ChangePasswordSerializer, CategorySerializer, PickupFeatureSerializer, CarFeatureSerializer, DefaultEquipmentSerializer, WishlistSerializer
             
 # Create your views here.
             
@@ -610,3 +610,14 @@ class ResetNotifCount(APIView):
         # Set all user inbox notifications as read
         Inbox.objects.filter(user=user_id).update(is_read=True)  # Set all notifications as read
         return Response({"message": "Notifications reset successfully", "notif_count": 0}, status=status.HTTP_200_OK)
+    
+class NewsLetterView(APIView):
+    def post(self, request, format=None):
+        try:
+            data = request.data
+            serializer = NewsLetterSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except:
+            return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)

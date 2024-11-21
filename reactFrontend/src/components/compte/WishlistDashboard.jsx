@@ -67,6 +67,7 @@ const WishlistDashboard = ({ selectedCurrency }) => {
           category: item.car.category.name,
           slug: item.car.slug,
           image: `https://carrentreactdjango-production.up.railway.app${item.car.image}`,
+          brand: `https://carrentreactdjango-production.up.railway.app${item.car.brand}`,
           is_available: item.car.is_available,
           model: item.car.model,
           car_size: item.car.car_size,

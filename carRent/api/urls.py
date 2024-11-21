@@ -24,6 +24,7 @@ urlpatterns = [
     path('available-cars/', views.AvailableCarsView.as_view(), name='available-cars'),
     
     path('create-booking/', views.CreateCarBooking.as_view(), name='create-booking'),
+    path('add-news-letter/', views.NewsLetterView.as_view(), name='add-news-letter'),
     path('latest-offers/', views.LatestOffersView.as_view(), name='latest-offers'),
     path('add-review/', views.AddReview.as_view(), name='add-review'),
     path('add-wishlist/', views.AddWishlist.as_view(), name='add-wishlist'),

@@ -32,6 +32,9 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone_number', 'created_at')
 admin.site.register(Profile, ProfileAdmin)
 
+class NewsLetterAdmin(admin.ModelAdmin):
+    list_display = ('id', 'email', 'created_at')
+admin.site.register(NewsLetter, NewsLetterAdmin)
 
 logger = logging.getLogger(__name__)
 # Car Booking Admin
