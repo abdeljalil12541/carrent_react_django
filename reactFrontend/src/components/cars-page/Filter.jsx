@@ -7,71 +7,48 @@ import PickupFeatures from "./PickupFeatures";
 import DefaultEquipment from './DefaultEquipment';
 
 const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, selectedPickupFeature, onPickupFeatureChange, selectedDefaultEquipement, onDefaultEquipementChange, selectedFeatures, onFeatureChange, filteredCarPrice, onFilterPriceChange }) => {
-  const [activeIndices, setActiveIndices] = useState([]); // Tracks which accordions are open
+  const [activeIndices, setActiveIndices] = useState([]);
   const contentRef1 = useRef(null);
   const contentRef2 = useRef(null);
   const contentRef3 = useRef(null);
   const contentRef4 = useRef(null);
   const contentRef5 = useRef(null);
   
-  const [isInitialized, setIsInitialized] = useState(false); // Ensures logic runs only once after reload
-  const [isScrolling, setIsScrolling] = useState(false); // Tracks if scrolling is happening
-
+  const [isInitialized, setIsInitialized] = useState(false);
+  
   const isMobile = () => window.innerWidth <= 766;
 
-useEffect(() => {
-  if (!isInitialized) {
-    if (isMobile()) {
-      setActiveIndices([]); // Close all filters on mobile
+  // Initial setup and resize handler
+  useEffect(() => {
+    if (!isInitialized) {
+      if (isMobile()) {
+        setActiveIndices([]); // Close all filters on mobile
+      }
+      setIsInitialized(true);
     }
-    setIsInitialized(true); // Mark as initialized
-  }
 
-  const handleResize = () => {
-    if (isMobile()) {
-      setActiveIndices([]); // Close all filters on mobile
-    } else {
-      setActiveIndices([1, 2, 3, 4, 5]); // Open all filters on desktop
-    }
+    const handleResize = () => {
+      if (isMobile()) {
+        setActiveIndices([]); // Close all filters on mobile
+      } else {
+        setActiveIndices([1, 2, 3, 4, 5]); // Open all filters on desktop
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isInitialized]);
+
+  const showFilter = (index) => {
+    setActiveIndices((prev) =>
+      prev.includes(index)
+        ? prev.filter((i) => i !== index)
+        : [...prev, index]
+    );
   };
-
-  window.addEventListener("resize", handleResize);
-
-  return () => {
-    window.removeEventListener("resize", handleResize);
-  };
-}, [isInitialized]);
-
-useEffect(() => {
-  let scrollTimeout;
-
-  const handleScroll = () => {
-    setIsScrolling(true);
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      setIsScrolling(false);
-    }, 200); // Adjust delay as needed
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-    clearTimeout(scrollTimeout);
-  };
-}, []);
-
-const showFilter = (index) => {
-  if (isScrolling) {
-    return; // Ignore clicks during scrolling
-  }
-  setActiveIndices((prev) =>
-    prev.includes(index)
-      ? prev.filter((i) => i !== index) // Close this one
-      : [...prev, index] // Open this one and keep others
-  );
-};
-
-  
 
   // Handle category change and call the parent's handler
   const handleCategoryChange = (category) => {
