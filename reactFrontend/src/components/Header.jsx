@@ -533,117 +533,107 @@ useEffect(() => {
                                         </>
                                         )}
     
-                                            <div className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-2 sm:hidden">
-                                            <div className="items-center">
-                                                {!isAuthenticated ? (
-                                                    <>
-                                                        <div ref={accountRef}>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    setIsCurrencyOpen(false);
-                                                                    setIsOpen(!isOpen);
-                                                                }}
-                                                                className="flex hover:bg-red-700 justify-between items-center w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white"
-                                                            >
-                                                                COMPTE
-                                                                <ChevronDownIcon
-                                                                    aria-hidden="true"
-                                                                    className={`h-4 w-4 text-gray-200 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                                                                />
-                                                            </button>
+    <div className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-2 sm:hidden">
+    <div className="items-center">
+        {!isAuthenticated ? (
+            <div ref={accountRef}>
+                <button
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsCurrencyOpen(false);
+                        setIsOpen(!isOpen);
+                    }}
+                    className="flex hover:bg-red-700 justify-between items-center w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white"
+                >
+                    COMPTE
+                    <ChevronDownIcon
+                        aria-hidden="true"
+                        className={`h-4 w-4 text-gray-200 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                    />
+                </button>
 
-                                                            {isOpen && (
-                                                                <div className="w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                                    <div className="py-1">
-                                                                        <div
-                                                                            onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                toggleMenu();
-                                                                                handleOpen();
-                                                                            }}
-                                                                            className="block px-4 py-2 cursor-pointer text-lg text-gray-700 hover:bg-gray-100"
-                                                                        >
-                                                                            Connectez-vous
-                                                                        </div>
-                                                                        <div
-                                                                            onClick={(e) => {
-                                                                                e.stopPropagation();
-                                                                                toggleMenu();
-                                                                                HandleOpenRegisterPage();
-                                                                            }}
-                                                                            className="cursor-pointer block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100"
-                                                                        >
-                                                                            S'inscrire
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <div
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                logout();
-                                                                toggleMenu();
-                                                            }}
-                                                            className="cursor-pointer py-2 px-6 h-full py-2.5 font-medium hover:bg-red-700 flex items-center pr-4 gap-x-1 font-medium text-white shadow-sm"
-                                                        >
-                                                            DÉCONNEXION
-                                                        </div>
-                                                    </>
-                                                )}
+                {isOpen && (
+                    <div className="w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                            <div
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleMenu();
+                                    handleOpen();
+                                }}
+                                className="block px-4 py-2 cursor-pointer text-lg text-gray-700 hover:bg-gray-100"
+                            >
+                                Connectez-vous
+                            </div>
+                            <div
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleMenu();
+                                    HandleOpenRegisterPage();
+                                }}
+                                className="cursor-pointer block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100"
+                            >
+                                S'inscrire
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        ) : (
+            <div
+                onClick={() => {
+                    logout();
+                    toggleMenu();
+                }}
+                className="cursor-pointer py-2 px-6 h-full py-2.5 font-medium hover:bg-red-700 flex items-center pr-4 gap-x-1 font-medium text-white shadow-sm"
+            >
+                DÉCONNEXION
+            </div>
+        )}
 
-                                                <div ref={currencyRef}>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            setIsOpen(false);
-                                                            setIsCurrencyOpen(!isCurrencyOpen);
-                                                            console.log(`MenuItem clicked: `);
-                                                        }}
-                                                        className="flex justify-between items-center hover:bg-red-700 w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white shadow-sm"
-                                                    >
-                                                        {selectedCurrency}
-                                                        <ChevronDownIcon
-                                                            className={`h-4 w-4 text-gray-200 transition-transform duration-200 ${isCurrencyOpen ? 'rotate-180' : ''}`}
-                                                        />
-                                                    </button>
+        <div ref={currencyRef}>
+            <button
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setIsOpen(false);
+                    setIsCurrencyOpen(!isCurrencyOpen);
+                    console.log(`MenuItem clicked: `);
+                }}
+                className="flex justify-between items-center hover:bg-red-700 w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white shadow-sm"
+            >
+                {selectedCurrency}
+                <ChevronDownIcon
+                    className={`h-4 w-4 text-gray-200 transition-transform duration-200 ${isCurrencyOpen ? 'rotate-180' : ''}`}
+                />
+            </button>
 
-                                                    {isCurrencyOpen && (
-                                                        <div
-                                                            style={{ zIndex: '999' }}
-                                                            className="right-0 w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                                        >
-                                                            <div className="py-1"
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    console.log(`MenuItem clicked: ${currency.label}`);
-                                                                }}
-                                                            >
-                                                                {[{ value: 'MAD', label: 'MAD dh' }, { value: 'USD', label: 'USD $' }, { value: 'EUR', label: 'EUR €' }].map((currency) => (
-                                                                    <div
-                                                                        key={currency.value}
-                                                                        onClick={(e) => {
-                                                                            e.stopPropagation();
-                                                                            console.log(`Currency selected: ${currency.value}`);
-                                                                            handleCurrencyChange(currency.value);
-                                                                            setIsCurrencyOpen(false);
-                                                                            toggleMenu();
-                                                                        }}
-                                                                        className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
-                                                                    >
-                                                                        {currency.label}
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
+            {isCurrencyOpen && (
+                <div
+                    style={{ zIndex: '999' }}
+                    className="right-0 w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
+                    <div className="py-1">
+                        {[{ value: 'MAD', label: 'MAD dh' }, { value: 'USD', label: 'USD $' }, { value: 'EUR', label: 'EUR €' }].map((currency) => (
+                            <div
+                                key={currency.value}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    console.log(`Currency selected: ${currency.value}`);
+                                    handleCurrencyChange(currency.value);
+                                    setIsCurrencyOpen(false);
+                                    toggleMenu();
+                                }}
+                                className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                                {currency.label}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    </div>
+</div>
 
                                 </nav>
                             </div>
