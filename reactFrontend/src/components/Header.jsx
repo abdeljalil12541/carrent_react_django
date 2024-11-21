@@ -511,7 +511,7 @@ useEffect(() => {
 
                                         {isAuthenticated && authenticatedUser.username && (
                                         <>
-                                            <NavLink to="/page-user-setting" className="px-6 pb-1 hover:bg-red-600 h-full flex ml-0.5 text-gray-200 text-sm">
+                                            <NavLink to="/page-user-setting" onClick={toggleMenu} className="px-6 pb-1 hover:bg-red-600 h-full flex ml-0.5 text-gray-200 text-sm">
                                             {userAvatar ? (
                                                 <img 
                                                     className="mt-1 object-cover h-10 w-10 cursor-pointer duration-300 border-2 border-transparent mr-2 rounded-full w-10" 
@@ -585,7 +585,8 @@ useEffect(() => {
                                             ) : (
                                                 <>
                                                     <div
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
                                                             logout();
                                                             toggleMenu();
                                                         }}
