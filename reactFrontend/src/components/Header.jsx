@@ -540,7 +540,6 @@ useEffect(() => {
     
                                         <div className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-2 sm:hidden">
                                         <div className="items-center">
-                                            {!isAuthenticated ? (
                                                 <>
                                                     <div ref={accountRef}>
                                                         <button
@@ -585,9 +584,6 @@ useEffect(() => {
                                                                 </div>
                                                             </div>
                                                     </div>
-                                                </>
-                                            ) : (
-                                                <>
                                                     <div
                                                         onClick={() => {
                                                             logout();
@@ -598,7 +594,6 @@ useEffect(() => {
                                                         DÉCONNEXION
                                                     </div>
                                                 </>
-                                            )}
 
                                             <div ref={currencyRef}>
                                                 <button
