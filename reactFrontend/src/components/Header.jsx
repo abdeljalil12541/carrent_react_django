@@ -19,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
+    const buttonRef = useRef(null); // Ref for the button
+
     // Set up Axios to send CSRF token and credentials with each request
     axios.defaults.withCredentials = true;
     axios.defaults.xsrfCookieName = 'csrftoken';
@@ -361,11 +363,12 @@ useEffect(() => {
     const accountRef = useRef(null);
     const currencyRef = useRef(null);
 
-    const toggleCurrencyDropdown = (e) => {
-        e.stopPropagation();
-        setIsOpen(false); // Close account dropdown
-        setIsCurrencyOpen(!isCurrencyOpen);
-    };
+
+  // Function to toggle the dropdown on button click
+  const toggleCurrencyDropdown = (e) => {
+    e.stopPropagation(); // Prevent the event from bubbling up
+    setIsCurrencyOpen((prev) => !prev); // Toggle dropdown visibility
+};
 
     const handleCurrencyChange =  (currency) => {
         try {
@@ -387,13 +390,11 @@ useEffect(() => {
                 closeSlider(); // Close the slider if clicked outside
                 console.log('slider closing...');
             }
-
-            if (currencyRef.current && !currencyRef.current.contains(event.target)) {
-                setIsCurrencyOpen(false)
+            if (accountRef.current && !accountRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
+                setIsOpen(false); // Close the dropdown when clicking outside
             }
-
-            if (accountRef.current && !accountRef.current.contains(event.target)) {
-                setIsOpen(false)
+            if (currencyRef.current && !currencyRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
+                setIsCurrencyOpen(false); // Close the dropdown when clicking outside
             }
         };
 
@@ -540,9 +541,8 @@ useEffect(() => {
                                                     <div ref={accountRef}>
                                                         <button
                                                             onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                setIsCurrencyOpen(false);
-                                                                setIsOpen(!isOpen);
+                                                                e.stopPropagation(); // Prevent the event from bubbling up
+                                                                setIsOpen((prev) => !prev); // Toggle dropdown visibility
                                                                 
                                                             }}
                                                             className="flex hover:bg-red-700 justify-between items-center w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white"
@@ -596,12 +596,8 @@ useEffect(() => {
 
                                             <div ref={currencyRef}>
                                                 <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setIsOpen(false);
-                                                        setIsCurrencyOpen(!isCurrencyOpen);
-                                                        console.log(`MenuItem clicked: `);
-                                                    }}
+                                                    ref={buttonRef} // Add button ref here
+                                                    onClick={toggleCurrencyDropdown}
                                                     className="flex justify-between items-center hover:bg-red-700 w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white shadow-sm"
                                                 >
                                                     {selectedCurrency}
@@ -610,33 +606,29 @@ useEffect(() => {
                                                     />
                                                 </button>
 
-                                                    <div
-                                                        style={{ zIndex: '999' }}
-                                                        className="right-0 w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                                    >
-                                                        <div className="py-1"
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                console.log(`MenuItem clicked: ${currency.label}`);
-                                                            }}
-                                                        >
-                                                            {[{ value: 'MAD', label: 'MAD dh' }, { value: 'USD', label: 'USD $' }, { value: 'EUR', label: 'EUR €' }].map((currency) => (
-                                                                <div
-                                                                    key={currency.value}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        console.log(`Currency selected: ${currency.value}`);
-                                                                        handleCurrencyChange(currency.value);
-                                                                        setIsCurrencyOpen(false);
-                                                                        toggleMenu();
-                                                                    }}
-                                                                    className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
-                                                                >
-                                                                    {currency.label}
-                                                                </div>
-                                                            ))}
-                                                        </div>
+                                                {/* Dropdown menu */}
+                                                <div
+                                                    style={{ zIndex: '999' }}
+                                                    className={`right-0 w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${isCurrencyOpen ? '' : 'hidden'}`}
+                                                >
+                                                    <div className="py-1" onClick={(e) => e.stopPropagation()}>
+                                                        {[{ value: 'MAD', label: 'MAD dh' }, { value: 'USD', label: 'USD $' }, { value: 'EUR', label: 'EUR €' }].map((currency) => (
+                                                            <div
+                                                                key={currency.value}
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    console.log(`Currency selected: ${currency.value}`);
+                                                                    handleCurrencyChange(currency.value); // Handle the currency change
+                                                                    setIsCurrencyOpen(false); // Close the dropdown after selection
+                                                                    toggleMenu(); // Close any other menu if needed
+                                                                }}
+                                                                className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
+                                                            >
+                                                                {currency.label}
+                                                            </div>
+                                                        ))}
                                                     </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -732,7 +724,7 @@ useEffect(() => {
                                 <span className="-mt-1 -mx-1 -ml-2" style={{fontSize: '16px', fontWeight:'100', color: 'gray', }}>|</span>
                                 </>
                             )}
-
+            
                             <div ref={currencyRef}>
                                 <MenuButton
                                     onClick={toggleCurrencyDropdown}
