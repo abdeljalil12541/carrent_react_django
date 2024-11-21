@@ -38,10 +38,8 @@ const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange
                 ref={contentRef3}
                 className="relative overflow-hidden transition-all duration-300"
                 style={{
-                    maxHeight: activeIndices.includes(3)
-                      ? `${contentRef3?.current?.scrollHeight || 0}px`
-                      : "0px",
-                  }}
+                    maxHeight: contentRef3.current ? activeIndices.includes(3) ? `${contentRef3.current.scrollHeight}px` : "0px" : "0px",
+                }}
             >
                 <section className="mb-2">
                     {categories.map((category, index) => (

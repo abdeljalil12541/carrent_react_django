@@ -13,61 +13,64 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   const contentRef3 = useRef(null);
   const contentRef4 = useRef(null);
   const contentRef5 = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(false); // Add this state
-  const scrollTimeoutRef = useRef(null); // Use ref for timeout to avoid closure issues
+  
+  const [isInitialized, setIsInitialized] = useState(false); // Ensures logic runs only once after reload
+  const [isScrolling, setIsScrolling] = useState(false); // Tracks if scrolling is happening
 
   const isMobile = () => window.innerWidth <= 766;
 
-  useEffect(() => {
-    // Set initial active indices based on screen size
-    const handleInitialSetup = () => {
-      if (isMobile()) {
-        setActiveIndices([]); // Closed by default on mobile
-      } else {
-        setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
-      }
-    };
-
-    handleInitialSetup(); // Run on component mount
-
-    const handleResize = () => {
-      if (isMobile()) {
-        setActiveIndices([]); // Close all on mobile
-      } else {
-        setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
-      }
-    };
-
-    const handleScroll = () => {
-      setIsScrolling(true);
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-      scrollTimeoutRef.current = setTimeout(() => {
-        setIsScrolling(false); // Reset after 200ms
-      }, 200);
-    };
-
-    // Attach event listeners
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll);
-
-    // Cleanup on unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-    };
-  }, []);
-
-  const showFilter = (index) => {
-    if (isScrolling) {
-      return; // Ignore clicks during scrolling
+useEffect(() => {
+  if (!isInitialized) {
+    if (isMobile()) {
+      setActiveIndices([]); // Close all filters on mobile
     }
-    setActiveIndices((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index) // Close this one
-        : [...prev, index] // Open this one and keep others
-    );
+    setIsInitialized(true); // Mark as initialized
+  }
+
+  const handleResize = () => {
+    if (isMobile()) {
+      setActiveIndices([]); // Close all filters on mobile
+    } else {
+      setActiveIndices([1, 2, 3, 4, 5]); // Open all filters on desktop
+    }
   };
+
+  window.addEventListener("resize", handleResize);
+
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, [isInitialized]);
+
+useEffect(() => {
+  let scrollTimeout;
+
+  const handleScroll = () => {
+    setIsScrolling(true);
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      setIsScrolling(false);
+    }, 200); // Adjust delay as needed
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    clearTimeout(scrollTimeout);
+  };
+}, []);
+
+const showFilter = (index) => {
+  if (isScrolling) {
+    return; // Ignore clicks during scrolling
+  }
+  setActiveIndices((prev) =>
+    prev.includes(index)
+      ? prev.filter((i) => i !== index) // Close this one
+      : [...prev, index] // Open this one and keep others
+  );
+};
+
   
 
   // Handle category change and call the parent's handler
