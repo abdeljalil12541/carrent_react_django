@@ -15,40 +15,64 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   const contentRef5 = useRef(null);
   
   const [isInitialized, setIsInitialized] = useState(false);
+  const touchStartY = useRef(null);
+  const isTouchMove = useRef(false);
   
   const isMobile = () => window.innerWidth <= 766;
 
-  // Initial setup and resize handler
   useEffect(() => {
     if (!isInitialized) {
       if (isMobile()) {
-        setActiveIndices([]); // Close all filters on mobile
+        setActiveIndices([]); 
       }
       setIsInitialized(true);
     }
 
     const handleResize = () => {
       if (isMobile()) {
-        setActiveIndices([]); // Close all filters on mobile
+        setActiveIndices([]); 
       } else {
-        setActiveIndices([1, 2, 3, 4, 5]); // Open all filters on desktop
+        setActiveIndices([1, 2, 3, 4, 5]); 
       }
     };
 
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, [isInitialized]);
 
-  const showFilter = (index) => {
+  // Handle touch start
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+    isTouchMove.current = false;
+  };
+
+  // Handle touch move
+  const handleTouchMove = (e) => {
+    if (!touchStartY.current) return;
+    
+    const touchY = e.touches[0].clientY;
+    const diff = Math.abs(touchY - touchStartY.current);
+    
+    // If finger moved more than 10px, consider it a scroll
+    if (diff > 10) {
+      isTouchMove.current = true;
+    }
+  };
+
+  // Handle touch end and filter toggle
+  const showFilter = (index, e) => {
+    // If this was a touch event and we detected movement, don't toggle
+    if (e?.type?.startsWith('touch') && isTouchMove.current) {
+      return;
+    }
+
     setActiveIndices((prev) =>
       prev.includes(index)
         ? prev.filter((i) => i !== index)
         : [...prev, index]
     );
   };
+
 
   // Handle category change and call the parent's handler
   const handleCategoryChange = (category) => {
@@ -82,6 +106,8 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedCategories={selectedCategories}
           onCategoryChange={handleCategoryChange} // Pass handler
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         />
             
         <PriceFilter
@@ -92,6 +118,8 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           filteredCarPrice={filteredCarPrice}
           onFilterPriceChange={handlePriceFilteringChange}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         />
 
         <PickupFeatures
@@ -100,6 +128,8 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedPickupFeature={selectedPickupFeature}
           onPickupFeatureChange={handlePickupFeatureChange}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         />
 
         <FeaturesFilter
@@ -108,6 +138,8 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedFeatures={selectedFeatures}
           onFeatureChange={handleFeatureChange}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         />
 
         <DefaultEquipment
@@ -116,6 +148,8 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedDefaultEquipement={selectedDefaultEquipement}
           onDefaultEquipementChange={handleDefaultEquipementChange}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
         />      
       </div>
     </div>

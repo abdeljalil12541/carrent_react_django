@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange }) => {
-
+const CarsCategory = ({ 
+    activeIndices, 
+    contentRef3, 
+    showFilter, 
+    selectedCategories,
+    onCategoryChange,
+    onTouchStart,
+    onTouchMove 
+}) => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -24,7 +31,12 @@ const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange
 
     return (
         <div className="relative transition-all border-y border-gray-600">
-            <div onClick={() => showFilter(3)} className="w-full pl-3 py-4 text-left cursor-pointer">
+            <div 
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onClick={() => showFilter(3)} 
+                className="w-full pl-3 py-4 text-left cursor-pointer"
+            >
                 <div className="flex items-center">
                     <span className={`transition-transform pr-1 duration-300 transform ${activeIndices.includes(3) ? "rotate-90" : ""}`}>
                         <svg viewBox="0 0 20 20" height={22} xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
@@ -48,7 +60,7 @@ const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange
                                 <label className="flex mr-2 items-center cursor-pointer relative">
                                     <input
                                         type="checkbox"
-                                        onChange={() => onCategoryChange(category)} // Use onCategoryChange
+                                        onChange={() => onCategoryChange(category)}
                                         id={category}
                                         className="peer h-5 w-5 cursor-pointer transition-all appearance-none shadow hover:shadow-md border border-slate-300 hover:border-red-600 duration-150 checked:bg-red-600 checked:border-red-600"
                                     />
