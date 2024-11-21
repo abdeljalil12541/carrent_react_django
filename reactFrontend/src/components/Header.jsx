@@ -422,7 +422,7 @@ useEffect(() => {
     
     return(
         <header>
-            <div className="w-full items-center px-2 sm:px-8 md:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
+            <div className="w-full items-center border-b border-b-red-600 px-2 sm:px-8 md:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
                 <div className="flex">
                     <img src={logo} className='ml-2 sm:ml-0 w-[120px] sm:w-[150px]' />
 
