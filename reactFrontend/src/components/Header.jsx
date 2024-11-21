@@ -554,13 +554,14 @@ useEffect(() => {
                                                             />
                                                         </button>
 
-                                                            <div className="w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                            <div className={`w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${isOpen ? '' : 'hidden'}`}>
                                                                 <div className="py-1">
                                                                     <div
                                                                         onClick={(e) => {
                                                                             e.stopPropagation();
                                                                             toggleMenu();
                                                                             handleOpen();
+                                                                            setIsOpen(false);
                                                                         }}
                                                                         className="block px-4 py-2 cursor-pointer text-lg text-gray-700 hover:bg-gray-100"
                                                                     >
@@ -571,6 +572,7 @@ useEffect(() => {
                                                                             e.stopPropagation();
                                                                             toggleMenu();
                                                                             HandleOpenRegisterPage();
+                                                                            setIsOpen(false);
                                                                         }}
                                                                         className="cursor-pointer block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100"
                                                                     >
