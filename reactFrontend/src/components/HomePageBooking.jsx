@@ -258,10 +258,10 @@ useEffect(() => {
         <>
         <div className="home relative">
             <div className="bgHome"></div>
-            <div className="grid grid-cols-3 sm:px-6 md:px-24 pt-10 relative" style={{zIndex: '999'}}>
+            <div className="grid grid-cols-3 sm:px-6 md:px-24 pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-white pb-8">
+                <h3 className="ml-3 sm:ml-0 text-3xl md:text-4xl lg:text-5xl font-light text-white pb-3 sm:pb-8">
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
