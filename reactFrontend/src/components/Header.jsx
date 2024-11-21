@@ -542,10 +542,8 @@ useEffect(() => {
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 setIsCurrencyOpen(false);
-                                                                toggleMenu();
                                                                 setIsOpen(!isOpen);
-                                                                handleOpen();
-
+                                                                
                                                             }}
                                                             className="flex hover:bg-red-700 justify-between items-center w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white"
                                                         >
@@ -556,7 +554,6 @@ useEffect(() => {
                                                             />
                                                         </button>
 
-                                                        {isOpen && (
                                                             <div className="w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                                 <div className="py-1">
                                                                     <div
@@ -581,7 +578,6 @@ useEffect(() => {
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        )}
                                                     </div>
                                                 </>
                                             ) : (
@@ -614,7 +610,6 @@ useEffect(() => {
                                                     />
                                                 </button>
 
-                                                {isCurrencyOpen && (
                                                     <div
                                                         style={{ zIndex: '999' }}
                                                         className="right-0 w-26 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
@@ -642,7 +637,6 @@ useEffect(() => {
                                                             ))}
                                                         </div>
                                                     </div>
-                                                )}
                                             </div>
                                         </div>
                                     </div>
