@@ -13,6 +13,7 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   const contentRef3 = useRef(null);
   const contentRef4 = useRef(null);
   const contentRef5 = useRef(null);
+  const [isScrolling, setIsScrolling] = useState(false); // Add this state
 
   const isMobile = () => window.innerWidth <= 766;
 
@@ -25,9 +26,9 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
         setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
       }
     };
-  
+
     handleInitialSetup(); // Run on component mount
-  
+
     // Handlers for resize and scroll events
     const handleResize = () => {
       if (isMobile()) {
@@ -36,7 +37,7 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
         setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
       }
     };
-  
+
     let scrollTimeout;
     const handleScroll = () => {
       setIsScrolling(true);
@@ -45,19 +46,19 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
         setIsScrolling(false);
       }, 200); // Adjust delay as necessary
     };
-  
+
     // Attach event listeners
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
-  
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
     // Cleanup on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
       clearTimeout(scrollTimeout);
     };
   }, []);
-  
+
   const showFilter = (index) => {
     if (isScrolling) {
       return; // Ignore clicks during scrolling
