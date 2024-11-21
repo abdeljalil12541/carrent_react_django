@@ -233,6 +233,7 @@ useEffect(() => {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
+        setLoader(true)
         if (!loginEmail || !loginPassword) {
             toast.error("Please fill in all fields!");
             return;
@@ -255,8 +256,8 @@ useEffect(() => {
                 window.location.reload();
             }, 2000);
         } catch (error) {
-            setLoader(true)
             toast.error("Invalid Password!");
+            setLoader(false)
         }
     };
             // Login Form End
