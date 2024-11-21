@@ -255,6 +255,7 @@ useEffect(() => {
                 window.location.reload();
             }, 2000);
         } catch (error) {
+            setLoader(true)
             toast.error("Invalid Password!");
         }
     };
