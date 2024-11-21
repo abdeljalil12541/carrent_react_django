@@ -308,31 +308,35 @@ useEffect(() => {
         
         try {
             const csrfToken = getCookie('csrftoken');  // CSRF token from cookies
-    
-            setLoader(true);
-            setTimeout(async () => {
-
-                // Perform the logout request with CSRF token
-                const response = await axios.post(
-                    'https://carrentreactdjango-production.up.railway.app/api/logout/', 
-                    {}, 
-                    { 
-                        headers: {
-                            'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
-                        },
-                        withCredentials: true,  // Ensure cookies are sent
-                    }
-                );
-                console.log("Logged out successfully", response.data);
-                navigate('/');  // Redirect to home page
-                window.location.reload();  // Optionally reload the page
-            }, 1000);
+        
+            setLoader(true); // Show loader before logout
+            // Perform logout immediately (no need for setTimeout)
+            const response = await axios.post(
+                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                {}, 
+                { 
+                    headers: {
+                        'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
+                    },
+                    withCredentials: true,  // Ensure cookies are sent
+                }
+            );
+            console.log("Logged out successfully", response.data);
+            
+            // Redirect after successful logout
+            navigate('/');  // Redirect to home page
+            
+            toast.success("Logged out successfully"); // Show success toast
         } catch (error) {
-            console.error("Logout error:", error.response ? error.response.data : error.message);
-        }finally{
-            toast.success("Logged out successfully")
+            // Improved error handling: Check for error response properly
+            const errorMessage = error.response ? error.response.data : error.message;
+            console.error("Logout error:", errorMessage);
+            toast.error(`Logout failed: ${errorMessage}`); // Show error toast
+        } finally {
+            setLoader(false);  // Stop loader after logout attempt (success or failure)
         }
     };
+    
     
     console.log('CSRF Token:', csrfToken);  // CSRF token fetched from cookie
     console.log('Session ID:', sessionId);  // Session ID fetched from cookie
@@ -585,8 +589,7 @@ useEffect(() => {
                                             ) : (
                                                 <>
                                                     <div
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
+                                                        onClick={() => {
                                                             logout();
                                                             toggleMenu();
                                                         }}
