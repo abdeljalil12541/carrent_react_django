@@ -584,7 +584,8 @@ useEffect(() => {
                                                 ) : (
                                                     <>
                                                         <div
-                                                            onClick={() => {
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
                                                                 logout();
                                                                 toggleMenu();
                                                             }}
