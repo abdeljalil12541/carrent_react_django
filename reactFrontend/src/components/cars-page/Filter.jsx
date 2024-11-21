@@ -22,7 +22,7 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
     if (!isMobile()) {
       setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
     } else {
-      setActiveIndices([1, 2, 3, 4, 5]); // Closed by default on mobile
+      setActiveIndices([]); // Closed by default on mobile
     }
 
     
