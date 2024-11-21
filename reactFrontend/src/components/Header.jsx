@@ -239,8 +239,6 @@ useEffect(() => {
         }
 
         try {
-            setLoader(true);
-            
             // The CSRF token will automatically be included in the headers
             const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-login/', 
                 { loginEmail, loginPassword }
@@ -248,6 +246,7 @@ useEffect(() => {
             console.log('User Login', response.data);
             setLoginEmail('');
             setLoginPassword('');
+            toast.success('User logged in successfully');
             setOpen(false);
 
             setTimeout(() => {
@@ -256,9 +255,6 @@ useEffect(() => {
             }, 2000);
         } catch (error) {
             toast.error("Invalid Password!");
-        } finally{
-            toast.success('User logged in successfully');
-
         }
     };
             // Login Form End
