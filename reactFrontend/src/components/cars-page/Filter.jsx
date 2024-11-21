@@ -14,18 +14,21 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   const contentRef4 = useRef(null);
   const contentRef5 = useRef(null);
 
-
   const isMobile = () => window.innerWidth <= 766;
 
   useEffect(() => {
-    // Check screen size and set initial active indices
-    if (!isMobile()) {
-      setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
-    } else {
-      setActiveIndices([]); // Closed by default on mobile
-    }
-
-    // Update active indices on window resize
+    // Set initial active indices based on screen size
+    const handleInitialSetup = () => {
+      if (isMobile()) {
+        setActiveIndices([]); // Closed by default on mobile
+      } else {
+        setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
+      }
+    };
+  
+    handleInitialSetup(); // Run on component mount
+  
+    // Handlers for resize and scroll events
     const handleResize = () => {
       if (isMobile()) {
         setActiveIndices([]); // Close all on mobile
@@ -33,20 +36,39 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
         setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
       }
     };
-
+  
+    let scrollTimeout;
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 200); // Adjust delay as necessary
+    };
+  
+    // Attach event listeners
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll);
+  
+    // Cleanup on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
-
+  
   const showFilter = (index) => {
-    // Check if the current index is already open, and toggle it
+    if (isScrolling) {
+      return; // Ignore clicks during scrolling
+    }
     if (activeIndices.includes(index)) {
       setActiveIndices(activeIndices.filter((i) => i !== index)); // Close this one
     } else {
       setActiveIndices([...activeIndices, index]); // Open this one and keep others
     }
   };
-
+  
 
   // Handle category change and call the parent's handler
   const handleCategoryChange = (category) => {
