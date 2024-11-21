@@ -84,7 +84,6 @@ const Ratings = () => {
 
     return(
         <div>
-            <ToastContainer />
             <div className='w-full md:flex reviewswiper sm:pl-36 md:pl-14 justify-center grid pt-12 overflow-hidden gap-6'>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
