@@ -178,7 +178,7 @@ const Footer = () => {
                                                             value={email} 
                                                             onChange={(e) => setEmail(e.target.value)}
                                                             type="email" 
-                                                            class="inputButton bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-gray-600 outline-none dark:placeholder-gray-400 dark:text-white duration-300 dark:focus:ring-blue-500" 
+                                                            class="inputButton bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-gray-600 outline-none duration-300" 
                                                             placeholder="example345@gmail.com" 
                                                             required />
                                                     </div>
