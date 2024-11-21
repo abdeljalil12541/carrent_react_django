@@ -138,15 +138,18 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
     const closestThumb = determineClosestThumb(percent);
     isDraggingRef.current = closestThumb;
     setPosition(closestThumb, percent);
-  };
+  };y
 
   const onMouseMove = (e) => {
+    // Normalize the events to support both mouse and touch events
+    const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    
     if (isDraggingRef.current === null) return;
-
+  
     const rect = sliderRef.current.getBoundingClientRect();
-    let percent = ((e.clientX - rect.left) / rect.width) * 100;
+    let percent = ((clientX - rect.left) / rect.width) * 100;
     percent = Math.min(Math.max(percent, 0), 100);
-
+  
     if (isDraggingRef.current === 1) {
       if (percent <= thumb2Position - 1) {
         setPosition(1, percent);
@@ -161,6 +164,18 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
   const onMouseDown = (e, thumbIndex) => {
     e.stopPropagation(); // Prevent the slider click handler from firing
     isDraggingRef.current = thumbIndex;
+    
+    // Prevent default behavior for touch events to ensure smooth dragging
+    if (e.type.includes('touch')) {
+      e.preventDefault();
+    }
+  };
+
+  // Modify onMouseDown for touch events as well
+  const onTouchStart = (e, thumbIndex) => {
+    e.stopPropagation(); // Prevent the slider click handler from firing
+    isDraggingRef.current = thumbIndex;
+    e.preventDefault(); // Prevent default behavior for touch events
   };
 
   const onMouseUp = () => {
@@ -170,9 +185,18 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+    
+    // Add touch event listeners for mobile devices
+    document.addEventListener('touchmove', onMouseMove);
+    document.addEventListener('touchend', onMouseUp);
+    
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+      
+      // Remove touch event listeners
+      document.removeEventListener('touchmove', onMouseMove);
+      document.removeEventListener('touchend', onMouseUp);
     };
   }, [thumb1Position, thumb2Position]);
 
@@ -190,6 +214,8 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
     const selectedRange = getSelectedPriceRange();
     onFilterPriceChange(selectedRange);
   };
+
+  
 
 
   return (
@@ -234,11 +260,14 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
                   className="thumb"
                   style={{ left: `${thumb1Position}%` }}
                   onMouseDown={(e) => onMouseDown(e, 1)}
+                  onTouchStart={(e) => onMouseDown(e, 1)}
                 ></div>
                 <div
                   className="thumb"
                   style={{ left: `${thumb2Position}%` }}
                   onMouseDown={(e) => onMouseDown(e, 2)}
+                  onTouchStart={(e) => onMouseDown(e, 2)}
+
                 ></div>
               </div>
               <div className="scale">{createScale()}</div>
