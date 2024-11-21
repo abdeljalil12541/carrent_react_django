@@ -455,7 +455,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   
 
   return (
-      <div className="col-span-3 mt-9 ml-4">
+      <div className="col-span-3 mt-9 md:ml-4">
           <div className="bg-neutral-950 w-full text-white pr-4">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start space-y-2 md:space-y-0">
               <ul className="flex text-red-600 flex-wrap">
