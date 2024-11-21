@@ -14,8 +14,8 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   const contentRef4 = useRef(null);
   const contentRef5 = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false); // Add this state
+  const scrollTimeoutRef = useRef(null); // Use ref for timeout to avoid closure issues
 
-  const isMobile = () => window.innerWidth <= 766;
 
   useEffect(() => {
     // Set initial active indices based on screen size
@@ -29,7 +29,6 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
 
     handleInitialSetup(); // Run on component mount
 
-    // Handlers for resize and scroll events
     const handleResize = () => {
       if (isMobile()) {
         setActiveIndices([]); // Close all on mobile
@@ -38,24 +37,23 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
       }
     };
 
-    let scrollTimeout;
     const handleScroll = () => {
       setIsScrolling(true);
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        setIsScrolling(false);
-      }, 200); // Adjust delay as necessary
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false); // Reset after 200ms
+      }, 200);
     };
 
     // Attach event listeners
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup on component unmount
+    // Cleanup on unmount
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, []);
 
@@ -63,11 +61,11 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
     if (isScrolling) {
       return; // Ignore clicks during scrolling
     }
-    if (activeIndices.includes(index)) {
-      setActiveIndices(activeIndices.filter((i) => i !== index)); // Close this one
-    } else {
-      setActiveIndices([...activeIndices, index]); // Open this one and keep others
-    }
+    setActiveIndices((prev) =>
+      prev.includes(index)
+        ? prev.filter((i) => i !== index) // Close this one
+        : [...prev, index] // Open this one and keep others
+    );
   };
   
 
