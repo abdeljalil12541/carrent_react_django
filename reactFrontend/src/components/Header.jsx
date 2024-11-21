@@ -308,35 +308,31 @@ useEffect(() => {
         
         try {
             const csrfToken = getCookie('csrftoken');  // CSRF token from cookies
-        
-            setLoader(true); // Show loader before logout
-            // Perform logout immediately (no need for setTimeout)
-            const response = await axios.post(
-                'https://carrentreactdjango-production.up.railway.app/api/logout/', 
-                {}, 
-                { 
-                    headers: {
-                        'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
-                    },
-                    withCredentials: true,  // Ensure cookies are sent
-                }
-            );
-            console.log("Logged out successfully", response.data);
-            
-            // Redirect after successful logout
-            navigate('/');  // Redirect to home page
-            
-            toast.success("Logged out successfully"); // Show success toast
+    
+            setLoader(true);
+            setTimeout(async () => {
+
+                // Perform the logout request with CSRF token
+                const response = await axios.post(
+                    'https://carrentreactdjango-production.up.railway.app/api/logout/', 
+                    {}, 
+                    { 
+                        headers: {
+                            'X-CSRFToken': csrfToken,  // Pass CSRF token in the headers
+                        },
+                        withCredentials: true,  // Ensure cookies are sent
+                    }
+                );
+                console.log("Logged out successfully", response.data);
+                navigate('/');  // Redirect to home page
+                window.location.reload();  // Optionally reload the page
+            }, 1000);
         } catch (error) {
-            // Improved error handling: Check for error response properly
-            const errorMessage = error.response ? error.response.data : error.message;
-            console.error("Logout error:", errorMessage);
-            toast.error(`Logout failed: ${errorMessage}`); // Show error toast
-        } finally {
-            setLoader(false);  // Stop loader after logout attempt (success or failure)
+            console.error("Logout error:", error.response ? error.response.data : error.message);
+        }finally{
+            toast.success("Logged out successfully")
         }
     };
-    
     
     console.log('CSRF Token:', csrfToken);  // CSRF token fetched from cookie
     console.log('Session ID:', sessionId);  // Session ID fetched from cookie
@@ -540,6 +536,7 @@ useEffect(() => {
     
                                         <div className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-2 sm:hidden">
                                         <div className="items-center">
+                                            {!isAuthenticated ? (
                                                 <>
                                                     <div ref={accountRef}>
                                                         <button
@@ -584,9 +581,12 @@ useEffect(() => {
                                                                 </div>
                                                             </div>
                                                     </div>
+                                                </>
+                                            ) : (
+                                                <>
                                                     <div
-                                                        onClick={() => {
-                                                            logout();
+                                                        onClick={(e) => {
+                                                            logout(e);
                                                             toggleMenu();
                                                         }}
                                                         className="cursor-pointer py-2 px-6 h-full py-2.5 font-medium hover:bg-red-700 flex items-center pr-4 gap-x-1 font-medium text-white shadow-sm"
@@ -594,6 +594,7 @@ useEffect(() => {
                                                         DÉCONNEXION
                                                     </div>
                                                 </>
+                                            )}
 
                                             <div ref={currencyRef}>
                                                 <button
