@@ -113,14 +113,20 @@ const Dashboard = ({ selectedCurrency }) => {
     }, [])
 
     const location = useLocation();
+    const isActive = (path, search) => location.pathname === path && location.search === search;
 
     return(
         <section className="lg:container w-full px-3 sm:px-2 lg:px-12 mx-auto grid grid-cols-4">
-            <div className="hidden col-span-4 w-full bg-gray-300 flex pl-3.5 text-gray-600 px-2 pb-3 pt-1 flex items-center">
-                <FaHome className="mt-[5px] mr-1" /> <span className="mt-[4px]">Accueil</span> <ChevronRight className="mt-2.5 -ml-[1px] text-gray-500" size={14} /> <span className="text-gray-500 mt-[4px]">Accueil  Tableau de bord </span> 
+            <div className="sm:hidden col-span-4 w-full text-sm flex -ml-[5px] text-gray-600 px-2 pt-1 flex items-center">
+                <FaHome className="mt-[5px] mr-1" /> <span className="mt-[4px]">Accueil</span> <ChevronRight className="mt-1.5 -ml-[1px] text-gray-500" size={14} /> 
+                <span className="text-gray-500 mt-[4px]">
+                    {location.pathname === '/page-user-setting' && location.search 
+                        ? new URLSearchParams(location.search).get('sc')?.replace(/-/g, ' ')  // Replace hyphens with spaces
+                    : 'Accueil  Tableau de bord'}
+                </span> 
             </div>
-            <div className="col-span-4 sm:col-span-1 my-4">
-                <div className="w-full pt-8 pb-10 bg-gray-600 h-screen">
+            <div className="col-span-4 sm:col-span-1 my-2.5 sm:my-4">
+                <div className="w-full pt-8 pb-10 bg-gray-600 sm:h-screen">
                     <div className="mx-4 sm:mx-0 md:mx-4">
                         
                         <div className="flex justify-center">
@@ -165,7 +171,7 @@ const Dashboard = ({ selectedCurrency }) => {
                 </div>
             </div>
 
-            <div className="col-span-4 sm:col-span-3 sm:px-1  mt-4">
+            <div className="col-span-4 sm:col-span-3 sm:px-1  sm:mt-4">
                 <div className="col-span-4 sm:col-span-3 sm:px-1 lg:px-6">
                     <div className="hidden sm:flex flex-row items-center w-full bg-gray-300 pl-3.5 text-gray-600 px-2 pb-3 pt-1"> <FaHome className="mt-1 mr-1" /> <span className="mt-1">Accueil</span> <ChevronRight className="mt-2 text-gray-500" size={14} /> <span className="text-gray-500 mt-1">Accueil Tableau de bord</span> </div>
                 </div>
