@@ -208,7 +208,7 @@ const HomeCardSlider = ({ selectedCurrency }) => {
                 <div className="flex justify-center">
                     <img src={logo} className="w-28 sm:w-36 md:mr-14" alt="" />
                 </div>
-                <h1 className="text-center text-2xl font-semibold text-gray-800 block md:mr-14 -mt-11">Our <span className="text-red-600">Cars</span></h1>
+                <h1 className="text-center text-lg sm:text-2xl font-semibold text-gray-800 block md:mr-14 -mt-8 sm:-mt-11">Our <span className="text-red-600">Cars</span></h1>
             </div>
 
             <Swiper
