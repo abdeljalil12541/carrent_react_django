@@ -25,10 +25,7 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
       setActiveIndices([1, 2, 3, 4, 5]); // Closed by default on mobile
     }
 
-   
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
   }, []);
 
   const showFilter = (index) => {
