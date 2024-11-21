@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 
 const CarsCategory = ({ 
@@ -6,12 +6,13 @@ const CarsCategory = ({
     contentRef3, 
     showFilter, 
     selectedCategories,
-    onCategoryChange,
-    onTouchStart,
-    onTouchMove 
+    onCategoryChange 
 }) => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [contentHeight, setContentHeight] = useState("0px");
+    const isScrolling = useRef(false);
+    const scrollTimeout = useRef(null);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -29,11 +30,37 @@ const CarsCategory = ({
         fetchCategories();
     }, []);
 
+    // Update height when activeIndices changes
+    useEffect(() => {
+        if (contentRef3.current && !isScrolling.current) {
+            const height = activeIndices.includes(3) ? `${contentRef3.current.scrollHeight}px` : "0px";
+            setContentHeight(height);
+        }
+    }, [activeIndices]);
+
+    const handleTouchStart = () => {
+        isScrolling.current = true;
+        if (scrollTimeout.current) {
+            clearTimeout(scrollTimeout.current);
+        }
+    };
+
+    const handleTouchEnd = () => {
+        // Delay resetting the scroll state to prevent unwanted height changes
+        scrollTimeout.current = setTimeout(() => {
+            isScrolling.current = false;
+            if (contentRef3.current) {
+                const height = activeIndices.includes(3) ? `${contentRef3.current.scrollHeight}px` : "0px";
+                setContentHeight(height);
+            }
+        }, 100);
+    };
+
     return (
         <div className="relative transition-all border-y border-gray-600">
             <div 
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
                 onClick={() => showFilter(3)} 
                 className="w-full pl-3 py-4 text-left cursor-pointer"
             >
@@ -50,7 +77,7 @@ const CarsCategory = ({
                 ref={contentRef3}
                 className="relative overflow-hidden transition-all duration-300"
                 style={{
-                    maxHeight: contentRef3.current ? activeIndices.includes(3) ? `${contentRef3.current.scrollHeight}px` : "0px" : "0px",
+                    maxHeight: contentHeight
                 }}
             >
                 <section className="mb-2">
