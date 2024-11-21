@@ -239,6 +239,8 @@ useEffect(() => {
         }
 
         try {
+            setLoader(true);
+            
             // The CSRF token will automatically be included in the headers
             const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-login/', 
                 { loginEmail, loginPassword }
