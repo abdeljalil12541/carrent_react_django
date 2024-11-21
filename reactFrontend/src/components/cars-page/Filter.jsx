@@ -16,6 +16,7 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
   const [isScrolling, setIsScrolling] = useState(false); // Add this state
   const scrollTimeoutRef = useRef(null); // Use ref for timeout to avoid closure issues
 
+  const isMobile = () => window.innerWidth <= 766;
 
   useEffect(() => {
     // Set initial active indices based on screen size
