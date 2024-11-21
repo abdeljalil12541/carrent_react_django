@@ -421,7 +421,7 @@ useEffect(() => {
     
     return(
         <header>
-            <div className="w-full items-center px-2 sm:px-28 bg-[#111] h-20 flex justify-between">
+            <div className="w-full items-center px-2 sm:px-8 md:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
                 <div className="flex">
                     <img src={logo} className='ml-2 sm:ml-0 w-[120px] sm:w-[150px]' />
 
@@ -443,93 +443,201 @@ useEffect(() => {
                                     
                             </button>
 
-                            {/* Menu Container */}
-                            <div className="absolute sm:hidden right-[10px] top-11 mt-2 dropdownMenuHeaderRes w-[200px] z-[9999]">
-                                <ul className="hList-responsive-header">
-                                <li className="menu-responsive-header">
-                                    <ul className="menu-dropdown-responsive-header ml-8">
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/">ACCUEIL</a>
-                                    </li>
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/location-de-voitures">LOCATION DE VOITURES</a>
-                                    </li>
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/about-us">À PROPOS</a>
-                                    </li>
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/offres">DERNIÈRES OFFRES</a>
-                                    </li>
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/galerie">GALERIE</a>
-                                    </li>
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/questions-frequemment-posees">FAQ</a>
-                                    </li>
-                                    <li className="menu-dropdown-item-responsive-header">
-                                        <a href="/contact-us">CONTACTEZ NOUS</a>
-                                    </li>
-                                    </ul>
-                                </li>
-                                </ul>
-                            </div>
-
-                            <style>{`
-                                /* Override hover states with click states */
-                                .menu-responsive-header:not(:hover) > .menu-dropdown-responsive-header {
-                                    padding: ${isMenuOpen ? '' : '1px 0'};
-                                    transform: ${isMenuOpen ? 'translateX(10px)' : 'translateX(0)'};
-                                    z-index: ${isMenuOpen ? '100' : '99'};
-                                    background: ${isMenuOpen ? '#ebebeb' : '#dc2626'};
-
-                                }
-
-                                .menu-dropdown-item-responsive-header {
-                                    overflow: hidden;
-                                    height: 30px;
-                                    padding: 5px 40px;
-                                    background: rgba(0, 0, 0, 0);
-                                    white-space: nowrap;
-                                    transition: 
-                                        0.5s height cubic-bezier(.73,.32,.34,1.5),
-                                        0.5s padding cubic-bezier(.73,.32,.34,1.5),
-                                        0.5s margin cubic-bezier(.73,.32,.34,1.5),
-                                        0.5s 0.2s color,
-                                        0.2s background-color,
-                                        0.3s transform;
-                                    }
-
-                                .menu-dropdown-item-responsive-header:hover {
-                                    background: rgba(0, 0, 0, 0.1);
-                                    transform: translateX(5px); /* Adding a slight right move when hovered */
-                                }
-                                        
-                                .menu-responsive-header:not(:hover) > .menu-dropdown-responsive-header:after {
-                                border-top-color: ${isMenuOpen ? '#ebebeb' : '#000'};
-                                }
-
-                                .menu-responsive-header:not(:hover) > .menu-title-responsive-header:after {
-                                border-bottom-width: ${isMenuOpen ? '5px' : '0'};
-                                transition: 0.2s ${isMenuOpen ? '0.2s' : '0s'} border-bottom-width ease-out;
-                                }
-
-                                .menu-responsive-header:not(:hover) > .menu-dropdown-responsive-header > .menu-dropdown-item-responsive-header {
-                                visibility: ${isMenuOpen ? 'visible' : 'hidden'};
-                                height: ${isMenuOpen ? '30px' : '0'};
-                                padding-top: ${isMenuOpen ? '5px' : '0'};
-                                padding-bottom: ${isMenuOpen ? '5px' : '0'};
-                                margin: ${isMenuOpen ? 'initial' : '0'};
-                                color: ${isMenuOpen ? 'rgba(25,25,25,1)' : 'rgba(25,25,25,0)'};
-                                transition: 
-                                    0.5s height cubic-bezier(.73,.32,.34,1.5),
-                                    0.5s padding cubic-bezier(.73,.32,.34,1.5),
-                                    0.5s margin cubic-bezier(.73,.32,.34,1.5),
-                                    0.5s ${isMenuOpen ? '0.2s' : '0s'} color,
-                                    ${isMenuOpen ? '0s' : '0.6s'} visibility;
-                                z-index: 99;
-                                }
-                            `}</style>
                         </div>
+
+                        {/* Mobile Sidebar */}
+                            <div
+                                style={{zIndex:'9999'}}
+                                className={`fixed inset-y-0 right-0 z-40 w-full bg-[#111] text-white transform ${
+                                    isMenuOpen ? "translate-x-0" : "translate-x-full"
+                                } transition-transform duration-300 ease-in-out sm:hidden`}
+                            >
+                                <div className="flex justify-end p-4">
+                                    <button onClick={toggleMenu}>
+                                        <X className="h-6 w-6" />
+                                    </button>
+                                </div>
+                                <nav className="flex flex-col space-y-[1px] py-1">
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="/"
+                                        className={`${location.pathname === '/' ? "bg-red-700 text-white": "text-gray-200" }-700 ml-0.5 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        ACCUEIL
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="location-de-voitures"
+                                        className={`${location.pathname === '/location-de-voitures' ? "bg-red-700 text-white": "text-gray-200" } ml-0.5 hover:bg-red-700 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        LOCATION DE VOITURES
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="/about-us"
+                                        className={`${location.pathname === '/about-us' ? "bg-red-700 text-white": "text-gray-200" } ml-0.5 hover:bg-red-700 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        À PROPOS
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="/offres"
+                                        className={`${location.pathname === '/offres' ? "bg-red-700 text-white": "text-gray-200" } ml-0.5 hover:bg-red-700 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        DERNIÈRES OFFRES
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="/galerie"
+                                        className={`${location.pathname === '/galerie' ? "bg-red-700 text-white": "text-gray-200" } ml-0.5 hover:bg-red-700 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        GALERIE
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="/questions-frequemment-posees"
+                                        className={`${location.pathname === '/questions-frequemment-posees' ? "bg-red-700 text-white": "text-gray-200" } ml-0.5 hover:bg-red-700 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        FAQ
+                                    </NavLink>
+                                    <NavLink
+                                        onClick={toggleMenu}
+                                        to="/contact-us"
+                                        className={`${location.pathname === '/contact-us' ? "bg-red-700 text-white": "text-gray-200" } ml-0.5 hover:bg-red-700 hover:text-white px-6 h-full py-2.5 text-sm font-medium`}
+                                    >
+                                        CONTACTEZ NOUS
+                                    </NavLink>
+
+                                        {!isAuthenticated && !authenticatedUser.username && (
+                                        <>
+                                            <NavLink to="/page-user-setting" className="px-6 py-1 pb-[8px] hover:bg-red-600 h-full flex ml-0.5 text-gray-200 text-sm">
+                                            {userAvatar ? (
+                                                <img 
+                                                    className="mt-1 object-cover h-10 w-10 cursor-pointer duration-300 border-2 border-transparent mr-2 rounded-full w-10" 
+                                                    src={userAvatar} 
+                                                    alt="User avatar"
+                                                    onError={(e) => {
+                                                        // Fallback if image fails to load
+                                                        e.target.src = "https://secure.gravatar.com/avatar/6a3b74536345bf054d23bb18dfc8a6b9?s=300&d=mm&r=g";
+                                                    }}
+                                                />
+                                            ) : (
+                                                <img 
+                                                    className="mt-1 object-cover h-10 w-10 cursor-pointer duration-300 border-2 border-transparent mr-2 rounded-full w-10" 
+                                                    src="https://secure.gravatar.com/avatar/6a3b74536345bf054d23bb18dfc8a6b9?s=300&d=mm&r=g" 
+                                                    alt="Default avatar"
+                                                />
+                                            )}
+                                                <p className="mt-3 cursor-pointer">Bonjour, {authenticatedUser.username}</p>
+                                            </NavLink>
+                                            <span className="-mt-1 -ml-2" style={{fontSize: '16px', fontWeight:'100', color: 'gray', }}>|</span>
+                                        </>
+                                        )}
+    
+                                        <Menu as="div" className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-6 sm:hidden">
+                                            <div className="items-center">
+                                                {/* Conditionally render the NavLink based on authentication status */}
+                                                
+                                                {!isAuthenticated ? (
+                                                <>
+                                                    <div ref={accountRef}>
+                                                        <MenuButton
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setIsCurrencyOpen(false);
+                                                                setIsOpen(!isOpen);
+                                                            }}
+                                                            className="flex hover:bg-red-700 justify-between items-center w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white"
+                                                        >
+                                                            COMPTE
+                                                            <ChevronDownIcon
+                                                                aria-hidden="true"
+                                                                className={`h-3 w-3 text-gray-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                                                            />
+                                                        </MenuButton>
+
+                                                        {isOpen && (
+                                                            <MenuItems
+                                                                static
+                                                                style={{zIndex: '999'}}
+                                                                className="absolute right-0 mt-2 w-26 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                                            >
+                                                                <div className="py-1">
+                                                                    <MenuItem>
+                                                                        <div
+                                                                            onClick={handleOpen}
+                                                                            className="block px-4 py-2 cursor-pointer text-lg text-gray-700 hover:bg-gray-100"
+                                                                        >
+                                                                            Connectez-vous
+                                                                        </div>
+                                                                    </MenuItem>
+                                                                    <MenuItem>
+                                                                        <div
+                                                                            onClick={HandleOpenRegisterPage}
+                                                                            className="cursor-pointer block px-4 py-2 text-lg text-gray-700 hover:bg-gray-100"
+                                                                        >
+                                                                            S'inscrire
+                                                                        </div>
+                                                                    </MenuItem>
+                                                                </div>
+                                                            </MenuItems>
+                                                        )}
+                                                    </div>
+                                                </>
+                                                ):(
+                                                    <>
+                                                    <div
+                                                        onClick={logout}
+                                                        className="cursor-pointer py-2 px-6 h-full py-2.5 font-medium  hover:bg-red-700 flex items-center pr-4 gap-x-1 font-medium text-white shadow-sm"
+                                                    >
+                                                        DÉCONNEXION
+                                                    </div>
+                                                    </>
+                                                )}
+
+                                                <div ref={currencyRef}>
+                                                    <MenuButton
+                                                        onClick={toggleCurrencyDropdown}
+                                                        className="flex justify-between items-center hover:bg-red-700 w-full gap-x-1 py-2 px-6 h-full py-2.5 font-medium text-white shadow-sm"
+                                                    >
+                                                        {selectedCurrency}
+                                                        <ChevronDownIcon
+                                                            className={`h-3 w-3 text-gray-500 transition-transform duration-200 ${isCurrencyOpen ? 'rotate-180' : ''}`}
+                                                        />
+                                                    </MenuButton>
+
+                                                    {isCurrencyOpen && (
+                                                        <MenuItems
+                                                            static
+                                                            style={{ zIndex: '999' }}
+                                                            className="absolute right-0 mt-2 w-26 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                                        >
+                                                            <div className="py-1">
+                                                                {[
+                                                                    { value: 'MAD', label: 'MAD dh' },
+                                                                    { value: 'USD', label: 'USD $' },
+                                                                    { value: 'EUR', label: 'EUR €' }
+                                                                ].map((currency) => (
+                                                                    <MenuItem key={currency.value}>
+                                                                        <div
+                                                                            onClick={() => {
+                                                                                handleCurrencyChange(currency.value);
+                                                                                setIsCurrencyOpen(false);
+                                                                            }}
+                                                                            className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
+                                                                        >
+                                                                            {currency.label}
+                                                                        </div>
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </div>
+                                                        </MenuItems>
+                                                        )}
+                                                </div>
+                                            </div>
+                                        </Menu>
+                                </nav>
+                            </div>
 
                     
                     {/* Existing Menu Component for larger screens */}
@@ -740,7 +848,8 @@ useEffect(() => {
                     </div>
                 </div>
             </Disclosure>
-
+                                                        
+            
 
 
             {open &&
@@ -933,14 +1042,3 @@ useEffect(() => {
     )
 }
 export default Header
-
-
-
-
-
-
-
-
-
-
-
