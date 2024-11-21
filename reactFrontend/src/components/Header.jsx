@@ -240,20 +240,22 @@ useEffect(() => {
 
         try {
             // The CSRF token will automatically be included in the headers
-            setLoader(true)
             const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/user-login/', 
                 { loginEmail, loginPassword }
             );
-        } catch (error) {
-            toast.error("Invalid Password!");
-        } finally{
-            toast.success('User logged in successfully');
             console.log('User Login', response.data);
             setLoginEmail('');
             setLoginPassword('');
             setOpen(false);
-            navigate('/', { replace: true });
-            window.location.reload();
+
+            setTimeout(() => {
+                navigate('/', { replace: true });
+                window.location.reload();
+            }, 2000);
+        } catch (error) {
+            toast.error("Invalid Password!");
+        } finally{
+            toast.success('User logged in successfully');
         }
     };
             // Login Form End
