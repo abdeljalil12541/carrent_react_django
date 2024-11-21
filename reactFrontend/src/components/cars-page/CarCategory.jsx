@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const CarsCategory = ({ 
-    activeIndices, 
-    contentRef3, 
-    showFilter, 
-    selectedCategories,
-    onCategoryChange,
-}) => {
+const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange }) => {
+
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -29,10 +24,7 @@ const CarsCategory = ({
 
     return (
         <div className="relative transition-all border-y border-gray-600">
-            <div 
-                onClick={() => showFilter(3)} 
-                className="w-full pl-3 py-4 text-left cursor-pointer"
-            >
+            <div onClick={() => showFilter(3)} className="w-full pl-3 py-4 text-left cursor-pointer">
                 <div className="flex items-center">
                     <span className={`transition-transform pr-1 duration-300 transform ${activeIndices.includes(3) ? "rotate-90" : ""}`}>
                         <svg viewBox="0 0 20 20" height={22} xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
@@ -46,8 +38,7 @@ const CarsCategory = ({
                 ref={contentRef3}
                 className="relative overflow-hidden transition-all duration-300"
                 style={{
-                    maxHeight: activeIndices.includes(3) ? 
-                        contentRef3?.current?.scrollHeight ? `${contentRef3.current.scrollHeight}px` : "500px" : "0px"
+                    maxHeight: contentRef3.current ? activeIndices.includes(3) ? `${contentRef3.current.scrollHeight}px` : "0px" : "0px",
                 }}
             >
                 <section className="mb-2">
@@ -57,7 +48,7 @@ const CarsCategory = ({
                                 <label className="flex mr-2 items-center cursor-pointer relative">
                                     <input
                                         type="checkbox"
-                                        onChange={() => onCategoryChange(category)}
+                                        onChange={() => onCategoryChange(category)} // Use onCategoryChange
                                         id={category}
                                         className="peer h-5 w-5 cursor-pointer transition-all appearance-none shadow hover:shadow-md border border-slate-300 hover:border-red-600 duration-150 checked:bg-red-600 checked:border-red-600"
                                     />

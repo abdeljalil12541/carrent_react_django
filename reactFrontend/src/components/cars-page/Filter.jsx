@@ -7,70 +7,37 @@ import PickupFeatures from "./PickupFeatures";
 import DefaultEquipment from './DefaultEquipment';
 
 const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, selectedPickupFeature, onPickupFeatureChange, selectedDefaultEquipement, onDefaultEquipementChange, selectedFeatures, onFeatureChange, filteredCarPrice, onFilterPriceChange }) => {
-  const [activeIndices, setActiveIndices] = useState([]);
+  const [activeIndices, setActiveIndices] = useState([]); // Tracks which accordions are open
   const contentRef1 = useRef(null);
   const contentRef2 = useRef(null);
   const contentRef3 = useRef(null);
   const contentRef4 = useRef(null);
   const contentRef5 = useRef(null);
-  
-  const [isInitialized, setIsInitialized] = useState(false);
-  const touchStartY = useRef(null);
-  const isTouchMove = useRef(false);
-  
+
+
   const isMobile = () => window.innerWidth <= 766;
 
   useEffect(() => {
-    if (!isInitialized) {
-      if (isMobile()) {
-        setActiveIndices([]); 
-      }
-      setIsInitialized(true);
+    // Check screen size and set initial active indices
+    if (!isMobile()) {
+      setActiveIndices([1, 2, 3, 4, 5]); // Open all on desktop
+    } else {
+      setActiveIndices([1, 2, 3, 4, 5]); // Closed by default on mobile
     }
 
-    const handleResize = () => {
-      if (isMobile()) {
-        setActiveIndices([]); 
-      } else {
-        setActiveIndices([1, 2, 3, 4, 5]); 
-      }
-    };
+   
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isInitialized]);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  // Handle touch start
-  const handleTouchStart = (e) => {
-    touchStartY.current = e.touches[0].clientY;
-    isTouchMove.current = false;
-  };
-
-  // Handle touch move
-  const handleTouchMove = (e) => {
-    if (!touchStartY.current) return;
-    
-    const touchY = e.touches[0].clientY;
-    const diff = Math.abs(touchY - touchStartY.current);
-    
-    // If finger moved more than 10px, consider it a scroll
-    if (diff > 10) {
-      isTouchMove.current = true;
+  const showFilter = (index) => {
+    // Check if the current index is already open, and toggle it
+    if (activeIndices.includes(index)) {
+      setActiveIndices(activeIndices.filter((i) => i !== index)); // Close this one
+    } else {
+      setActiveIndices([...activeIndices, index]); // Open this one and keep others
     }
-  };
-
-  // Handle touch end and filter toggle
-  const showFilter = (index, e) => {
-    // If this was a touch event and we detected movement, don't toggle
-    if (e?.type?.startsWith('touch') && isTouchMove.current) {
-      return;
-    }
-
-    setActiveIndices((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
-    );
   };
 
 
@@ -106,8 +73,6 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedCategories={selectedCategories}
           onCategoryChange={handleCategoryChange} // Pass handler
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
         />
             
         <PriceFilter
@@ -118,8 +83,6 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           filteredCarPrice={filteredCarPrice}
           onFilterPriceChange={handlePriceFilteringChange}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
         />
 
         <PickupFeatures
@@ -128,8 +91,6 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedPickupFeature={selectedPickupFeature}
           onPickupFeatureChange={handlePickupFeatureChange}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
         />
 
         <FeaturesFilter
@@ -138,8 +99,6 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedFeatures={selectedFeatures}
           onFeatureChange={handleFeatureChange}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
         />
 
         <DefaultEquipment
@@ -148,8 +107,6 @@ const Filter = ({ selectedCurrency, selectedCategories, onCategoryChange, select
           showFilter={showFilter}
           selectedDefaultEquipement={selectedDefaultEquipement}
           onDefaultEquipementChange={handleDefaultEquipementChange}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
         />      
       </div>
     </div>
