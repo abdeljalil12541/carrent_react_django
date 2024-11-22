@@ -425,7 +425,7 @@ useEffect(() => {
                 </div>
 
 
-                <div className="col-span-3 mt-9 lg:mt-0 bookingHomeRes lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center">
+                <div className={`col-span-3 ${isSameDestination? '': 'bookingDesHomeRes'} lg:mt-0 bookingHomeRes lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center`}>
                     {/* Weather Info Section */}
                     <div className={`col-span-1 weather-info flex ${isSameDestination? 'mt-4': 'mt-0'} sm:mt-3 flex-col lg:flex-col`}>
                         <h2 className="text-3xl sm:text-4xl font-light text-center text-white">CASABLANCA OFFICE</h2>

@@ -34,6 +34,13 @@
     }
 }
 
+
+@media screen and (max-width:396px) {
+    .bookingHomeRes{
+        margin-top: 100px !important;
+    }
+}
+
 .chooseUsItems:hover svg{
     background-color: #c53030;
     fill: #fff;
