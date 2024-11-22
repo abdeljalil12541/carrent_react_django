@@ -197,7 +197,7 @@ const Footer = () => {
 
         </div>
         <div className='bg-red-700'>
-            <div class="text-md py-3 text-center text-white">
+            <div class="text-sm sm:text-[16px] py-3 text-center text-gray-300">
                 Copyright © 2024 . Crafted with by AI enthusiasts at AIOps.
             </div>
         </div>

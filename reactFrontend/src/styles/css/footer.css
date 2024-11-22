@@ -20,7 +20,11 @@
   .linkIcons:hover{
     background-color: rgb(239 68 68) !important;
   }
-  
+  @media (min-width: 640px) and (max-width: 767px) {
+    .footerBgColor{
+      min-height: 800px !important; /* Adjust as per your design */
+    }  
+  }
   @media (max-width: 768px) {
     .footerBgImg {
       height: auto;
@@ -40,7 +44,7 @@
     }
   
     .footerBgColor {
-      min-height: 1250px; /* Adjust as per your design */
+      min-height: 650px; /* Adjust as per your design */
       padding-bottom: 2rem; /* Create space for content */
     }
   
