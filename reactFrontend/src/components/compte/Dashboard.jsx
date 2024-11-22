@@ -125,7 +125,7 @@ const Dashboard = ({ selectedCurrency }) => {
                 </span> 
             </div>
             <div className="col-span-4 sm:col-span-1 my-2.5 sm:my-4">
-                <div className="w-full pt-8 pb-10 bg-gray-600 sm:h-screen">
+                <div className="w-full pt-8 pb-10 bg-neutral-900 sm:h-screen">
                     <div className="mx-4 sm:mx-0 md:mx-4">
                         
                         <div className="flex justify-center">
