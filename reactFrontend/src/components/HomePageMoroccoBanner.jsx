@@ -8,9 +8,9 @@ const HomePageMoroccoBaner = () => {
                 <div className='BannerMoroccoBg'></div>
                 <div className='aboutUsContent w-full flex justify-center items-center'>
                     <div>
-                        <p className='text-lg sm:text-xl md:text-3xl lg:text-5xl font-light text-center text-white'>Disponible 24/7 <br /> Notre ligne téléphonique est disponible 24/7 Us</p>
+                        <p className='sm:text-xl md:text-3xl lg:text-5xl font-light text-center text-white'>Disponible 24/7 <br /> Notre ligne téléphonique est disponible 24/7 Us</p>
                         <div className='w-full flex justify-center mt-5 md:mt-10'>
-                            <button className='py-3 hover:bg-red-500 duration-150 text-xs md:text-base px-3 sm:px-6 rounded-3xl bg-red-600 text-white'>En savoir plus sur RN Car - FAQ</button>
+                            <button className='py-3 hover:bg-red-500 mt-8 duration-150 text-xs md:text-base px-3 sm:px-6 rounded-3xl bg-red-600 text-white'>En savoir plus sur RN Car - FAQ</button>
                         </div>
                     </div>
                 </div>

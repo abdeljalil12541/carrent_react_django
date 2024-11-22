@@ -425,7 +425,7 @@ useEffect(() => {
     
     return(
         <header>
-            <div className="w-full items-center border-b border-b-red-600 px-2 sm:px-8 md:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
+            <div className="w-full items-center border-b border-b-red-600 border-none px-2 sm:px-8 lg:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
                 <div className="flex">
                     <img src={logo} className='ml-2 sm:ml-0 w-[120px] sm:w-[150px]' />
 
@@ -435,7 +435,7 @@ useEffect(() => {
                         <div className="relative">
                             {/* Mobile Menu Button */}
                             <button
-                                className="mobile-menu-button-responsive-header sm:hidden flex items-center text-white"
+                                className="mobile-menu-button-responsive-header lg:hidden flex items-center text-white"
                                 onClick={toggleMenu}
                             >
                                 {isMenuOpen? (
@@ -454,7 +454,7 @@ useEffect(() => {
                                 style={{zIndex:'99999'}}
                                 className={`fixed inset-y-0 right-0 z-40 w-full bg-[#111] text-white transform ${
                                     isMenuOpen ? "translate-x-0" : "translate-x-full"
-                                } transition-transform duration-300 ease-in-out sm:hidden`}
+                                } transition-transform duration-300 ease-in-out lg:hidden`}
                             >
                                 <div className="flex justify-end p-4">
                                     <button onClick={toggleMenu}>
@@ -537,7 +537,7 @@ useEffect(() => {
                                         </>
                                         )}
     
-                                        <div className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-2 sm:hidden">
+                                        <div className="relative ml-0.5 hover:text-white h-full py-2.5 text-sm font-medium inline-block text-left -top-2 lg:hidden">
                                         <div className="items-center">
                                             {!isAuthenticated ? (
                                                 <>
@@ -643,7 +643,7 @@ useEffect(() => {
 
                     
                     {/* Existing Menu Component for larger screens */}
-                    <Menu as="div" className="relative inline-block text-left -top-2 hidden sm:block">
+                    <Menu as="div" className="relative inline-block text-left -top-2 hidden lg:block">
                         <div className="inline-flex items-center">
                             {/* Conditionally render the NavLink based on authentication status */}
                             {isAuthenticated && authenticatedUser.username && (
@@ -774,7 +774,7 @@ useEffect(() => {
                 </div>
             </div>
 
-            <Disclosure as="nav" className={`bg-white hidden sm:block navBorder scrollingNavbar ${isFixed ? 'fixed' : 'hiddenn'}`} style={{zIndex: '9998'}}> {/* Updated to conditionally apply fixed */}
+            <Disclosure as="nav" className={`bg-white hidden lg:block navBorder scrollingNavbar ${isFixed ? 'fixed' : 'hiddenn'}`} style={{zIndex: '9998'}}> {/* Updated to conditionally apply fixed */}
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-10 items-center justify-center"> {/* Centering the items */}
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -792,43 +792,43 @@ useEffect(() => {
                                 <div className="flex h-full">
                                     <NavLink
                                         to="/"
-                                        className={`${location.pathname === '/' ? "bg-red-700 text-white": "text-gray-600" } hover:bg-red-700 ml-0.5 hover:text-white px-10 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/' ? "bg-red-700 text-white": "text-gray-600" } hover:bg-red-700 ml-0.5 hover:text-white px-10 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         ACCUEIL
                                     </NavLink>
                                     <NavLink
                                         to="location-de-voitures"
-                                        className={`${location.pathname === '/location-de-voitures' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/location-de-voitures' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         LOCATION DE VOITURES
                                     </NavLink>
                                     <NavLink
                                         to="/about-us"
-                                        className={`${location.pathname === '/about-us' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/about-us' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         À PROPOS
                                     </NavLink>
                                     <NavLink
                                         to="/offres"
-                                        className={`${location.pathname === '/offres' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/offres' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         DERNIÈRES OFFRES
                                     </NavLink>
                                     <NavLink
                                         to="/galerie"
-                                        className={`${location.pathname === '/galerie' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/galerie' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         GALERIE
                                     </NavLink>
                                     <NavLink
                                         to="/questions-frequemment-posees"
-                                        className={`${location.pathname === '/questions-frequemment-posees' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/questions-frequemment-posees' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         FAQ
                                     </NavLink>
                                     <NavLink
                                         to="/contact-us"
-                                        className={`${location.pathname === '/contact-us' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-sm font-medium`}
+                                        className={`${location.pathname === '/contact-us' ? "bg-red-700 text-white": "text-gray-600" } text-gray-600 ml-0.5 hover:bg-red-700 hover:text-white px-9 h-full py-2 text-xs headerTextRes font-medium`}
                                     >
                                         CONTACTEZ NOUS
                                     </NavLink>

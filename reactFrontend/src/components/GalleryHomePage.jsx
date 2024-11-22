@@ -8,26 +8,46 @@ import gallery_img_7 from '../styles/images/gallery/gallery7.png';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 const Galleries = ({gallery, gallery_alt}) => {
     return(
-        <img src={gallery} width={500} alt={gallery_alt} />
+        <div className=' overflow-hidden'>
+            <img src={gallery}  className='h-[200px] mx-3 object-cover w-56' alt={gallery_alt} />
+        </div>
     );
 }
 
 
+
 const GalleryHomePage = () => {
-    const gallery_imgs = [
-        {gallery_img: gallery_img_1, gallery_img_alt: 'Gallery img 1'},
-        {gallery_img: gallery_img_2, gallery_img_alt: 'Gallery img 2'},
-        {gallery_img: gallery_img_3, gallery_img_alt: 'Gallery img 3'},
-        {gallery_img: gallery_img_4, gallery_img_alt: 'Gallery img 4'},
-        {gallery_img: gallery_img_5, gallery_img_alt: 'Gallery img 5'},
-        {gallery_img: gallery_img_6, gallery_img_alt: 'Gallery img 6'},
-        {gallery_img: gallery_img_4, gallery_img_alt: 'Gallery img 4'},
-        // {gallery_img: gallery_img_7, gallery_img_alt: 'Gallery img 7'},
-    ]
+    const [galleries, setGalleries] = useState([])
+
+    useEffect(() => {
+        const Gellery = async () => {
+            try{
+                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/gallery/')
+                setGalleries(response.data)
+                console.log('galleries', response.data)
+            }
+            catch(error)  {
+                console.log('error', error)
+            }
+        }
+        Gellery();
+    }, [])
+
+    const gallery_imgs = galleries.map((gallery) => ({
+        gallery_img: `https://carrentreactdjango-production.up.railway.app${gallery.image}`, gallery_img_alt: gallery.title,
+
+    }));
+
+    useEffect(() => {
+        console.log('gallery_imgs', gallery_imgs);
+
+    }, [])
 
     return(
         <div className=''>
@@ -38,12 +58,12 @@ const GalleryHomePage = () => {
                     autoplay={{
                         delay:4000
                     }}
-                    slidesPerView={3}
+                    slidesPerView={2}
                     loop={true}
                     modules={[Navigation, Pagination, Autoplay]}
                     breakpoints={{
-                        640: { slidesPerView: 3 },
-                        768: { slidesPerView: 4 },
+                        480: { slidesPerView: 2 },
+                        480: { slidesPerView: 4 },
                         1024: { slidesPerView: 6 },
                     }}
                 >

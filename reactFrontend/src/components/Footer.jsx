@@ -27,21 +27,15 @@ const Footer = () => {
         <footer className='relative mx-auto p-0 md:px-0 xl:px-0 overflow-hidden'>
         <div className='relative bg-neutral-950 footerBgColor' style={{height: '55vh'}}>
                 <div class="container absolute mx-auto p-0 md:px-8 xl:px-0">
-                    <div class="mx-auto max-w-7xl pl-6 pb-10 pt-16">
+                    <div class="mx-auto max-w-7xl pl-3 sm:pl-6 pb-10 pt-16">
                         <div class="xl:grid xl:grid-cols-4 xl:gap-1">
-                            <div class="lg:pl-9">
+                            <div class="lg:pl-9 footerImgDivRes">
                                 <div>
-                                    <a href="/">
                                         <div class="flex items-center space-x-2 text-2xl font-medium">
-                                            <span>
-                                                <img className='lg:-mt-20 Footerlogo' src={logo} alt="RN Logo"
-                                                    width={150} />
-                                            </span>
+                                                <img className='lg:-mt-20 w-[150px] sm:w-[250px] sdqdsqd lg:w-[150px] py-4 lg:py-0 Footerlogo' src={logo} alt="RN Logo" />
                                         </div>
-
-                                    </a>
                                 </div>
-                                <div class="max-w-md pr-16 -mt-9 text-md text-gray-400">
+                                <div class="max-w-md pr-16 -mt-14 md:-mt-16 lg:-mt-9 text-sm sm:text-[16px] text-gray-400">
                                     Enhance productivity and efficiency with cutting-edge artificial intelligence solutions for your business operations.
                                 </div>
                                 <div class="flex space-x-2 pt-3">
@@ -92,39 +86,39 @@ const Footer = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div class="mt-16 grid grid-cols-1 gap-1 xl:col-span-3 xl:mt-0">
-                                <div class="md:grid md:grid-cols-4 md:gap-1">
+                            <div class="mt-4 sm:mt-16 grid grid-cols-1 gap-1 xl:col-span-3 xl:mt-0">
+                                <div class="grid grid-cols-2 md:grid-cols-4 md:gap-1">
                                     <div>
                                         <h3 class="text-md font-semibold leading-6 text-[#c53030]">Quick Links</h3>
-                                        <ul role="list" class="mt-6 space-y-4">
+                                        <ul role="list" class="mt-2 sm:mt-6 space-y-1 sm:space-y-4">
                                             <li>
                                                 <a href="/aiplatform"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">Home
+                                                    class="text-sm sm:text-[16px] leading-6 text-gray-400 hover:text-gray-50">Home
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/aialgorithms"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">About us
+                                                    class="text-sm sm:text-[16px] leading-6 text-gray-400 hover:text-gray-50">About us
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/industryapplications"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50"> Contact us
+                                                    class="text-sm sm:text-[16px] leading-6 text-gray-400 hover:text-gray-50"> Contact us
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/industryapplications"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50"> Gallery
+                                                    class="text-sm sm:text-[16px] leading-6 text-gray-400 hover:text-gray-50"> Gallery
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="mt-10 md:mt-0">
+                                    <div>
                                         <h3 class="text-md font-semibold leading-6 text-[#c53030]">Address</h3>
-                                        <ul role="list" class="mt-6 space-y-4">
+                                        <ul role="list" class="mt-2 sm:mt-6 space-y-1 sm:space-y-4">
                                             <li>
                                                 <a href="/predictiveanalysis"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">
+                                                    class="text-sm sm:text-[16px] sm:leading-6 text-gray-400 hover:text-gray-50">
 
                                                     55 Main Street, 2nd block
                                                     Melbourne, Australia
@@ -135,56 +129,56 @@ const Footer = () => {
                                             </li>
                                             <li>
                                                 <a href="/customerexperience"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">Customer
+                                                    class="text-sm sm:text-[16px] sm:leading-6 text-gray-400 hover:text-gray-50">Customer
                                                     73 Main Street, 5th block
                                                     New York City
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="mt-10 md:mt-0">
+                                    <div class="mt-1">
                                         <h3 class="text-md font-semibold leading-6 text-[#c53030]">Company</h3>
-                                        <ul role="list" class="mt-6 space-y-4">
+                                        <ul role="list" class="mt-2 sm:mt-6 space-y-1 sm:space-y-4">
                                             <li>
                                                 <a href="/aboutus"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">About Us
+                                                    class="text-sm sm:text-[16px] leading-1 sm:leading-6 text-gray-400 hover:text-gray-50">About Us
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/careers"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">Careers
+                                                    class="text-sm sm:text-[16px] leading-1 sm:leading-6 text-gray-400 hover:text-gray-50">Careers
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/contactus"
-                                                    class="text-md leading-6 text-gray-400 hover:text-gray-50">Contact Us
+                                                    class="text-sm sm:text-[16px] leading-1 sm:leading-6 text-gray-400 hover:text-gray-50">Contact Us
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="mt-10 md:mt-0">
+                                    <div class="mt-1">
                                         <h3 class="text-md font-semibold leading-6 text-[#c53030] uppercase">Newsletter</h3>
                                         {/* <dir className='w-full'>
                                             <hr className='w-14 flex justify-center' />
                                         </dir> */}
-                                        <ul role="list" class="mt-6 space-y-4">
+                                        <ul role="list" class="mt-2 sm:mt-6 space-y-1 sm:space-y-4">
                                             <li className='w-full'>
-                                                <h1 className='text-md leading-6 text-gray-400'>Subscribe to our newsletter to get anything new</h1>
+                                                <h1 className='text-sm sm:text-[16px] sm:leading-6 text-gray-400'>Subscribe to our newsletter to get anything new</h1>
                                             </li>
-                                            <form onSubmit={(e) => handleNewsLetterForm(e)}>
+                                            <form onSubmit={(e) => handleNewsLetterForm(e)} className='mr-1 sm:mr-0'>
                                                 <li>
                                                     <div>
                                                         <input 
                                                             value={email} 
                                                             onChange={(e) => setEmail(e.target.value)}
                                                             type="email" 
-                                                            class="inputButton bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-gray-600 outline-none duration-300" 
+                                                            class="sm:inputButton mr-96 sm:inputButton mt-1 sm:mt-0 bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:border-gray-600 outline-none duration-300" 
                                                             placeholder="example345@gmail.com" 
                                                             required />
                                                     </div>
                                                 </li>
-                                                <li className='mt-3'>
-                                                    <button type='submit' class="inline-flex Subscribebutton items-center hover:border-white justify-center w-full pl-4 pr-3 py-2 mb-2 text-md text-white bg-[#c53030] rounded-md hover:bg-red-500 duration-150 sm:w-auto sm:mb-0">
+                                                <li className='mt-2 sm:mt-3'>
+                                                    <button type='submit' class="inline-flex sm:Subscribebutton items-center hover:border-white justify-center w-full pl-2 sm:pl-4 pr-1 sm:pr-3 py-2 mb-2 text-md text-white bg-[#c53030] rounded-md hover:bg-red-500 duration-150 sm:w-auto sm:mb-0">
                                                         Subscribe
                                                         <svg class="w-4 h-4 ml-1 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                                     </button>

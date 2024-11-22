@@ -456,7 +456,7 @@ const CarsPage = ({ selectedCurrency }) => {
 
 
     return(
-    <section className="ml-2 mr-1 lg:container searcherRes lg:mx-auto lg:px-16">
+    <section className="mx-1 lg:container searcherRes lg:mx-auto lg:px-16">
         <nav className="mt-4">
                 <div className="flex items-center gap-2 text-sm">
                 <a href="/" className="text-red-600 hover:text-red-700 font-semibold">Accueil</a>
@@ -464,18 +464,20 @@ const CarsPage = ({ selectedCurrency }) => {
                 <span className="text-gray-500 -ml-1">LOCATION DE VOITURES</span>
                 </div>
         </nav>
-        <h2 className={`text-xl sm:text-3xl ${SearchFormVisible? 'hidden': ''} font-light inline-block mt-3`}>
-            {filteredCarsLengthByCurrentLocation > 0 ? `${filteredCarsLengthByCurrentLocation} voitures` : 'Aucune voiture'} à {
-                finalDestination.selectedOptionDestination1 && finalDestination.selectedOptionDestination1.label
-                ? finalDestination.selectedOptionDestination1.label.toUpperCase()
-                : ''
-            }
-            <span> </span>
-            le {finalDateTime.pickupDate ? `${new Date(finalDateTime.pickupDate).toLocaleDateString('en-US', { month: 'short' })} ${new Date(finalDateTime.pickupDate).getDate()}` : 'empty date'}
-            <span> </span>
-            - {finalDateTime.dropoffDate ? `${new Date(finalDateTime.dropoffDate).toLocaleDateString('en-US', { month: 'short' })} ${new Date(finalDateTime.dropoffDate).getDate()}` : 'empty date'}
-        </h2>
-        <a onClick={(event) => { event.preventDefault(); setSearchFormVisible(true); }} className={`${SearchFormVisible? 'hidden': ''} text-red-600 cursor-pointer text-sm ml-1 inline-block`}>Changer la recherche</a>
+        <div className="hidden md:block">
+            <h2 className={`text-xl sm:text-3xl ${SearchFormVisible? 'hidden': ''} font-light inline-block mt-3`}>
+                {filteredCarsLengthByCurrentLocation > 0 ? `${filteredCarsLengthByCurrentLocation} voitures` : 'Aucune voiture'} à {
+                    finalDestination.selectedOptionDestination1 && finalDestination.selectedOptionDestination1.label
+                    ? finalDestination.selectedOptionDestination1.label.toUpperCase()
+                    : ''
+                }
+                <span> </span>
+                le {finalDateTime.pickupDate ? `${new Date(finalDateTime.pickupDate).toLocaleDateString('en-US', { month: 'short' })} ${new Date(finalDateTime.pickupDate).getDate()}` : 'empty date'}
+                <span> </span>
+                - {finalDateTime.dropoffDate ? `${new Date(finalDateTime.dropoffDate).toLocaleDateString('en-US', { month: 'short' })} ${new Date(finalDateTime.dropoffDate).getDate()}` : 'empty date'}
+            </h2>
+            <a onClick={(event) => { event.preventDefault(); setSearchFormVisible(true); }} className={`${SearchFormVisible? 'hidden': ''} text-red-600 cursor-pointer text-sm ml-1 inline-block`}>Changer la recherche</a>
+        </div>
         
         <div className={`${!SearchFormVisible? 'hidden': ''} w-full bg-neutral-950 rounded-md pb-2 sm:pb-6 pt-6 px-4 mt-6`}>
             <form onSubmit={handleCarsFormBookingSubmit} className="md:flex items-center justify-center space-x-4">
@@ -632,8 +634,9 @@ const CarsPage = ({ selectedCurrency }) => {
                     </svg>
                 </button>
             </form>
+            
         </div>
-
+                                        
         {/* Grid layout for cars and filters */}
         <div className="grid grid-cols-1 md:grid-cols-4">
             <Filter 
@@ -650,22 +653,41 @@ const CarsPage = ({ selectedCurrency }) => {
                 filteredCarPrice={filteredCarPrice}
                 onFilterPriceChange={handleFilteringPriceChange}
             />
-            <CarsForRent 
-                selectedCurrency={selectedCurrency}
-                
-                selectedCategories={selectedCategories}
-                selectedPickupFeature={selectedPickupFeature}
-                filteredCarPrice={filteredCarPrice}
-                selectedFeatures={selectedFeatures}
-                selectedDefaultEquipement={selectedDefaultEquipement}
-                availableCarsState={availableCarsState}
-                availableCarsFromBokkingForm={availableCarsFromBokkingForm}
-                finalDateTime={finalDateTime}
-                finalDestination={finalDestination}
-                setFilteredCarsLengthByCurrentLocation={setFilteredCarsLengthByCurrentLocation}
-                
-                loader={loader}
-            />
+
+            
+            <div className="col-span-3">
+                <div className="md:hidden">
+                    <h2 className={`text-xl sm:text-2xl ${SearchFormVisible? 'hidden': ''} font-light inline-block mt-3`}>
+                        {filteredCarsLengthByCurrentLocation > 0 ? `${filteredCarsLengthByCurrentLocation} voitures` : 'Aucune voiture'} à {
+                            finalDestination.selectedOptionDestination1 && finalDestination.selectedOptionDestination1.label
+                            ? finalDestination.selectedOptionDestination1.label.toUpperCase()
+                            : ''
+                        }
+                        <span> </span>
+                        le {finalDateTime.pickupDate ? `${new Date(finalDateTime.pickupDate).toLocaleDateString('en-US', { month: 'short' })} ${new Date(finalDateTime.pickupDate).getDate()}` : 'empty date'}
+                        <span> </span>
+                        - {finalDateTime.dropoffDate ? `${new Date(finalDateTime.dropoffDate).toLocaleDateString('en-US', { month: 'short' })} ${new Date(finalDateTime.dropoffDate).getDate()}` : 'empty date'}
+                    </h2>
+                    <a onClick={(event) => { event.preventDefault(); setSearchFormVisible(true); }} className={`${SearchFormVisible? 'hidden': ''} text-red-600 cursor-pointer text-sm ml-1 inline-block`}>Changer la recherche</a>
+                </div>
+
+                <CarsForRent 
+                    selectedCurrency={selectedCurrency}
+                    
+                    selectedCategories={selectedCategories}
+                    selectedPickupFeature={selectedPickupFeature}
+                    filteredCarPrice={filteredCarPrice}
+                    selectedFeatures={selectedFeatures}
+                    selectedDefaultEquipement={selectedDefaultEquipement}
+                    availableCarsState={availableCarsState}
+                    availableCarsFromBokkingForm={availableCarsFromBokkingForm}
+                    finalDateTime={finalDateTime}
+                    finalDestination={finalDestination}
+                    setFilteredCarsLengthByCurrentLocation={setFilteredCarsLengthByCurrentLocation}
+                    
+                    loader={loader}
+                />
+            </div>
         </div>
 
         {open &&

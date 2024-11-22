@@ -32,14 +32,14 @@ const HomePageAboutUs = () => {
                             </div>
                         </div>
 
-                        <button className="bg-red-600 py-3 flex px-5 rounded-full mt-8">
+                        <button className="hidden md:block bg-red-600 py-3 flex flex-row px-5 rounded-full mt-8">
                             <span className="pr-1 inline-block">Read More</span>
-                            <svg className="pb-1 inline-block mt-1 ml-1" fill="#fff" height={20} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
+                            <svg className="pb-1 inline-block mt-[1] " fill="#fff" height={22} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
                         </button>
                     </div>
 
 
-                    <div className="w-full col-span-2 md:col-span-1 lg:pl-24 relative px-4 py-9">
+                    <div className="w-full col-span-2 md:col-span-1 lg:pl-24 relative px-4 pb-4 md:py-9">
                         <div className="relative w-full">
                             <img className="w-full h-96 object-cover rounded-3xl" src="https://img.freepik.com/premium-photo/young-business-moroccan-man-isolated-beige-wall-applauding-after-presentation-conference_1368-143651.jpg" alt="" />
                             
@@ -119,6 +119,10 @@ const HomePageAboutUs = () => {
                                         
                                     </div>
                                 </div>
+                            </button>
+                            <button className="md:hidden bg-red-600 py-3 flex px-5 rounded-full mt-8">
+                                <span className="pr-1 inline-block text-white">Read More</span>
+                                <svg className=" inline-block mt-1 ml-1" fill="#fff" height={18} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
                             </button>
                         </div>
                     </div>

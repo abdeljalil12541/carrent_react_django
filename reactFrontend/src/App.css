@@ -452,3 +452,12 @@ a {
     width: 100% !important; /* Ensure it takes 100% width */
   }
 }
+
+
+
+
+@media screen and (min-width: 1260px) {
+  .headerTextRes {
+    font-size: 15px;
+  }
+}

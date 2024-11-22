@@ -14,6 +14,26 @@
     opacity: .5;
 }
 
+@media screen and (min-width: 300px) and (max-width:619px) {
+    .bookingHomeRes{
+        margin-top: 140px !important;
+    }
+}
+
+
+@media screen and (min-width: 619px) and (max-width:640px) {
+    .bookingHomeRes{
+        margin-top: 0 !important;
+    }
+    .bgHome{
+        height: 100%;
+    }
+
+    .home {
+        height: 1050px !important;
+    }
+}
+
 .chooseUsItems:hover svg{
     background-color: #c53030;
     fill: #fff;

@@ -84,10 +84,11 @@ const Ratings = () => {
 
     return(
         <div>
-            <div className='w-full md:flex reviewswiper sm:pl-36 md:pl-14 justify-center grid pt-12 overflow-hidden gap-6'>
+            <div className='w-full md:flex reviewswiper sm:pl-36 md:pl-14 justify-center grid pt-4 sm:pt-12 overflow-hidden gap-6'>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     autoplay={{ delay: 3000 }}
+                    loop = {true}
                     spaceBetween={20}
                     slidesPerView={1}
                     breakpoints={{
@@ -124,6 +125,20 @@ const Ratings = () => {
                             </div>
                         </SwiperSlide>
 
+                        
+                        <SwiperSlide>
+                            <div className='col-span-1 flex px-8 w-full justify-center flex-col rounded mx-4 commentBg'>
+                                <div className='flex justify-center'>
+                                    <FaStar color='yellow' /><FaStar color='yellow' /><FaStar color='yellow' /><FaStar color='yellow' />
+                                </div>
+                                <span className='text-white text-center mt-2'>
+                                    Professional and very helpful car rental. Fantastic airport car delivery and collection service. Well maintained car. Highly recommended!
+                                </span>
+                                <p className='text-[yellow] text-center font-semibold mt-2'>Ali</p>
+                                <p className='text-white text-center text-sm mt-1'>France</p>
+                            </div>
+                        </SwiperSlide>
+
                         <SwiperSlide>
                             <div className='col-span-1 flex px-8 w-full justify-center flex-col rounded mx-4 commentBg'>
                                 <div className='flex justify-center'>
@@ -140,8 +155,8 @@ const Ratings = () => {
                 </Swiper>
             </div>
 
-            <div className='w-full flex justify-center my-9'>
-                <button onClick={handleOpen} className='text-white hover:bg-red-500 font-semibold bg-red-600 py-3 px-5 rounded'>Leave A Comment</button>
+            <div className='w-full flex justify-center my-2 lg:pr-[25px] sm:my-9'>
+                <button onClick={handleOpen} className='text-white hover:bg-red-500 text-sm sm:text-[16px] font-semibold bg-red-600 py-3 px-5 rounded'>Leave A Comment</button>
             </div>
 
             {open && (
