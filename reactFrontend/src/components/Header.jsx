@@ -5,7 +5,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import '../styles/css/header.css';
-import logo from '../styles/images/logo.png';
+import logo from '../styles/images/logo10.png';
 import { NavLink, replace } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -426,8 +426,8 @@ useEffect(() => {
     return(
         <header>
             <div className="w-full items-center border-b border-b-red-600 border-none px-2 sm:px-8 lg:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
-                <div className="flex mb-2.5 -ml-6">
-                    <img src={logo} className='ml-2 sm:ml-0 w-[155px] sm:w-[170px] mt-2' />
+                <div className="flex mb-2.5 -ml-12 sm:-ml-14">
+                    <img src={logo} className='ml-2 sm:ml-0 w-[240px] sm:w-[240px] mt-[88px]' />
 
                 </div>
 
