@@ -529,7 +529,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
                     <div key={index} className="border hover:border-red-600 hover:shadow-lg duration-300 border-sm pl-4 py-4 border-gray-200 mt-4 w-full grid grid-cols-7">
                         <div className="col-span-7 md:col-span-2 pl-2">
                           <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}}><img src={car.image} alt={car.name} className='md:w-[120px]' /></Link>
-                          <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}} className='flex justify-center sm:block text-sm text-red-600 cursor-pointer'>{car.name}</Link>
+                          <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}} className='text-sm text-red-600 cursor-pointer'>{car.name}</Link>
                         </div>
                         <div className="col-span-7 mt-2 md:mt-0 md:col-span-2 flex md:ml-[1px] items-center md:-ml-6">
                             <div className='flex flex-col'>
