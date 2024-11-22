@@ -116,7 +116,7 @@ const Dashboard = ({ selectedCurrency }) => {
 
     return(
         <section className="lg:container w-full px-3 sm:px-2 lg:px-12 mx-auto grid grid-cols-4">
-            <div className="sm:hidden col-span-4 w-full text-sm flex -ml-[5px] text-gray-600 px-2 pt-1 flex items-center">
+            <div className="sm:hidden col-span-4 w-full text-sm flex -ml-[5px] text-gray-600 px-2 pt-2 mb-1 flex items-center">
                 <FaHome className="mt-[5px] mr-1" /> <span className="mt-[4px]">Accueil</span> <ChevronRight className="mt-1 -ml-[1px] text-gray-500" size={14} /> 
                 <span className="text-gray-500 mt-[4px]">
                     {location.pathname === '/page-user-setting' && location.search 
