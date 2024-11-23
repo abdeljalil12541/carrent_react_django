@@ -281,10 +281,10 @@ useEffect(() => {
         <>
         <div className={`home ${isSameDestination? '' : 'homeResDes'} relative`}>
             <div className="bgHome"></div>
-            <div className="grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
+            <div className="grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-2 sm:pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className="ml-3 sm:ml-0 text-center lg:text-start text-3xl md:text-4xl lg:text-5xl font-light text-white pb-3 lg:pb-5">
+                <h3 className="ml-0 sm:ml-0 text-center lg:text-start text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white pb-1 sm:pb-3 lg:pb-5">
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
