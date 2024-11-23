@@ -170,9 +170,13 @@ select:focus + div div {
 @media (max-width: 622px) {
     .home {
         background-image: url('https://pictures.dealer.com/f/fredbeansautorent/1196/531580b545d2013d35d6dc917976e0c3x.jpg?impolicy=downsize_bkpt&w=2500');
-        height: 1200px;
+        height: 705px;
         background-size: cover;
         background-position: 1000px;
+    }
+    
+    .homeResDes {
+        height: 805px;
     }
 }
 

@@ -6,7 +6,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formatInTimeZone } from 'date-fns-tz';
 import { Link, useNavigate } from 'react-router-dom';
-
+import CountUp from 'react-countup';
+import {MapPin} from 'lucide-react';
 import Select from 'react-select';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -256,12 +257,12 @@ useEffect(() => {
 
     return (
         <>
-        <div className="home relative">
+        <div className={`home ${isSameDestination? '' : 'homeResDes'} relative`}>
             <div className="bgHome"></div>
             <div className="grid grid-cols-3 sm:px-6 md:px-24 pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className="ml-3 sm:ml-0 text-3xl md:text-4xl lg:text-5xl font-light text-white pb-3 sm:pb-8">
+                <h3 className="ml-3 sm:ml-0 text-center lg:text-start text-3xl md:text-4xl lg:text-5xl font-light text-white pb-3">
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
@@ -425,18 +426,18 @@ useEffect(() => {
                 </div>
 
 
-                <div className={`col-span-3 ${isSameDestination? '': 'bookingDesHomeRes'} lg:mt-0 bookingHomeRes lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center`}>
+                <div className={`col-span-3 ${isSameDestination? '': 'bookingDesHomeRes'} hidden sm:block lg:mt-0 bookingHomeRes lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center`}>
                     {/* Weather Info Section */}
                     <div className={`col-span-1 weather-info flex ${isSameDestination? 'mt-4': 'mt-0'} sm:mt-3 flex-col lg:flex-col`}>
                         <h2 className="text-3xl sm:text-4xl font-light text-center text-white">CASABLANCA OFFICE</h2>
-                        <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} sm:mt-4 justify-center`}>
-                            <span className="text-4xl mx-2 text-white">26.0</span>
-                            <span className="text-8xl text-white"><WiDayRainMix /></span>
+                        <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} font-light mb-4 sm:mb-0 sm:font-normal sm:mt-4 justify-center`}>
+                            <span className="text-4xl mx-2 text-white">+<CountUp end={7} duration={1.75} /> Years </span>
+                            <span className="text-8xl text-white"><MapPin strokeWidth={1.5} size={50} /></span>
                         </div>
                     </div>
                     
                     {/* Car Info Section */}
-                    <div className="col-span-1 flex lg:flex-col items-center justify-center lg:mt-8">
+                    <div className="col-span-1 flex lg:flex-col items-center justify-center lg:mt-0">
                         <div className="flex flex-col">
                             <a href="" className={`ml-2 sm:ml-0 text-sm text-center flex sm:text-[16px] justify-center sm:mt-8 font-medium hover:text-white`} style={{color: "#e2e8f0"}}>
                                 <svg className="pr-2" viewBox="0 0 24 24" style={{marginTop: '2px'}} height={20} fill="#e2e8f0" xmlns="http://www.w3.org/2000/svg">
