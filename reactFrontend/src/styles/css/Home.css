@@ -214,3 +214,12 @@ select:focus + div div {
         background-position: 1100px;
     }
 }
+
+
+@media (min-width: 512px) {
+    .colsRowsRes {
+        top: -2.7px !important;
+        right: 26px !important;
+    }
+}
+

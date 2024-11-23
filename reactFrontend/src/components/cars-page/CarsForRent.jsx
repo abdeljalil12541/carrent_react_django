@@ -456,7 +456,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
 
   return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
-          <div className="bg-neutral-950 w-full text-white pr-4">
+          <div className="bg-neutral-950 w-full text-white relative pr-4">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start space-y-2 md:space-y-0">
               <ul className="flex text-red-600 flex-wrap">
                 <li className={`hover:bg-red-600 hover:text-white mr-1 cursor-pointer py-1.5 px-2 ${sortConfig.key === 'newest' ? 'bg-red-600 text-white' : ''}`}
@@ -475,16 +475,15 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
                     onClick={() => handleSort('name')}>
                     Nom (A-Z)
                 </li>
-                <li className={`hover:bg-red-600 hover:text-white mr-1 cursor-pointer py-1.5 px-2 ${sortConfig.key === 'name' && sortConfig.direction === 'desc' ? 'bg-red-600 text-white' : ''}`}
+                <li className={`hover:bg-red-600 pr-12 hover:text-white mr-1 cursor-pointer py-1.5 px-2 ${sortConfig.key === 'name' && sortConfig.direction === 'desc' ? 'bg-red-600 text-white' : ''}`}
                     onClick={() => handleSort('name')}>
                     Nom (Z-A)
                 </li>
-              </ul>
-
-              <ul className="flex text-red-600 gap-4 relative py-1.5">
+              <li className="flex flex-col text-red-600 gap-4 absolute right-1 py-1.5">
+                      <div className='relative'>
                       <li className="text-white">
                           <div onClick={handleChangeCardsToColsStyle}>
-                              <svg fill="#ffffff" className={`${colsCards ? "active" : ""} cursor-pointer absolute right-7`} style={{ top: '4px' }} height={30} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <svg fill="#ffffff" className={`${colsCards ? "active" : ""} cursor-pointer absolute colsRowsRes`} style={{ top: '26px', right: '-2px' }} height={30} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <g strokeWidth="0" transform="translate(2.16,2.16), scale(0.82)">
                                       <rect x="0" y="0" width="24" height="24" rx="0" />
                                   </g>
@@ -519,7 +518,10 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
                               </svg>
                           </div>
                       </li>
+                      </div>
+              </li>
               </ul>
+
             </div>
           </div>
 
