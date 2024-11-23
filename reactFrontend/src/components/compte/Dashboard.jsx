@@ -1,5 +1,5 @@
 import { Clock9, Heart, ChevronRight } from "lucide-react"
-import { FaUser, FaCog, FaInbox, FaHome } from "react-icons/fa"
+import { FaUser, FaCog, FaInbox, FaHome, FaHeart } from "react-icons/fa"
 import { NavLink, useLocation } from "react-router-dom"
 import SettingsDashboard from "./SettingsDashboard"
 import PreviewDashboard from "./PreviewDashboard"
@@ -115,16 +115,9 @@ const Dashboard = ({ selectedCurrency }) => {
     const location = useLocation();
 
     return(
-        <section className="lg:container w-full px-3 sm:px-2 lg:px-12 mx-auto grid grid-cols-4">
-            <div className="sm:hidden col-span-4 w-full text-sm flex -ml-[5px] text-gray-600 px-2 pt-2 mb-1 flex items-center">
-                <FaHome className="mt-[5px] mr-1" /> <span className="mt-[4px]">Accueil</span> <ChevronRight className="mt-1 -ml-[1px] text-gray-500" size={14} /> 
-                <span className="text-gray-500 mt-[4px]">
-                    {location.pathname === '/page-user-setting' && location.search 
-                        ? new URLSearchParams(location.search).get('sc')?.replace(/-/g, ' ')  // Replace hyphens with spaces
-                    : 'Accueil  Tableau de bord'}
-                </span> 
-            </div>
-            <div className="col-span-4 sm:col-span-1 my-2.5 sm:my-4">
+        <section className="lg:container w-full px-1 sm:px-2 lg:px-12 mx-auto grid grid-cols-4">
+            
+            <div className="col-span-4 sm:col-span-1 my-1 sm:my-4">
                 <div className="w-full pt-8 pb-10 bg-[#111] sm:h-screen">
                     <div className="mx-4 sm:mx-0 md:mx-4">
                         
@@ -157,7 +150,7 @@ const Dashboard = ({ selectedCurrency }) => {
                         <NavLink to="?sc=overview" className={`flex pl-4 sm:pl-1 md:pl-4 py-2.5 sm:py-1.5 md:py-2.5 ${location.pathname === '/page-user-setting' && location.search === '?sc=overview' ? "bg-red-600" : "hover:bg-gray-700"} cursor-pointer duration-150`}><FaUser className="mt-1 mr-1 text-lg" />Aperçu</NavLink>
                         <NavLink to="?sc=setting" className={`flex pl-4 sm:pl-1 md:pl-4 py-2.5 sm:py-1.5 md:py-2.5 ${location.pathname === '/page-user-setting' && location.search === '?sc=setting' ? "bg-red-600" : "hover:bg-gray-700"} cursor-pointer duration-150`}><FaCog className="mt-1 mr-1 text-lg" />Paramètres</NavLink>
                         <NavLink to="?sc=booking-history" className={`flex pl-4 sm:pl-1 md:pl-4 py-2.5 sm:py-1.5 md:py-2.5 ${location.pathname === '/page-user-setting' && location.search === '?sc=booking-history' ? "bg-red-600" : "hover:bg-gray-700"} cursor-pointer duration-150`}><Clock9 size={19} className="mr-1 mt-[2px]" />Historique des réservation</NavLink>
-                        <NavLink to="?sc=wishlist" className={`flex pl-4 sm:pl-1 md:pl-4 py-2.5 sm:py-1.5 md:py-2.5 ${location.pathname === '/page-user-setting' && location.search === '?sc=wishlist' ? "bg-red-600" : "hover:bg-gray-700"} cursor-pointer duration-150`}><Heart size={19} className="mr-1 mt-[2px]" />Ma liste de course</NavLink>
+                        <NavLink to="?sc=wishlist" className={`flex pl-4 sm:pl-1 md:pl-4 py-2.5 sm:py-1.5 md:py-2.5 ${location.pathname === '/page-user-setting' && location.search === '?sc=wishlist' ? "bg-red-600" : "hover:bg-gray-700"} cursor-pointer duration-150`}> {location.pathname === '/page-user-setting' && location.search === '?sc=wishlist' ? <FaHeart size={19} className="mr-1 mt-[2px]" /> : <Heart size={19} className="mr-1 mt-[2px]" />} Ma liste de course</NavLink>
                         <NavLink onClick={ResetInboxCount}  to="?sc=inbox" className={`flex items-center pl-4 sm:pl-1 md:pl-4 py-2.5 sm:py-1.5 md:py-2.5 ${location.pathname === '/page-user-setting' && location.search === '?sc=inbox' ? "bg-red-600" : "hover:bg-gray-700"} cursor-pointer duration-150`}><FaInbox className="mt-1 mr-1 text-lg" />
                             Inbox Notification
                             {inboxsCount === 0 ? (
@@ -172,7 +165,13 @@ const Dashboard = ({ selectedCurrency }) => {
 
             <div className="col-span-4 sm:col-span-3 sm:px-1  sm:mt-4">
                 <div className="col-span-4 sm:col-span-3 sm:px-1 lg:px-6">
-                    <div className="hidden sm:flex flex-row items-center w-full bg-gray-300 pl-3.5 text-gray-600 px-2 pb-3 pt-1"> <FaHome className="mt-1 mr-1" /> <span className="mt-1">Accueil</span> <ChevronRight className="mt-2 text-gray-500" size={14} /> <span className="text-gray-500 mt-1">Accueil Tableau de bord</span> </div>
+                    <div className="hidden sm:flex flex-row items-center w-full bg-[#111] pl-3.5 text-gray-200 px-2 pb-3 pt-1"> <FaHome className="mt-[6px] mr-1.5" /> <span className="mt-1">Accueil</span> <ChevronRight className="mt-2 text-gray-200 mx-[3px]" size={14} /> 
+                        <span className="text-gray-200 mt-1">
+                            {location.pathname === '/page-user-setting' && location.search 
+                                ? new URLSearchParams(location.search).get('sc')?.replace(/-/g, ' ')  // Replace hyphens with spaces
+                            : 'Accueil  Tableau de bord'}
+                        </span> 
+                    </div>
                 </div>
 
                 

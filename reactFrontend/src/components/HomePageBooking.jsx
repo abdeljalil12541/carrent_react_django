@@ -168,6 +168,9 @@ const Destination = {
 
 const handleChangeOptionDestination1 = (option) => {
   setSelectedOptionDestination1(option);
+  if(selectedOptionDestination2 === '') {
+    setSelectedOptionDestination2(option)
+  } 
 };
 
 const handleChangeOptionDestination2 = (option) => {
@@ -284,7 +287,7 @@ useEffect(() => {
             <div className="grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-2 sm:pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className="ml-0 sm:ml-0 text-center lg:text-start text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white pb-1 sm:pb-3 lg:pb-5">
+                <h3 className="ml-0 sm:ml-0 text-center lg:text-start text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white pb-1 sm:pb-6 lg:pb-5">
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
@@ -450,16 +453,16 @@ useEffect(() => {
 
                 <div className={`col-span-3 hideItemsRes ${isSameDestination? '': 'bookingDesHomeRes'} hidden sm:block lg:mt-0 bookingHomeRes lg:ml-9 lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center`}>
                     {/* Weather Info Section */}
-                    <div className={`col-span-1 hidden md:block weather-info flex ${isSameDestination? 'mt-4': 'mt-0'} sm:mt-3 flex-col lg:flex-col`}>
-                        <h2 className="text-3xl sm:text-4xl font-light text-center text-white">CASABLANCA OFFICE</h2>
-                        <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} font-light mb-4 sm:mb-0 sm:font-normal sm:mt-6 justify-center`}>
-                            <span className="text-4xl mx-2 text-gray-100">+<CountUp end={7} duration={1.75} /> Years </span>
-                            <span className="text-8xl text-gray-100"><MapPin strokeWidth={1.5} size={50} /></span>
+                    <div className={`col-span-1 hidden md:block weather-info flex ${isSameDestination? 'mt-4': 'mt-0'} sm:mt-24 marginForCountUpSpaceRes lg:-mr-14 flex-col lg:flex-col`}>
+                        <h2 className="text-3xl sm:text-4xl text-center text-white">CASABLANCA OFFICE</h2>
+                        <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} font-light mb-4 sm:mb-0 sm:font-normal  sm:mt-6 justify-center`}>
+                            <span className="text-4xl mx-2 text-gray-200">+<CountUp end={7} duration={1.75} /> Years </span>
+                            <span className="text-8xl text-gray-200"><MapPin strokeWidth={1.5} size={50} /></span>
                         </div>
                     </div>
                     
                     {/* Car Info Section */}
-                    <div className="col-span-1 hidden md:block flex lg:flex-col items-center justify-center lg:mt-0">
+                    <div className="col-span-1 hidden md:block flex lg:flex-col items-center justify-center lg:mt-0  marginForCountUpSpaceRes lg:-mr-14">
                         <div className="flex flex-col">
                             <a href="" className={`ml-2 sm:ml-0 text-sm text-center flex sm:text-[16px] justify-center sm:mt-8 font-medium hover:text-white`} style={{color: "#e2e8f0"}}>
                                 <svg className="pr-2" viewBox="0 0 24 24" style={{marginTop: '2px'}} height={20} fill="#e2e8f0" xmlns="http://www.w3.org/2000/svg">

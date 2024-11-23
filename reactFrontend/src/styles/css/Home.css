@@ -3,6 +3,12 @@
     height: 82vh;
 }
 
+@media screen and (min-width: 1023px) {
+    .home {
+        height: 82vh !important;
+    }
+}
+
 .bgHome{
     background-color: black;
     position: absolute;
@@ -190,19 +196,22 @@ select:focus + div div {
         padding-left: 30px !important;
         padding-right: 30px !important;
     }
+    .marginForCountUpSpaceRes{
+        margin-right: 10px !important;
+    }
 }
 
 
 @media (max-width: 622px) {
     .home {
         background-image: url('https://pictures.dealer.com/f/fredbeansautorent/1196/531580b545d2013d35d6dc917976e0c3x.jpg?impolicy=downsize_bkpt&w=2500');
-        height: 705px;
+        height: 655px;
         background-size: cover;
         background-position: 1000px;
     }
     
     .homeResDes {
-        height: 805px;
+        height: 755px;
     }
 }
 

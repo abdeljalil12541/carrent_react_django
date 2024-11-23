@@ -7,4 +7,5 @@
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
 
-@import './styles/css/loader.css'
+@import './styles/css/loader.css';
+@import './styles/css/ScrollToTopBtn.css';

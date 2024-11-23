@@ -25,7 +25,7 @@
       min-height: 800px !important; /* Adjust as per your design */
     }  
   }
-  @media (max-width: 768px) {
+  @media (min-width: 479px) and (max-width: 768px) {
     .footerBgImg {
       height: auto;
       min-height: 1250px; /* Adjust as per your design */
@@ -44,7 +44,77 @@
     }
   
     .footerBgColor {
-      min-height: 650px; /* Adjust as per your design */
+      min-height: 550px !important; /* Adjust as per your design */
+      padding-bottom: 2rem; /* Create space for content */
+    }
+  
+    .footer {
+      text-align: center; /* Center content for smaller screens */
+    }
+  
+    /* Ensure columns stack vertically on small screens */
+    .xl\\:grid-cols-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  
+  @media (min-width: 640px) and (max-width: 768px) {
+    .footerBgImg {
+      height: auto;
+      min-height: 1250px; /* Adjust as per your design */
+    }
+
+    .Footerlogo{
+        width: 250px;
+        margin-top: -100px;
+    }
+    .Subscribebutton{
+      width: 150px !important;
+    }
+
+    .inputButton{
+      width: 80% !important;
+    }
+  
+    .footerBgColor {
+      min-height: 750px !important; /* Adjust as per your design */
+      padding-bottom: 2rem; /* Create space for content */
+    }
+  
+    .footer {
+      text-align: center; /* Center content for smaller screens */
+    }
+  
+    /* Ensure columns stack vertically on small screens */
+    .xl\\:grid-cols-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+
+  @media (max-width: 479px) {
+    .footerBgImg {
+      height: auto;
+      min-height: 1250px; /* Adjust as per your design */
+    }
+
+    .Footerlogo{
+        width: 250px;
+        margin-top: -100px;
+    }
+    .Subscribebutton{
+      width: 150px !important;
+    }
+
+    .inputButton{
+      width: 80% !important;
+    }
+  
+    .footerBgColor {
+      min-height: 600px; /* Adjust as per your design */
       padding-bottom: 2rem; /* Create space for content */
     }
   
@@ -67,7 +137,7 @@
       }
     
       .footerBgColor {
-        min-height: 650px; /* Adjust as per your design */
+        min-height: 550px; /* Adjust as per your design */
         padding-bottom: 2rem; /* Create space for content */
       }
 

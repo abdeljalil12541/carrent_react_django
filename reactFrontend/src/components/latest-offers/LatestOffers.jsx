@@ -71,12 +71,12 @@ const LatestOffers = ({ selectedCurrency }) => {
     const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
 
     return (
-        <div className="container mx-auto py-6 px-6 sm:px-8 md:px-10 lg:px-14">
+        <div className="container mx-auto py-4 px-2 sm:px-8 md:px-10 lg:px-14">
             {/* Navigation breadcrumb */}
             <nav className="mb-8">
                 <div className="flex items-center gap-2 text-sm">
-                    <a href="/" className="text-red-600 hover:text-red-700">Accueil</a>
-                    <span className="text-gray-400"><ChevronRight className='-ml-1 mt-1' size={14} /></span>
+                    <a href="/" className="text-red-600 hover:text-red-700 font-semibold">Accueil</a>
+                    <span className="text-gray-400"><ChevronRight className='-ml-1' size={14} /></span>
                     <span className="text-gray-500 -ml-1">DERNIÈRES OFFRES</span>
                 </div>
             </nav>

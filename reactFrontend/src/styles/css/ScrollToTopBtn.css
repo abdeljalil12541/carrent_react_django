@@ -1,0 +1,8 @@
+.ScrollBackBtn{
+    box-shadow: 0 0 8px -1px white;
+    border-radius: 50px;
+    transition: all .4s;
+}
+.ScrollBackBtn:hover{
+    box-shadow: 0 0 15px -6px white;
+}

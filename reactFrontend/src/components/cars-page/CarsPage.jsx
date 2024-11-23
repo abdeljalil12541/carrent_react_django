@@ -403,7 +403,10 @@ const CarsPage = ({ selectedCurrency }) => {
     })
 
     const handleChangeOptionDestination1 = (option) => {
-    setSelectedOptionDestination1(option);
+        setSelectedOptionDestination1(option);
+        if(selectedOptionDestination2 === '') {
+            setSelectedOptionDestination2(option)
+        }    
     };
 
     const handleChangeOptionDestination2 = (option) => {
@@ -459,8 +462,8 @@ const CarsPage = ({ selectedCurrency }) => {
     <section className="mx-1 lg:container searcherRes lg:mx-auto lg:px-16">
         <nav className="mt-4">
                 <div className="flex items-center gap-2 text-sm">
-                <a href="/" className="text-red-600 hover:text-red-700 font-semibold">Accueil</a>
-                <span className="text-gray-400"><ChevronRight className='-ml-1 mt-1' size={14} /></span>
+                <a href="/" className="text-red-600 hover:text-red-700 ml-1 font-semibold">Accueil</a>
+                <span className="text-gray-400"><ChevronRight className='-ml-1' size={14} /></span>
                 <span className="text-gray-500 -ml-1">LOCATION DE VOITURES</span>
                 </div>
         </nav>

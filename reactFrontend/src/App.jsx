@@ -14,6 +14,8 @@ import CarDetail from "./components/reservation/CarDetail";
 import CheckoutCart from "./components/reservation/CheckoutCart";
 import Checkout from "./components/reservation/Checkout";
 import SuccessBooking from "./components/SuccessBooking";
+import ScrollToTop from './components/ScrollUp';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -49,6 +51,7 @@ function App() {
         <Footer />
       </div>
       <ToastContainer autoClose={1500} position='bottom-right' />
+      <ScrollToTop />
     </Router>
   );
 }

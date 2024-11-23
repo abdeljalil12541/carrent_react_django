@@ -428,6 +428,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
     });
 };
 
+
   const handleChangeCardsToRowsStyle = () => {
       setRrowsCards(true);
       setColsCards(false);
@@ -453,7 +454,16 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
     console.log('finalDateTime before Link:', finalDateTime);
 }, [finalDateTime]);
   
+const [noCarsAvailable, setNoCarsAvailable] = useState(false);
+useEffect(() => {
+  if(currentCars.length === 0) {
+    setNoCarsAvailable(true);
+  }else {
+    setNoCarsAvailable(false);
+  }
 
+  console.log('available cars', currentCars.length)
+}, [currentCars])
   return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
           <div className="bg-neutral-950 w-full text-white relative pr-4">
@@ -527,6 +537,9 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
 
           {/* CARS THAT TAKING WHOLE WIDTH */}
           <div className={`${colsCards ? "hidden" : ""} mb-4`}>
+              <span className={`${noCarsAvailable? '' : 'hidden'} flex justify-center text-red-600 font-light text-2xl sm:text-4xl mt-20 mb-24 md:mb-0 md:mt-36`}>
+                {noCarsAvailable? 'No cars available': ''}
+              </span>
               {currentCars.map((car, index) => (
                     <div key={index} className="border hover:border-red-600 hover:shadow-lg duration-300 border-sm pl-4 py-4 border-gray-200 mt-4 w-full grid grid-cols-7">
                         <div className="col-span-7 md:col-span-2 pl-2">

@@ -422,6 +422,10 @@ useEffect(() => {
 
 const handleChangeOptionDestination1 = (option) => {
     setSelectedOptionDestination1(option);
+    // if there is problem remove this
+    if (selectedOptionDestination2 === '') {
+        setSelectedOptionDestination2(option);
+    }
     console.log('destination changed', selectedOptionDestination1)
 };
 
@@ -688,7 +692,9 @@ const addWishlist = async () => {
     }
 };
 
-
+useEffect(() => {
+    console.log('car brand', car.brand)
+})
 
     return(
         <section className="sm:ml-1 lg:mx-auto lg:container lg:px-20 overflow-hidden sm:mx-1 sm:ml-2">
@@ -726,9 +732,15 @@ const addWishlist = async () => {
             
                 <div className="grid grid-cols-4">
                     <div className="col-span-4 sm:col-span-1 mb-4 border border-red-600 rounded mx-2 sm:mx-0 lg:mr-0">
-                        <div className="flex justify-center w-full">
-                        <img src={car.brand} className="w-32 -mb-6" alt="" />
-                        </div>
+                    {car.brand !== 'https://carrentreactdjango-production.up.railway.appnull' && car.brand ? (
+                            <div className="flex justify-center w-full">
+                                <img src={car.brand} className="w-32 -mb-6" alt="Car Brand" />
+                            </div>
+                        ) : (
+                        ''
+                        )
+                    }
+
                         <p className={`text-center text-xl mt-4  mb-2 text-gray-600`}>{car.name}</p>
 
                         <div className="w-full pl-6 sm:pl-1 lg:pl-6">
@@ -810,7 +822,7 @@ const addWishlist = async () => {
                         </div>
                     </div>
 
-                    <div className="col-span-4 sm:col-span-1 mt-4 ml-2 sm:ml-0 lg:ml-4">
+                    <div className="col-span-4 sm:col-span-1 mt-4 mx-1 sm:ml-0 lg:ml-4">
                         <div className="w-full">
                             <div className="flex justify-between mt-6 py-2 borderDotted " >
                                 <div className="flex justify-between">
@@ -954,7 +966,7 @@ const addWishlist = async () => {
                 </div>
 
                 <div className="w-full">
-                    <div className="border border-red-200 bg-gray-50 p-6 rounded-md mb-9 ml-2 mr-1 sm:mx-auto">
+                    <div className="border border-red-200 bg-gray-50 p-6 rounded-md mb-9 mx-1 sm:mx-auto">
                         <h2 className="text-2xl sm:text-4xl mb-1 sm:mb-4 text-gray-600 font-light">Description de la voiture:</h2>
                         <h3 className="text-md sm:text-xl font-medium mb-1 sm:mb-3 text-gray-700">Location Voiture {car.name} Maroc casablanca chez Zouhir Rent</h3>
                         <p className="text-gray-600 mb-1 text-sm sm:text-[16px]">
