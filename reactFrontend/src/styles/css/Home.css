@@ -22,15 +22,37 @@
 
 
 @media screen and (min-width: 619px) and (max-width:640px) {
-    .bookingHomeRes{
-        margin-top: 0 !important;
-    }
-    .bgHome{
-        height: 100%;
-    }
 
     .home {
-        height: 1050px !important;
+        height: 670px !important;
+    }
+
+    .homeResDes {
+        height: 770px !important;
+    }
+}
+
+
+@media screen and (min-width: 640px) and (max-width:766px) {
+
+    .home {
+        height: 560px !important;
+    }
+
+    .homeResDes {
+        height: 640px !important;
+    }
+}
+@media screen and (min-width: 767px) and (max-width:1023px) {
+    .hideItemsRes{
+        display: none !important;
+    }
+    .home {
+        height: 500px !important;
+    }
+
+    .homeResDes {
+        height: 580px !important;
     }
 }
 
@@ -164,6 +186,10 @@ select:focus + div div {
     .home {
         height: 100vh;
     }
+    .paddingRes {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
 }
 
 
@@ -183,7 +209,7 @@ select:focus + div div {
 @media (min-width: 623px) and (max-width: 1023px) {
     .home {
         background-image: url('https://pictures.dealer.com/f/fredbeansautorent/1196/531580b545d2013d35d6dc917976e0c3x.jpg?impolicy=downsize_bkpt&w=2500');
-        height: 900px;
+        height: 700px;
         background-size: cover;
         background-position: 1100px;
     }

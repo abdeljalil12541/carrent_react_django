@@ -12,9 +12,50 @@ import Select from 'react-select';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 
+// Currency conversion rates object
+const CURRENCY_RATES = {
+    'MAD': 1,      // Base currency (MAD)
+    'USD': 0.095,  // 1 MAD = 0.095 USD
+    'EUR': 0.081   // 1 MAD = 0.081 EUR
+  };
+  
+  // Currency display configuration
+  const CURRENCY_CONFIG = {
+    'MAD': { symbol: 'DH', position: 'after' },
+    'USD': { symbol: '$', position: 'before' },
+    'EUR': { symbol: '€', position: 'after' }
+  };
+  
+  // Format price with currency
+  const formatPrice = (price, currencyCode) => {
+    const config = CURRENCY_CONFIG[currencyCode];
+    const formattedNumber = price.toFixed(0);
+    
+    return config.position === 'before' 
+      ? `${config.symbol}${formattedNumber}`
+      : `${formattedNumber} ${config.symbol}`;
+  };
+  
+  // Convert price between currencies
+  const convertPrice = (price, fromCurrency, toCurrency) => {
+    // If the target currency is MAD, return the price directly
+    if (toCurrency === 'MAD dh') {
+        return price; // No conversion needed
+    }
+  
+    // First convert to MAD (base currency)
+    const priceInMAD = fromCurrency === 'MAD dh' 
+      ? price 
+      : price / CURRENCY_RATES[fromCurrency];
+    
+    // Then convert to target currency
+    return toCurrency === 'MAD dh' 
+      ? priceInMAD 
+      : priceInMAD * CURRENCY_RATES[toCurrency];
+  };
 
 
-const HomePageBooking = () => {
+const HomePageBooking = ({ selectedCurrency }) => {
     const [loader, setLoader] = useState(false)
     const navigate = useNavigate();
 
@@ -36,49 +77,10 @@ const HomePageBooking = () => {
 
 
     const [isSameDestination, SetIsSameDestination] = useState(true);
-    const [weatherData, setWeatherData] = useState(null);
-    const [error, setError] = useState(null);
 
     const toggleIsSameDestination = () => {
         SetIsSameDestination(!isSameDestination);
     }
-
-    const [startDate, setStartDate] = useState(new Date());
-
-
-    useEffect(() => {
-        const options = { method: 'GET', headers: { accept: 'application/json' } };
-
-        fetch('https://api.tomorrow.io/v4/weather/forecast?location=casablanca&apikey=MB7FQmiMlNW3fMiK2daJmT3rjQDSM2Sx', options)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data); // Log the data to check its structure
-                setWeatherData(data);
-            })
-            .catch(err => {
-                setError(err);
-                console.error(err);
-            });
-    }, []);
-
-    // Function to get weather icon based on weather code
-    const getWeatherIcon = (weatherCode) => {
-        switch (weatherCode) {
-            case 1000: // Clear
-                return <WiDaySunny />; // Sun icon
-            case 1001: // Cloudy
-                return <WiCloud />; // Cloud icon
-            case 2000: // Fog
-                return <WiFog />; // Fog icon
-            case 3000: // Light rain
-                return <WiDayRainMix />; // Rain icon
-            case 4000: // Heavy rain
-                return <WiRain />; // Heavy rain icon
-            default:
-                return "☁️"; // Unknown weather
-        }
-    };
-
 
 
     const [availableCars, setAvailableCars] = useState([]);
@@ -255,14 +257,34 @@ useEffect(() => {
     console.log('destination', Destination)
 })
 
+const [minPrice, setMinPrice] = useState();
+useEffect(() => {
+    const fetchPriceFilter = async () => {
+      try {
+        const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/price-filter/');
+        setMinPrice(response.data.min_price);
+      } catch (error) {
+        console.error('Error fetching features:', error);
+      }
+    };
+
+    fetchPriceFilter();
+  }, []);
+
+  // Extract currency code from selectedCurrency or default to MAD
+  const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
+
+  // Format price with currency symbol
+  const displayMinPrice = formatPrice(convertPrice(minPrice, 'MAD dh', currencyCode), currencyCode);
+
     return (
         <>
         <div className={`home ${isSameDestination? '' : 'homeResDes'} relative`}>
             <div className="bgHome"></div>
-            <div className="grid grid-cols-3 sm:px-6 md:px-24 pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
+            <div className="grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className="ml-3 sm:ml-0 text-center lg:text-start text-3xl md:text-4xl lg:text-5xl font-light text-white pb-3">
+                <h3 className="ml-3 sm:ml-0 text-center lg:text-start text-3xl md:text-4xl lg:text-5xl font-light text-white pb-3 lg:pb-5">
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
@@ -426,32 +448,32 @@ useEffect(() => {
                 </div>
 
 
-                <div className={`col-span-3 ${isSameDestination? '': 'bookingDesHomeRes'} hidden sm:block lg:mt-0 bookingHomeRes lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center`}>
+                <div className={`col-span-3 hideItemsRes ${isSameDestination? '': 'bookingDesHomeRes'} hidden sm:block lg:mt-0 bookingHomeRes lg:ml-9 lg:col-span-1 lg:flex lg:flex-col sm:flex-row sm:grid grid-cols-2 items-center`}>
                     {/* Weather Info Section */}
-                    <div className={`col-span-1 weather-info flex ${isSameDestination? 'mt-4': 'mt-0'} sm:mt-3 flex-col lg:flex-col`}>
+                    <div className={`col-span-1 hidden md:block weather-info flex ${isSameDestination? 'mt-4': 'mt-0'} sm:mt-3 flex-col lg:flex-col`}>
                         <h2 className="text-3xl sm:text-4xl font-light text-center text-white">CASABLANCA OFFICE</h2>
-                        <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} font-light mb-4 sm:mb-0 sm:font-normal sm:mt-4 justify-center`}>
-                            <span className="text-4xl mx-2 text-white">+<CountUp end={7} duration={1.75} /> Years </span>
-                            <span className="text-8xl text-white"><MapPin strokeWidth={1.5} size={50} /></span>
+                        <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} font-light mb-4 sm:mb-0 sm:font-normal sm:mt-6 justify-center`}>
+                            <span className="text-4xl mx-2 text-gray-100">+<CountUp end={7} duration={1.75} /> Years </span>
+                            <span className="text-8xl text-gray-100"><MapPin strokeWidth={1.5} size={50} /></span>
                         </div>
                     </div>
                     
                     {/* Car Info Section */}
-                    <div className="col-span-1 flex lg:flex-col items-center justify-center lg:mt-0">
+                    <div className="col-span-1 hidden md:block flex lg:flex-col items-center justify-center lg:mt-0">
                         <div className="flex flex-col">
                             <a href="" className={`ml-2 sm:ml-0 text-sm text-center flex sm:text-[16px] justify-center sm:mt-8 font-medium hover:text-white`} style={{color: "#e2e8f0"}}>
                                 <svg className="pr-2" viewBox="0 0 24 24" style={{marginTop: '2px'}} height={20} fill="#e2e8f0" xmlns="http://www.w3.org/2000/svg">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M2 14.803v6.447c0 .414.336.75.75.75h1.614a.75.75 0 0 0 .74-.627L5.5 19h13l.395 2.373a.75.75 0 0 0 .74.627h1.615a.75.75 0 0 0 .75-.75v-6.447a5.954 5.954 0 0 0-1-3.303l-.78-1.17a1.994 1.994 0 0 1-.178-.33h.994a.75.75 0 0 0 .671-.415l.25-.5A.75.75 0 0 0 21.287 8H19.6l-.31-1.546a2.5 2.5 0 0 0-1.885-1.944C15.943 4.17 14.141 4 12 4c-2.142 0-3.943.17-5.405.51a2.5 2.5 0 0 0-1.886 1.944L4.399 8H2.714a.75.75 0 0 0-.67 1.085l.25.5a.75.75 0 0 0 .67.415h.995a1.999 1.999 0 0 1-.178.33L3 11.5c-.652.978-1 2.127-1 3.303zm15.961-4.799a4 4 0 0 0 .34.997H5.699c.157-.315.271-.65.34-.997l.632-3.157a.5.5 0 0 1 .377-.39C8.346 6.157 10 6 12 6c2 0 3.654.156 4.952.458a.5.5 0 0 1 .378.389l.631 3.157zM5.5 16a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM20 14.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
                                 </svg>
-                                24 Voitures from 200 dhs/jour
+                                24 Voitures from {displayMinPrice}/jour
                             </a>
 
                             <div className="w-full flex justify-center mt-9">
                                 <button className="py-3 px-4 font-medium hover:bg-red-500 duration-300 rounded-md bg-red-700 text-white">
-                                    <svg height={15} className="pr-1 mb-1 inline-block" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                    Explore
+                                    <svg height={15} className="pl-1 mb-[1px] inline-block" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
                                         <path d="M8.293 5.707a1 1 0 0 1 1.414-1.414l6.647 6.646a1.5 1.5 0 0 1 0 2.122l-6.647 6.646a1 1 0 0 1-1.414-1.414L14.586 12 8.293 5.707z" fill="#ffffff"></path>
                                     </svg>
-                                    Explore
                                 </button>
                             </div>
                         </div>

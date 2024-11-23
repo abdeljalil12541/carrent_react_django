@@ -19,7 +19,7 @@ export default function Home({ selectedCurrency }) {
     
     return(
         <div>
-            <HomePageBooking />
+            <HomePageBooking  selectedCurrency={selectedCurrency} />
             <BrandSlider />
             <HomeCardSlider selectedCurrency={selectedCurrency} />
             <HomePageAboutUs />

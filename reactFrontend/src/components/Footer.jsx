@@ -1,4 +1,4 @@
-import logo from '../styles/images/logo.png'
+import logo from '../styles/images/logo10.png'
 import '../styles/css/footer.css'
 import axios from 'axios'
 import { useState } from 'react';
@@ -29,10 +29,10 @@ const Footer = () => {
                 <div class="container absolute mx-auto p-0 md:px-8 xl:px-0">
                     <div class="mx-auto max-w-7xl pl-3 sm:pl-6 pb-10 pt-16">
                         <div class="xl:grid xl:grid-cols-4 xl:gap-1">
-                            <div class="lg:pl-9 footerImgDivRes">
+                            <div class="lg:pl-8 footerImgDivRes">
                                 <div>
-                                        <div class="flex items-center space-x-2 text-2xl font-medium">
-                                                <img className='lg:-mt-20 w-[150px] sm:w-[250px] sdqdsqd lg:w-[150px] py-4 lg:py-0 Footerlogo' src={logo} alt="RN Logo" />
+                                        <div class="flex items-center sm:-ml-3 md:-ml-3 lg:-ml-5 space-x-2 text-2xl font-medium">
+                                                <img className='lg:-mt-20 w-[220px] -mb-16 sm:-mb-20 md:-mb-16 lg:-mb-24 -ml-9 sm:w-[250px] sdqdsqd lg:w-[350px] py-4 lg:py-0 Footerlogo' src={logo} alt="RN Logo" />
                                         </div>
                                 </div>
                                 <div class="max-w-md pr-16 -mt-14 md:-mt-16 lg:-mt-9 text-sm sm:text-[16px] text-gray-400">
