@@ -257,9 +257,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   const [priceArrowTop, setPriceArrowTop] = useState("#c53030"); 
   const [priceArrowDown, setPriceArrowDown] = useState("#c53030"); 
   const itemsPerPage = 2;
-  
   const [loader, setLoader] = useState(false);
-  const [noCarsAvailable, setNoCarsAvailable] = useState(false);
 
 
   const [colsCards, setColsCards] = useState(false);
@@ -277,7 +275,6 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   useEffect(() => {
       const fetchHomeCardCar = async () => {
           try {
-              setNoCarsAvailable(false);
               setLoader(true);
               const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/home-car-card/');
               const formattedCars = response.data.data.map(car => ({
@@ -457,11 +454,14 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
     console.log('finalDateTime before Link:', finalDateTime);
 }, [finalDateTime]);
   
+const [noCarsAvailable, setNoCarsAvailable] = useState(false);
 useEffect(() => {
 
     if(currentCars.length === 0) {
       setLoader(true);
-      setNoCarsAvailable(true);
+      setTimeout(() => {
+        setNoCarsAvailable(true);
+      }, 2000)
     }else {
       setNoCarsAvailable(false);
       setLoader(false);
