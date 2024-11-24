@@ -48,7 +48,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 const LatestOffers = ({ selectedCurrency }) => {
     const navigate = useNavigate();
     const [latestOffers, setLatestOffers] = useState([]);
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -57,7 +57,6 @@ const LatestOffers = ({ selectedCurrency }) => {
     useEffect(() => {
         const fetchLatestOffers = async () => {
             try {
-                setLoader(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
                 setLatestOffers(response.data);
                 console.log('data...', response.data);
