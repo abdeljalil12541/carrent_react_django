@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Tooltip } from 'react-tooltip';
 import '../../styles/css/ToolTip.css';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
