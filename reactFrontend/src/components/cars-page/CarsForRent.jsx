@@ -468,6 +468,7 @@ useEffect(() => {
       setNoCarsAvailable(false);
       setLoader(false);
     }
+    setLoader(false);
 
   console.log('available cars', currentCars.length)
 }, [currentCars])
