@@ -287,7 +287,7 @@ useEffect(() => {
             <div className={`grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-2 sm:pt-4 sm:pt-10  ${isSameDestination? 'lg:pt-8': 'lg:pt-4'} relative`} style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className={`ml-0 sm:ml-0 text-center lg:text-start text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-light text-white pb-1 sm:pb-6 lg:pb-6 ${isSameDestination? 'lg:pt-4': 'lg:pt-0'}`}>
+                <h3 className={`ml-0 sm:ml-0 text-center lg:text-start lg:font-normal text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-light text-gray-100 pb-1 sm:pb-6 lg:pb-6 ${isSameDestination? 'lg:pt-4': 'lg:pt-0'}`}>
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
