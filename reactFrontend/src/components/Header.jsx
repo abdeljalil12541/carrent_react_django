@@ -177,8 +177,8 @@ useEffect(() => {
     const [ifRegistered, setIfRegistered] = useState(false)
 
     const handleSwitchFromSignupToLogin = () => {
-        setOpenRegisterPage(false)
-        setOpen(true)
+        setOpenRegisterPage(false);
+        setOpen(true);
     }
 
     const handleSingUpSubmit = async (e) => {
