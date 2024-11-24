@@ -257,7 +257,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   const [priceArrowTop, setPriceArrowTop] = useState("#c53030"); 
   const [priceArrowDown, setPriceArrowDown] = useState("#c53030"); 
   const itemsPerPage = 2;
-
+  
   const [loader, setLoader] = useState(false);
   const [noCarsAvailable, setNoCarsAvailable] = useState(false);
 
@@ -460,6 +460,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
 useEffect(() => {
 
     if(currentCars.length === 0) {
+      setLoader(true);
       setTimeout(() => {
         setNoCarsAvailable(true);
       }, 2000)
