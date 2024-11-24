@@ -21,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [selectedCurrency, setSelectedCurrency] = useState('MAD dh');
+  const [openRegisterPage, setOpenRegisterPage] = useState(false);
 
   const handleCurrencyChange = (currency) => {
     setSelectedCurrency(currency);
@@ -29,7 +30,11 @@ function App() {
   return (
     <Router>
       <div>
-        <Header selectedCurrency={selectedCurrency} onCurrencyChange={handleCurrencyChange} setOpenRegisterPage={setOpenRegisterPageFromAnotherCom} />
+        <Header 
+          selectedCurrency={selectedCurrency} 
+          onCurrencyChange={handleCurrencyChange} 
+          setOpenRegisterPage={setOpenRegisterPage}
+        />
       </div>
       
       <Routes>
@@ -43,7 +48,7 @@ function App() {
         <Route path="/page-user-setting" element={<Dashboard selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/location-de-voitures/:slug" element={<CarDetail selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/panier" element={<CheckoutCart selectedCurrency={selectedCurrency} />}></Route>
-        <Route path="/checkout" element={<Checkout setOpenRegisterPageFromAnotherCom={setOpenRegisterPageFromAnotherCom} selectedCurrency={selectedCurrency} />}></Route>
+        <Route path="/checkout" element={<Checkout setOpenRegisterPageFromAnotherCom={setOpenRegisterPage} selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/success-booking" element={<SuccessBooking selectedCurrency={selectedCurrency} />}></Route>
       </Routes>
 
