@@ -462,11 +462,8 @@ useEffect(() => {
   if (!dataFetched) return;
 
   if (currentCars.length === 0) {
-      setLoader(true);
-      const timer = setTimeout(() => {
-          setNoCarsAvailable(true);
-          setLoader(false); // Ensure loader is stopped even if no cars are available
-      }, 2000);
+      setNoCarsAvailable(true);
+      setLoader(false); // Ensure loader is stopped even if no cars are available
 
       return () => clearTimeout(timer); // Cleanup timeout on unmount
   } else {
@@ -476,6 +473,7 @@ useEffect(() => {
 
   console.log('Available cars:', currentCars.length);
 }, [currentCars, dataFetched]);
+
   return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
           <div className="bg-neutral-950 w-full text-white relative pr-4">
