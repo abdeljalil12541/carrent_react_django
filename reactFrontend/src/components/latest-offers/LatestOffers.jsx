@@ -57,11 +57,14 @@ const LatestOffers = ({ selectedCurrency }) => {
     useEffect(() => {
         const fetchLatestOffers = async () => {
             try {
+                setLoader(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
                 setLatestOffers(response.data);
                 console.log('data...', response.data);
             } catch (error) {
                 console.error('Error fetching latest offers:', error);
+            }finally{
+                setLoader(true);
             }
         };
         fetchLatestOffers();

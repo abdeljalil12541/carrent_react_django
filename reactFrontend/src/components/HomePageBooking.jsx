@@ -56,7 +56,7 @@ const CURRENCY_RATES = {
 
 
 const HomePageBooking = ({ selectedCurrency }) => {
-    const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
 
     const [selectedHour, setSelectedHour] = useState('');

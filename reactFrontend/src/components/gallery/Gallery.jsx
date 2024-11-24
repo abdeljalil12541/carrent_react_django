@@ -9,6 +9,7 @@ import axios from 'axios';
 const Gallery = () => {
     const [galleries, setGalleries] = useState([])
     const [galleriesCategories, setGalleriesCategory] = useState([])
+    const [loader, setLoader] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -31,12 +32,15 @@ const Gallery = () => {
     useEffect(() => {
         const Gellery = async () => {
             try{
+                setLoader(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/gallery/')
                 setGalleries(response.data)
                 console.log('galleries', response.data)
             }
             catch(error)  {
                 console.log('error', error)
+            }finally{
+                setLoader(false);
             }
         }
         Gellery();
@@ -81,6 +85,10 @@ const Gallery = () => {
 
     return (
         <div className='w-full mx-auto'>
+            <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                <div className="loaderBg"></div>
+                <span class="loader"></span>
+            </div>
             <div className='w-full relative'>
                 <img className='w-full h-56 object-cover' src={AboutHeaderImg} alt="" />
                 <div className='aboutUsBg'></div>
