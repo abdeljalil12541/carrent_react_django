@@ -500,7 +500,7 @@ const goToCarDetail = ({ car, finalDateTime, finalDestination }) => {
           },
         });
         setIsNavigating(false); // Stop navigating state when navigation completes
-    }, 10000);
+    }, 500);
 };
 
 return (
