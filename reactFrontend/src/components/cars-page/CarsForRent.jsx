@@ -461,7 +461,7 @@ useEffect(() => {
   // Run this effect only after data is fetched
   if (!dataFetched) return;
 
-  if (currentCars.length === 0) {
+  if (currentCars.length === 0 && dataFetched) {
       setNoCarsAvailable(true);
       setLoader(false); // Ensure loader is stopped even if no cars are available
 
