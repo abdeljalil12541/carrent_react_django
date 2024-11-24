@@ -277,6 +277,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   useEffect(() => {
       const fetchHomeCardCar = async () => {
           try {
+              setNoCarsAvailable(false);
               setLoader(true);
               const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/home-car-card/');
               const formattedCars = response.data.data.map(car => ({
@@ -304,7 +305,6 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
               console.error('Error fetching cars:', error);
           } finally {
               setLoader(false);
-              setNoCarsAvailable(false);
           }
       };
 
