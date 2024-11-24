@@ -49,33 +49,28 @@ const LatestOffers = ({ selectedCurrency }) => {
     const navigate = useNavigate();
     const [latestOffers, setLatestOffers] = useState([]);
     const [loader, setLoader] = useState(false);
-    const [mounted, setMounted] = useState(false); // Add mounted state
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setMounted(true); // Set mounted to true
     }, []);
 
     useEffect(() => {
         const fetchLatestOffers = async () => {
-            if (!mounted) return; // Only fetch if mounted
             try {
                 setLoader(true);
-                // Add a small delay to ensure the loader is visible
-                await new Promise(resolve => setTimeout(resolve, 300));
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
                 setLatestOffers(response.data);
                 console.log('data...', response.data);
             } catch (error) {
                 console.error('Error fetching latest offers:', error);
-            } finally {
+            }finally{
                 setLoader(false);
             }
         };
         fetchLatestOffers();
-    }, [mounted]); // Add mounted as dependency
+    }, []);
 
-    // Rest of your code remains exactly the same...
+    // Extract currency code from selectedCurrency or default to MAD
     const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
 
     const goToCarsPageBtn = (carDetails) => {
@@ -91,6 +86,10 @@ const LatestOffers = ({ selectedCurrency }) => {
 
     return (
         <div className="container mx-auto py-4 px-2 sm:px-8 md:px-10 lg:px-14">
+            <div className={`loaderPosition ${!loader ? 'invisible' : 'visible'}`}>
+                <div className="loaderBg"></div>
+                <span className="loader"></span>
+            </div>
             {/* Navigation breadcrumb */}
             <nav className="mb-8">
                 <div className="flex items-center gap-2 text-sm">
