@@ -466,6 +466,7 @@ useEffect(() => {
       }, 2000)
     }else {
       setNoCarsAvailable(false);
+      setLoader(false);
     }
 
   console.log('available cars', currentCars.length)
