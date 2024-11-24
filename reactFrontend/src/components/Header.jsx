@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Header = ({ selectedCurrency, onCurrencyChange }) => {
+const Header = ({ selectedCurrency, onCurrencyChange, setOpenRegisterPage }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
     const buttonRef = useRef(null); // Ref for the button
 

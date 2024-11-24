@@ -50,7 +50,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 
-const Checkout = ({ selectedCurrency }) => {
+const Checkout = ({ selectedCurrency, setOpenRegisterPage }) => {
     axios.defaults.withCredentials = true;
     axios.defaults.xsrfCookieName = 'csrftoken';
     axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -351,7 +351,9 @@ const CreateBoking = async (e) => {
 
 };
 
-
+handleOpenRegister = () => {
+    handleOpenRegister(true)
+}
 
 
   return (
@@ -367,9 +369,9 @@ const CreateBoking = async (e) => {
         <div className="bg-pink-50 flex justify-between border-t-[3px] border-red-600 p-4 mb-8">
             <p className="text-gray-700">
             <span className="mr-2">Nouveau client ? Créez votre compte facilement.</span>
-                <button className="text-red-500 hover:text-red-600 underline">
+                <div onClick={handleOpenRegister} className="inline-block text-red-500 hover:text-red-600 underline">
                 Inscrivez-vous
-                </button>
+                </div>
             </p>
             <FaCalendar className='inline-block mr-1 text-red-500 mt-[2px]' />
         </div>
@@ -377,7 +379,7 @@ const CreateBoking = async (e) => {
         <div className="bg-pink-50 flex justify-between border-t-[3px] border-red-600 p-4 mb-8">
             <p className="text-gray-700">
             <span className="mr-2">Aidez-nous à nous améliorer !</span>
-                <div className="text-red-500 hover:text-red-600 underline">
+                <div className="text-red-500 inline-block hover:text-red-600 underline">
                 Donnez votre avis
                 </div>
             </p>
