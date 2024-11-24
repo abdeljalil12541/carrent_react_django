@@ -166,7 +166,11 @@ useEffect(() => {
     };
 
     const [openRegisterPage, setOpenRegisterPage] = useState(false)
-    const HandleOpenRegisterPage = () => setOpenRegisterPageFromProps(!openRegisterPage);
+    const HandleOpenRegisterPage = () => {
+        setOpenRegisterPage(!openRegisterPage);
+        setOpenRegisterPageFromProps(!openRegisterPage);
+    }
+    
 
     // Register Form
     const [username, setUserName] = useState('');
