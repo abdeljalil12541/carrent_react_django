@@ -7,10 +7,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { formatInTimeZone } from 'date-fns-tz';
 import { Link, useNavigate } from 'react-router-dom';
 import CountUp from 'react-countup';
-import {MapPin} from 'lucide-react';
 import Select from 'react-select';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-
+import { MapPin,   House, MapPinHouse, Hotel  } from 'lucide-react';
+import { FaBuilding, FaRegBuilding } from 'react-icons/fa';
 
 // Currency conversion rates object
 const CURRENCY_RATES = {
@@ -284,10 +284,10 @@ useEffect(() => {
         <>
         <div className={`home ${isSameDestination? '' : 'homeResDes'} relative`}>
             <div className="bgHome"></div>
-            <div className="grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-2 sm:pt-4 sm:pt-10 relative" style={{zIndex: '999'}}>
+            <div className={`grid grid-cols-3 sm:px-6 lg:px-24 paddingRes pt-2 sm:pt-4 sm:pt-10  ${isSameDestination? 'lg:pt-8': 'lg:pt-4'} relative`} style={{zIndex: '999'}}>
 
             <div className="col-span-3 lg:col-span-2">
-                <h3 className="ml-0 sm:ml-0 text-center lg:text-start text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white pb-1 sm:pb-6 lg:pb-5">
+                <h3 className={`ml-0 sm:ml-0 text-center lg:text-start text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-light text-white pb-1 sm:pb-6 lg:pb-6 ${isSameDestination? 'lg:pt-4': 'lg:pt-0'}`}>
                     Trouvez votre voiture parfaite
                 </h3>
                 <div>
@@ -457,7 +457,7 @@ useEffect(() => {
                         <h2 className="text-3xl sm:text-4xl text-center text-white">CASABLANCA OFFICE</h2>
                         <div className={`flex items-center ${isSameDestination? 'mt-4':'mt-2'} font-light mb-4 sm:mb-0 sm:font-normal  sm:mt-6 justify-center`}>
                             <span className="text-4xl mx-2 text-gray-200">+<CountUp end={7} duration={1.75} /> Years </span>
-                            <span className="text-8xl text-gray-200"><MapPin strokeWidth={1.5} size={50} /></span>
+                            <span className="text-8xl text-gray-200"><House strokeWidth={2} size={50} /></span>
                         </div>
                     </div>
                     
