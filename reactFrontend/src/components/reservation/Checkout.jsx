@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import countries from '../../countries-list/countries.json';
 
-
 // Currency conversion rates object
 const CURRENCY_RATES = {
     'MAD': 1,      // Base currency (MAD)
@@ -371,6 +370,16 @@ const CreateBoking = async (e) => {
                 <button className="text-red-500 hover:text-red-600 underline">
                 Inscrivez-vous
                 </button>
+            </p>
+            <FaCalendar className='inline-block mr-1 text-red-500 mt-[2px]' />
+        </div>
+
+        <div className="bg-pink-50 flex justify-between border-t-[3px] border-red-600 p-4 mb-8">
+            <p className="text-gray-700">
+            <span className="mr-2">Aidez-nous à nous améliorer !</span>
+                <div className="text-red-500 hover:text-red-600 underline">
+                Donnez votre avis
+                </div>
             </p>
             <FaCalendar className='inline-block mr-1 text-red-500 mt-[2px]' />
         </div>
