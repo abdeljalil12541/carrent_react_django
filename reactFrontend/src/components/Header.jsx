@@ -364,6 +364,7 @@ useEffect(() => {
     const [isOpen, setIsOpen] = useState(false);
     const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
     const accountRef = useRef(null);
+    const accountRefLg = useRef(null);
     const currencyRef = useRef(null);
 
 
@@ -399,6 +400,9 @@ useEffect(() => {
             if (currencyRef.current && !currencyRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
                 setIsCurrencyOpen(false); // Close the dropdown when clicking outside
             }
+            if (accountRefLg.current && !accountRefLg.current.contains(event.target)) {
+                setIsOpen(false);
+            }
         };
 
         // Bind the event listener
@@ -407,7 +411,7 @@ useEffect(() => {
             // Clean up the event listener
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    });
+    }, []);
     
     
 
@@ -675,7 +679,7 @@ useEffect(() => {
                             )}
                             {!isAuthenticated ? (
                             <>
-                                <div ref={accountRef}>
+                                <div ref={accountRefLg}>
                                     <MenuButton
                                         onClick={(e) => {
                                             e.stopPropagation();
@@ -700,7 +704,10 @@ useEffect(() => {
                                             <div className="py-1">
                                                 <MenuItem>
                                                     <div
-                                                        onClick={handleOpen}
+                                                        onClick={() => {
+                                                            handleOpen();
+                                                            setIsOpen(false)
+                                                        }}
                                                         className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
                                                     >
                                                         Connectez-vous
@@ -708,7 +715,10 @@ useEffect(() => {
                                                 </MenuItem>
                                                 <MenuItem>
                                                     <div
-                                                        onClick={HandleOpenRegisterPage}
+                                                        onClick={() => {
+                                                            HandleOpenRegisterPage();
+                                                            setIsOpen(false);
+                                                        }}
                                                         className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                     >
                                                         S'inscrire
