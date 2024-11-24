@@ -294,11 +294,11 @@ const CarsPage = ({ selectedCurrency }) => {
 
         const handleCarsFormBookingSubmit =  (e) => {
             e.preventDefault();
+            setLoader(true);
 
             // Combine date and hour to create full datetime strings
             const pickup_datetime = `${pickupDate}T${pickupHour}:00.000Z`;
             const dropoff_datetime = `${dropoffDate}T${dropoffHour}:00.000Z`;
-            setLoader(true)
 
             console.log('Submitting:', { pickup_datetime, dropoff_datetime });
 
