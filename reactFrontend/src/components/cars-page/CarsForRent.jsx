@@ -479,7 +479,7 @@ useEffect(() => {
   if(noCarsAvailable) {
     setLoader(false);
   }
-})
+}, [])
 
 return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
