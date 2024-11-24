@@ -462,8 +462,11 @@ useEffect(() => {
   if (!dataFetched) return;
 
   if (currentCars.length === 0 && dataFetched) {
-      setNoCarsAvailable(true);
-      setLoader(false); // Ensure loader is stopped even if no cars are available
+    setLoader(true);
+      setTimeout(() => {
+        setNoCarsAvailable(true);
+        setLoader(false);
+      }, 2000);
 
       
   } else {
