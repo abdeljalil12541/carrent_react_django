@@ -569,15 +569,19 @@ const handleValidData = () => {
         toast.error('please fill all the fields');
         setOpen(true);
     } else {
-        navigate('/panier', { 
-            state: { 
-                car: car, 
-                FinalDateTimeStateFrom: FinalDateTimeStateFrom, 
-                finalDestinationState: finalDestinationState, 
-                totalPrice: totalPrice, 
-                selectedAddOns: selectedAddOns 
-            }
-        });
+        setLoader(true);
+        setTimeout(() => {
+            navigate('/panier', { 
+                state: { 
+                    car: car, 
+                    FinalDateTimeStateFrom: FinalDateTimeStateFrom, 
+                    finalDestinationState: finalDestinationState, 
+                    totalPrice: totalPrice, 
+                    selectedAddOns: selectedAddOns 
+                }
+            });
+            setLoader(false);
+        }, 300);
     }
 };
 
@@ -1171,7 +1175,10 @@ useEffect(() => {
                 </Dialog>
                 }
 
-
+                <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                    <div className="loaderBg"></div>
+                    <span class="loader"></span>
+                </div>
             </section>
     )
 }

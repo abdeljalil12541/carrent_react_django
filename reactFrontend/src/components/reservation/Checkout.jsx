@@ -4,7 +4,7 @@ import { FaCalendar } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-
+import countries from '../../countries-list/countries.json';
 
 
 // Currency conversion rates object
@@ -138,7 +138,8 @@ const formatForDjango = (date, time) => {
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const [companyName, setCompanyName] = useState('');
-const [country, setCountry] = useState('maroc');
+const [country, setCountry] = useState('maroc'); // Initial value is 'maroc'
+const [countryList, setCountryList] = useState([]);
 const [streetNumberAndName, setStreetNumberAndName] = useState('');
 const [city, setCity] = useState('');
 const [regionDepartment, setRegionDepartment] = useState('');
@@ -157,6 +158,50 @@ const [isAddon2, setIsAddon2] = useState('');
 const [isAddon3, setIsAddon3] = useState('');
 const [totalPriceToBook, setTotalPriceToBook] = useState(totalPrice);
 
+
+useEffect(() => {
+    const getCountries = async () => {
+      try {
+        // Try to fetch countries from the API
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        if (!response.ok) {
+          throw new Error('API fetch failed');
+        }
+        const data = await response.json();
+
+        // Sort countries alphabetically by common name
+        const sortedCountries = data.sort((a, b) => {
+          const nameA = a.name.common.toLowerCase();
+          const nameB = b.name.common.toLowerCase();
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        });
+
+        setCountryList(sortedCountries);
+      } catch (error) {
+        console.error('Error fetching from API, using local countries.json instead:', error);
+
+        // Fallback to local countries.json file if API fails
+        const sortedCountries = countries.sort((a, b) => {
+          const nameA = a.name.toLowerCase();
+          const nameB = b.name.toLowerCase();
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        });
+
+        setCountryList(sortedCountries);
+      }
+    };
+
+    getCountries();
+  }, []); // Runs once on component mount
+
+  // Handle the country change
+  const handleCountryChange = (e) => {
+    setCountry(e.target.value);
+  };
 
 useEffect(() => {
     if (selectedAddOns) {
@@ -381,8 +426,13 @@ const CreateBoking = async (e) => {
                     <label className="block text-sm text-gray-600 mb-2">
                     Pays/région
                     </label>
-                    <select value={country} className="w-full p-2 border outline-none focus:border-red-600 duration-300">
-                    <option>Maroc</option>
+                    <select className='w-full p-2 border outline-none focus:border-red-600 duration-300' id="country-select" value={country} onChange={handleCountryChange}>
+                    <option value="">Select a country</option>
+                        {countryList.map((country) => (
+                        <option key={country.cca2} value={country.name.common}>
+                            {country.name.common}
+                        </option>
+                        ))}
                     </select>
                 </div>
 

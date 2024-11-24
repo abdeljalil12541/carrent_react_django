@@ -1,4 +1,16 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const HomePageAboutUs = () => {
+
+    const navigate = useNavigate();
+    const [loader, setLoader] = useState(false)
+    const goToAboutUsBtn = () => {
+        setLoader(true)
+        setTimeout(() => {
+            navigate('/about-us');
+        }, 300);
+    }
     return(
         <div className="h-5/6 w-full bg-neutral-950">
                 <div className="grid grid-cols-2 container mx-auto">
@@ -32,9 +44,9 @@ const HomePageAboutUs = () => {
                             </div>
                         </div>
 
-                        <button className="hidden md:block sm:flex bg-red-600 py-3 flex flex-row px-5 rounded-full mt-8">
+                        <button onClick={goToAboutUsBtn} className="hidden md:flex  bg-red-600 py-3 flex flex-row px-5 rounded-full mt-8">
                             <span className="pr-1 inline-block">Read More</span>
-                            <svg className="pb-1 inline-block mt-[1] " fill="#fff" height={22} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
+                            <svg className="pb-1 inline-block md:mt-[4px] lg:mt-[3px] " fill="#fff" height={22} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
                         </button>
                     </div>
 
@@ -123,15 +135,16 @@ const HomePageAboutUs = () => {
                             <div className="flex justify-center">
                                 <button className="md:hidden bg-red-600 py-3 flex px-5 rounded-full mt-8">
                                     <span className="pr-1 inline-block text-white">Read More</span>
-                                    <svg className=" inline-block mt-1 ml-1" fill="#fff" height={18} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
+                                    <svg className=" inline-block mt-[4px] ml-1" fill="#fff" height={18} viewBox="0 0 24 24"  data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="5" y1="19" x2="19" y2="5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeL: 'round', strokeWidth: '2'}}></line><polyline id="primary-2" data-name="primary" points="19 9 19 5 15 5" style={{fill: 'none', stroke: '#fff', strokeLinecap: 'round', strokeLinejoin: 'round', strokeWidth: '2'}}></polyline></g></svg>
                                 </button>
                             </div>
                         </div>
                     </div>
 
-
-
-
+                    <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                        <div className="loaderBg"></div>
+                        <span class="loader"></span>
+                    </div>
                 </div>
         </div>
     )

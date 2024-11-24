@@ -1,54 +1,54 @@
 import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
-
+import { Link, useNavigate } from 'react-router-dom';
 
 // Currency conversion rates object
 const CURRENCY_RATES = {
     'MAD': 1,      // Base currency (MAD)
     'USD': 0.095,  // 1 MAD = 0.095 USD
     'EUR': 0.081   // 1 MAD = 0.081 EUR
-  };
-  
-  // Currency display configuration
-  const CURRENCY_CONFIG = {
+};
+
+// Currency display configuration
+const CURRENCY_CONFIG = {
     'MAD': { symbol: 'DH', position: 'after' },
     'USD': { symbol: '$', position: 'before' },
     'EUR': { symbol: '€', position: 'after' }
-  };
-  
-  // Format price with currency
-  const formatPrice = (price, currencyCode) => {
+};
+
+// Format price with currency
+const formatPrice = (price, currencyCode) => {
     const config = CURRENCY_CONFIG[currencyCode];
     const formattedNumber = price.toFixed(0);
-    
-    return config.position === 'before' 
-      ? `${config.symbol}${formattedNumber}`
-      : `${formattedNumber} ${config.symbol}`;
-  };
-  
-  // Convert price between currencies
-  const convertPrice = (price, fromCurrency, toCurrency) => {
+
+    return config.position === 'before'
+        ? `${config.symbol}${formattedNumber}`
+        : `${formattedNumber} ${config.symbol}`;
+};
+
+// Convert price between currencies
+const convertPrice = (price, fromCurrency, toCurrency) => {
     // If the target currency is MAD, return the price directly
     if (toCurrency === 'MAD dh') {
         return price; // No conversion needed
     }
-  
+
     // First convert to MAD (base currency)
-    const priceInMAD = fromCurrency === 'MAD dh' 
-      ? price 
-      : price / CURRENCY_RATES[fromCurrency];
-    
+    const priceInMAD = fromCurrency === 'MAD dh'
+        ? price
+        : price / CURRENCY_RATES[fromCurrency];
+
     // Then convert to target currency
-    return toCurrency === 'MAD dh' 
-      ? priceInMAD 
-      : priceInMAD * CURRENCY_RATES[toCurrency];
-  };
+    return toCurrency === 'MAD dh'
+        ? priceInMAD
+        : priceInMAD * CURRENCY_RATES[toCurrency];
+};
 
 const LatestOffers = ({ selectedCurrency }) => {
+    const navigate = useNavigate();
     const [latestOffers, setLatestOffers] = useState([]);
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -70,6 +70,17 @@ const LatestOffers = ({ selectedCurrency }) => {
     // Extract currency code from selectedCurrency or default to MAD
     const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
 
+    const goToCarsPageBtn = (carDetails) => {
+        setLoader(true);  // Show loader when the button is clicked
+        setTimeout(() => {
+            // Navigate to the car details page with slug
+            navigate(`/location-de-voitures/${carDetails.slug}`, {
+                state: { finalDateTime: {}, car: carDetails }
+            });
+            setLoader(false);  // Hide loader after the navigation delay
+        }, 300);  // 300ms delay before navigation
+    };
+
     return (
         <div className="container mx-auto py-4 px-2 sm:px-8 md:px-10 lg:px-14">
             {/* Navigation breadcrumb */}
@@ -85,7 +96,6 @@ const LatestOffers = ({ selectedCurrency }) => {
 
             {/* Promo Card */}
             {latestOffers && latestOffers.map((offer, index) => {
-                
                 // Create a refined `carDetails` object with only the properties you want
                 const carDetails = {
                     id: offer.car.id,
@@ -110,7 +120,7 @@ const LatestOffers = ({ selectedCurrency }) => {
                             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10" />
                             
                             {/* Main background image */}
-                            <img 
+                            <img
                                 src={`https://carrentreactdjango-production.up.railway.app${offer.image}`}
                                 alt={offer.title}
                                 className="w-full h-full object-cover scale-x-[-1]"
@@ -130,10 +140,17 @@ const LatestOffers = ({ selectedCurrency }) => {
                                 </div>
                                 
                                 {/* Button positioned below the content box */}
-                                <Link to={`/location-de-voitures/${carDetails.slug}`} state={{ finalDateTime: {}, car: carDetails }} className="bg-red-600 hover:bg-red-700 text-white px-3 sm:px-5 text-sm sm:text-[16px] py-3 rounded-3xl mt-6 sm:ml-6 w-fit">
+                                <button
+                                    onClick={() => goToCarsPageBtn(carDetails)} 
+                                    className="bg-red-600 hover:bg-red-700 text-white px-3 sm:px-5 text-sm sm:text-[16px] py-3 rounded-3xl mt-6 sm:ml-6 w-fit"
+                                >
                                     RÉSERVER MAINTENANT
-                                </Link>
+                                </button>
                             </div>
+                        </div>
+                        <div className={`loaderPosition ${!loader ? 'invisible' : 'visible'}`}>
+                            <div className="loaderBg"></div>
+                            <span className="loader"></span>
                         </div>
                     </div>
                 );

@@ -4,19 +4,15 @@ import axios from 'axios';
 const FeaturesFilter = ({ activeIndices, contentRef1, showFilter, onFeatureChange }) => {
 
     const [features, setFeatures] = useState([])
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchFeatures = async () => {
             try {
-                setLoading(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/features/');
                 setFeatures(response.data.data.map((feature) => feature.name))
                 } catch (error) {
                 console.error('Error fetching features:', error);
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
 
         fetchFeatures();

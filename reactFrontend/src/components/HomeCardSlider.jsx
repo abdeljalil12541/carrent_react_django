@@ -1,5 +1,5 @@
 import logo from "../styles/images/smallLogo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ArrowRight } from 'lucide-react'
 
 
@@ -69,7 +69,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 
-const Card = ({ id, name, slug, is_available, image, model, car_size, category, brand, price, mileage, seats, transmission, fuel_type, current_location, car_features, default_equipements, pickup_features, selectedCurrency }) => {
+const Card = ({ setLoader, loader, id, name, slug, is_available, image, model, car_size, category, brand, price, mileage, seats, transmission, fuel_type, current_location, car_features, default_equipements, pickup_features, selectedCurrency }) => {
     
     // Extract currency code from selectedCurrency or default to MAD
     const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
@@ -105,10 +105,16 @@ const Card = ({ id, name, slug, is_available, image, model, car_size, category, 
 
     // Initialize finalDateTime as an empty object
     const [finalDateTime] = useState({});
-    
-    
+    const navigate = useNavigate();
 
-    
+    const handleButtonClick = () => {
+        setLoader(true)
+        setTimeout(() => {
+            navigate(`/location-de-voitures/${slug}`, { state: { finalDateTime, car: carData } });
+        }, 300);
+      };
+
+
 
   return (
     <section className="px-4">
@@ -154,7 +160,7 @@ const Card = ({ id, name, slug, is_available, image, model, car_size, category, 
             <div></div>
             <p className="text-blue-900 pl-1 mt-4 mb-4 font-semibold">{displayPrice} <span className="text-gray-600 font-medium"> / Day</span></p>
             <div className="flex justify-between items-center mt-2">
-            <Link to={`/location-de-voitures/${slug}`} state={{ finalDateTime, car: carData }} className="text-white hover:bg-red-600 duration-300 bg-red-700 rounded-lg px-4 py-2">Book Now</Link>
+            <button onClick={handleButtonClick} className="text-white hover:bg-red-600 duration-300 bg-red-700 rounded-lg px-4 py-2">Book Now</button>
             </div>
         </div>
         </div>
@@ -203,6 +209,16 @@ const HomeCardSlider = ({ selectedCurrency }) => {
 
         fetchHomeCardCar();
     }, []);
+    
+    const navigate = useNavigate();
+    const [loader, setLoader] = useState(false)
+
+    const goToCarsPageBtn = () => {
+        setLoader(true)
+        setTimeout(() => {
+            navigate('/location-de-voitures');
+        }, 300);
+    }
 
     return (
         <div>
@@ -231,13 +247,18 @@ const HomeCardSlider = ({ selectedCurrency }) => {
             >
                 {cars.map(car => (
                     <SwiperSlide key={car.id}>
-                        <Card {...car} selectedCurrency={selectedCurrency} />
+                        <Card {...car} setLoader={setLoader} loader={loader} selectedCurrency={selectedCurrency} />
                     </SwiperSlide>
                 ))}
             </Swiper>
                 
             <div className="w-full flex justify-center mb-4 -mt-4">
-                <button className="bg-red-600 text-gray-200 text-lg px-3 py-1.5 rounded flex">More <ArrowRight className="mt-1 ml-1 w-5" /></button>
+                <button onClick={goToCarsPageBtn} className="bg-red-600 text-gray-200 text-lg px-3 py-1.5 rounded flex">More <ArrowRight className="mt-1 ml-1 w-5" /></button>
+            </div>
+            
+            <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                <div className="loaderBg"></div>
+                <span class="loader"></span>
             </div>
         </div>
     );

@@ -21,6 +21,7 @@ const Ratings = () => {
         handleOpen(); // Close the dialog
     };
 
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dialogRef.current && !dialogRef.current.contains(event.target)) {
@@ -227,6 +228,11 @@ const Ratings = () => {
                     </form>
                 </Dialog>
                 )}
+
+                <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                    <div className="loaderBg"></div>
+                    <span class="loader"></span>
+                </div>
             </div>
         );
 };

@@ -3,18 +3,14 @@ import axios from 'axios';
 
 const DefaultEquipment = ({ activeIndices, contentRef5, showFilter, onDefaultEquipementChange }) => {
     const [defaultEquipments, setDefaultEquipments] = useState([])
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchDefaultEquipments = async () => {
             try {
-                setLoading(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/default-equipment/');
                 setDefaultEquipments(response.data.data.map((defaultEquipment) => defaultEquipment.name))
                 } catch (error) {
                 console.error('Error fetching categories:', error);
-            } finally {
-                setLoading(false);
             }
         };
 

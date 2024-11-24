@@ -124,6 +124,7 @@ const UpdatePassword = async (e) => {
         return;
     }
     
+    setLoader(true);
     try {
         const response = await axios.put(
             'https://carrentreactdjango-production.up.railway.app/api/update-password/',  // Note: no username in URL
@@ -156,9 +157,13 @@ const UpdatePassword = async (e) => {
                            'Error updating password';
         toast.error(errorMessage);
         console.error('Error updating password:', error);
+    }finally {
+        setLoader(false);
     }
 };
 
+
+const [loader, setLoader] = useState(false)
 
 const FormSubmit = (e) => {
     e.preventDefault();
@@ -167,8 +172,10 @@ const FormSubmit = (e) => {
     UpdateProfile(e);
     
     toast.success('user updated successfully')
+    setLoader(true);
     setTimeout(() => {
         window.location.reload();
+        setLoader(false);
     }, 1500);
 }
 
@@ -341,6 +348,11 @@ const FormSubmit = (e) => {
                     </div>
                 </div>
             </div>
+            <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                <div className="loaderBg"></div>
+                <span class="loader"></span>
+            </div>
+
         </div>    
     )
 }

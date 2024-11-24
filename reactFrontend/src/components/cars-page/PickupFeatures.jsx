@@ -3,18 +3,14 @@ import axios from 'axios';
 
 const PickupFeatures = ({ activeIndices, contentRef4, showFilter, onPickupFeatureChange }) => {
     const [pickUpFeatures, setPickUpFeatures] = useState([])
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchPickupFeatures = async () => {
             try {
-                setLoading(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/pick-up-features/');
                 setPickUpFeatures(response.data.data.map((pickUpFeatures) => pickUpFeatures.name))
                 } catch (error) {
                 console.error('Error fetching pick up features:', error);
-            } finally {
-                setLoading(false);
             }
         };
 

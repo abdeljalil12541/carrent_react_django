@@ -209,10 +209,17 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
       high: Math.round(Math.max(low, high))
     };
   };
+  const [loader, setLoader] = useState(false)
 
   const handleFilterClick = () => {
-    const selectedRange = getSelectedPriceRange();
-    onFilterPriceChange(selectedRange);
+
+    setLoader(true);
+
+    setTimeout(() => {
+      const selectedRange = getSelectedPriceRange();
+      onFilterPriceChange(selectedRange);
+      setLoader(false);
+    }, 300);
   };
 
   
@@ -281,6 +288,10 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
             </button>
           </div>
         </div>
+      </div>
+      <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+          <div className="loaderBg"></div>
+          <span class="loader"></span>
       </div>
     </div>
   );

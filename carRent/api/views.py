@@ -266,7 +266,8 @@ class CarView(APIView):
         return Response(
             {
                 'success': "Fetching home car card data successfully",
-                'data': serializer.data
+                'data': serializer.data,
+                'cars_count': Car.objects.all().count()
             },
             status=status.HTTP_200_OK
         )

@@ -2,7 +2,7 @@ import car from '../../styles/images/cars/car2.png';
 import { FaCar } from "react-icons/fa"
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -52,7 +52,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 const WishlistDashboard = ({ selectedCurrency }) => {
-  const [wishlistCars, setWishlistCars] = useState([])
+  const [wishlistCars, setWishlistCars] = useState([]);
   const [itemsToShow, setItemsToShow] = useState(3);
   const [loader, setLoader] = useState(false);
 
@@ -105,6 +105,17 @@ const WishlistDashboard = ({ selectedCurrency }) => {
   const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
   const [finalDateTime] = useState({});
 
+  // Handle the navigation with state
+  const navigate = useNavigate();
+  const goToCarsPageBtn = ({ car, finalDateTime }) => {
+    setLoader(true);
+    setTimeout(() => {
+      navigate(`/location-de-voitures/${car.slug}`, {
+        state: { finalDateTime, car }  // Passing finalDateTime and car as state
+      });
+      setLoader(false);
+  }, 300);
+  };
 
   return (
     <div className="p-1 sm:p-6">
@@ -143,13 +154,12 @@ const WishlistDashboard = ({ selectedCurrency }) => {
                               {formatPrice(convertPrice(car.price, 'MAD dh', currencyCode), currencyCode)}
                           </p>
                       </div>
-                      <Link
-                          to={`/location-de-voitures/${car.slug}`}
-                          state={{ finalDateTime, car: car }}
+                      <button
+                          onClick={() => goToCarsPageBtn({car, finalDateTime})}
                           className="bg-red-500 text-sm sm:text-[15px] md:text-[16px] text-white px-4 py-2 mt-2 sm:mt-0 rounded w-full sm:w-auto text-center"
                       >
                           Prendre rendez-vous
-                      </Link>
+                      </button>
                   </div>
               </div>
               </div>

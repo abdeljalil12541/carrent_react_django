@@ -74,19 +74,24 @@ const CheckoutCart = ({ selectedCurrency }) => {
 
     // Format price with currency symbol
     const displayTotalPrice = formatPrice(convertPrice(totalPrice, 'MAD dh', currencyCode), currencyCode);
+    const [loader, setLoader] = useState(false)
 
     const handlePassingData = (e) => {
         e.preventDefault();
-
-        navigate('/checkout', { 
-            state: { 
-                car: car, 
-                DateTimeStateFrom: DateTimeStateFrom, 
-                finalDestination: finalDestination, 
-                totalPrice: totalPrice, 
-                selectedAddOns: selectedAddOns 
-            }
-        });
+        
+        setLoader(true);
+        setTimeout(() => {
+            navigate('/checkout', { 
+                state: { 
+                    car: car, 
+                    DateTimeStateFrom: DateTimeStateFrom, 
+                    finalDestination: finalDestination, 
+                    totalPrice: totalPrice, 
+                    selectedAddOns: selectedAddOns 
+                }
+            });
+            setLoader(false);
+        }, 300);
     }
 
     return(
@@ -140,6 +145,10 @@ const CheckoutCart = ({ selectedCurrency }) => {
 
                     <button onClick={handlePassingData} className='bg-red-600 text-gray-100 px-2 sm:px-4 md:px-1 lg:px-4 sm:font-semibold py-2 sm:py-3 mt-4 rounded'>Valider la commande</button>
                 </div>
+            </div>
+            <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+                <div className="loaderBg"></div>
+                <span class="loader"></span>
             </div>
         </section>
     )
