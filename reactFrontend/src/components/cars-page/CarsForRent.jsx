@@ -465,7 +465,7 @@ useEffect(() => {
     setLoader(true);
       setTimeout(() => {
         setNoCarsAvailable(true);
-      }, 1000);
+      }, 1500);
       
   } else {
       setNoCarsAvailable(false);
@@ -479,7 +479,7 @@ useEffect(() => {
   if(noCarsAvailable) {
     setLoader(false);
   }
-}, [])
+})
 
 return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
