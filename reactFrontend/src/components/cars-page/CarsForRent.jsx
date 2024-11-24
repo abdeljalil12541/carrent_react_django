@@ -482,19 +482,25 @@ useEffect(() => {
 }, [currentCars, dataFetched, isNavigating]);
 
 
+useEffect(() => {
+  if(noCarsAvailable) {
+    setLoader(false);
+  }
+})
+
 const goToCarDetail = ({ car, finalDateTime, finalDestination }) => {
-  setIsNavigating(true); // Indicate navigation is in progress
-  setLoader(true); // Start loader
-  setTimeout(() => {
-      navigate(`/location-de-voitures/${car.slug}`, {
-        state: {
-          car: car,
-          finalDateTime: finalDateTime,
-          finalDestination: finalDestination,
-        },
-      });
-      setIsNavigating(false); // Stop navigating state when navigation completes
-  }, 10000);
+    setIsNavigating(true); // Indicate navigation is in progress
+    setLoader(true); // Start loader
+    setTimeout(() => {
+        navigate(`/location-de-voitures/${car.slug}`, {
+          state: {
+            car: car,
+            finalDateTime: finalDateTime,
+            finalDestination: finalDestination,
+          },
+        });
+        setIsNavigating(false); // Stop navigating state when navigation completes
+    }, 10000);
 };
 
 return (
