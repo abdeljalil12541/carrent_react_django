@@ -47,8 +47,8 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChange, selectedCurrency }) => {
-  const [maxPrice, setMaxPrice] = useState();
-  const [minPrice, setMinPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [minPrice, setMinPrice] = useState(0);
 
   // Extract currency code from selectedCurrency or default to MAD
   const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
