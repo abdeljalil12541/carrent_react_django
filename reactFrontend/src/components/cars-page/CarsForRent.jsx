@@ -611,7 +611,7 @@ return (
                         </div>
                         <div className="col-span-7 md:col-span-2 mt-1 md:mt-0 md:ml-9 -mt-1">
                             <p className='text-4xl font-medium mb-4 text-gray-600'>{formatPrice(convertPrice(car.price, 'MAD dh', currencyCode), currencyCode)} <span className='text-lg -ml-2 font-light'>/jour</span></p>
-                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='cursor-pointer bg-red-600 text-white py-2 mt-2 rounded hover:bg-red-500 duration-150 px-3 md:mr-5'>Sélectionner</div>
+                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='cursor-pointer bg-red-600 text-white py-2 mt-2 rounded hover:bg-red-500 duration-150 px-3 inline-block'>Sélectionner</div>
                         </div>
                     </div>
                 ))}
