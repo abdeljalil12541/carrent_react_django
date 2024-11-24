@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Header = ({ selectedCurrency, onCurrencyChange, setOpenRegisterPage }) => {
+const Header = ({ selectedCurrency, onCurrencyChange, setOpenRegisterPage: setOpenRegisterPageFromProps }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
     const buttonRef = useRef(null); // Ref for the button
 
@@ -166,7 +166,7 @@ useEffect(() => {
     };
 
     const [openRegisterPage, setOpenRegisterPage] = useState(false)
-    const HandleOpenRegisterPage = () => setOpenRegisterPage(!openRegisterPage)
+    const HandleOpenRegisterPage = () => setOpenRegisterPageFromProps(!openRegisterPage);
 
     // Register Form
     const [username, setUserName] = useState('');

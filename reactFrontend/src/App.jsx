@@ -33,7 +33,7 @@ function App() {
         <Header 
           selectedCurrency={selectedCurrency} 
           onCurrencyChange={handleCurrencyChange} 
-          setOpenRegisterPage={setOpenRegisterPage}
+          openRegisterPage={openRegisterPage}
         />
       </div>
       
@@ -48,7 +48,7 @@ function App() {
         <Route path="/page-user-setting" element={<Dashboard selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/location-de-voitures/:slug" element={<CarDetail selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/panier" element={<CheckoutCart selectedCurrency={selectedCurrency} />}></Route>
-        <Route path="/checkout" element={<Checkout setOpenRegisterPageFromAnotherCom={setOpenRegisterPage} selectedCurrency={selectedCurrency} />}></Route>
+        <Route path="/checkout" element={<Checkout setOpenRegisterPageFromAnotherCom={setOpenRegisterPage}  selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/success-booking" element={<SuccessBooking selectedCurrency={selectedCurrency} />}></Route>
       </Routes>
 
