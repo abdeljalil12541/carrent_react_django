@@ -465,7 +465,7 @@ useEffect(() => {
       setNoCarsAvailable(true);
       setLoader(false); // Ensure loader is stopped even if no cars are available
 
-      return () => clearTimeout(timer); // Cleanup timeout on unmount
+      
   } else {
       setNoCarsAvailable(false);
       setLoader(false);
