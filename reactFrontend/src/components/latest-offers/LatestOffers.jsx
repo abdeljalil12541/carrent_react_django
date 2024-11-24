@@ -48,40 +48,47 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 const LatestOffers = ({ selectedCurrency }) => {
     const navigate = useNavigate();
     const [latestOffers, setLatestOffers] = useState([]);
-    const [loader, setLoader] = useState(true);
+    const [loader, setLoader] = useState(true); // Start with loader visible
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        setMounted(true); // Mark component as mounted
     }, []);
 
     useEffect(() => {
         const fetchLatestOffers = async () => {
+            if (!mounted) return; // Don't fetch if not mounted
+
             try {
+                setLoader(true);
+                // Add artificial delay to ensure loader is visible
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
                 setLatestOffers(response.data);
-                console.log('data...', response.data);
             } catch (error) {
                 console.error('Error fetching latest offers:', error);
-            }finally{
+            } finally {
                 setLoader(false);
             }
         };
-        fetchLatestOffers();
-    }, []);
 
-    // Extract currency code from selectedCurrency or default to MAD
-    const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
+        fetchLatestOffers();
+    }, [mounted]); // Depend on mounted state
 
     const goToCarsPageBtn = (carDetails) => {
-        setLoader(true);  // Show loader when the button is clicked
+        setLoader(true);
         setTimeout(() => {
-            // Navigate to the car details page with slug
             navigate(`/location-de-voitures/${carDetails.slug}`, {
                 state: { finalDateTime: {}, car: carDetails }
             });
-            setLoader(false);  // Hide loader after the navigation delay
-        }, 300);  // 300ms delay before navigation
+            setLoader(false);
+        }, 300);
     };
+
+    // Only render content when mounted
+    if (!mounted) return null;
 
     return (
         <div className="container mx-auto py-4 px-2 sm:px-8 md:px-10 lg:px-14">
@@ -150,10 +157,12 @@ const LatestOffers = ({ selectedCurrency }) => {
                                 </button>
                             </div>
                         </div>
-                        <div className={`loaderPosition ${!loader ? 'invisible' : 'visible'}`}>
-                            <div className="loaderBg"></div>
-                            <span className="loader"></span>
-                        </div>
+                        {loader && (
+                            <div className="loaderPosition visible">
+                                <div className="loaderBg"></div>
+                                <span className="loader"></span>
+                            </div>
+                        )}
                     </div>
                 );
             })}
