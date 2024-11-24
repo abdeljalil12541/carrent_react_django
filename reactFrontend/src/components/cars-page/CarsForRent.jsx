@@ -577,7 +577,7 @@ return (
           {/* CARS THAT TAKING WHOLE WIDTH */}
           <div className={`${colsCards ? "hidden" : ""} mb-4`}>
               <span className={`${noCarsAvailable? '' : 'hidden'} flex justify-center text-red-600 font-light text-2xl sm:text-4xl mt-20 mb-24 md:mb-0 md:mt-36`}>
-                {noCarsAvailable? 'No cars available': ''}
+                {noCarsAvailable? 'Aucune voiture': ''}
               </span>
               {currentCars.map((car, index) => (
                     <div key={index} className="border hover:border-red-600 hover:shadow-lg duration-300 border-sm pl-4 py-4 border-gray-200 mt-4 w-full grid grid-cols-7">
