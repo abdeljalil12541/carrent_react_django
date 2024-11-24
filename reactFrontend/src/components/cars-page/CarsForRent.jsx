@@ -469,7 +469,7 @@ useEffect(() => {
       const timer = setTimeout(() => {
           setNoCarsAvailable(true);
           setLoader(false);
-      }, 2000);
+      }, 1500);
 
       return () => clearTimeout(timer); // Cleanup timeout on unmount
   } else {
