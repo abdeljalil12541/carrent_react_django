@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Header = ({ selectedCurrency, onCurrencyChange, setOpenRegisterPage: setOpenRegisterPageFromProps }) => {
+const Header = ({ selectedCurrency, onCurrencyChange, openFromCheckout }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
     const buttonRef = useRef(null); // Ref for the button
 
@@ -166,11 +166,7 @@ useEffect(() => {
     };
 
     const [openRegisterPage, setOpenRegisterPage] = useState(false)
-    const HandleOpenRegisterPage = () => {
-        setOpenRegisterPage(!openRegisterPage);
-        setOpenRegisterPageFromProps(!openRegisterPage);
-    }
-    
+    const HandleOpenRegisterPage = () => setOpenRegisterPage(!openRegisterPage)
 
     // Register Form
     const [username, setUserName] = useState('');
@@ -929,7 +925,7 @@ useEffect(() => {
             {openRegisterPage &&
                 <Dialog
                 ref={dialogRef}
-                open={openRegisterPage}
+                open={openRegisterPage || openFromCheckout}
                 onClose={HandleOpenRegisterPage}
                 fullWidth // Make the dialog take the full width
                 maxWidth="3xl" // Set the maximum width to large (or you can use "xl" for extra large)
