@@ -486,6 +486,20 @@ useEffect(() => {
   }
 })
 
+const goToCarDetail = ({ car, finalDateTime, finalDestination }) => {
+    setLoader(true);
+    setTimeout(() => {
+        navigate(`/location-de-voitures/${car.slug}`, {
+          state: {
+            car: car,
+            finalDateTime: finalDateTime,
+            finalDestination: finalDestination
+          }
+        });
+    setLoader(true);
+    }, 300);
+}
+
 return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
           <div className="bg-neutral-950 w-full text-white relative pr-4">
@@ -565,8 +579,8 @@ return (
               {currentCars.map((car, index) => (
                     <div key={index} className="border hover:border-red-600 hover:shadow-lg duration-300 border-sm pl-4 py-4 border-gray-200 mt-4 w-full grid grid-cols-7">
                         <div className="col-span-7 md:col-span-2 pl-2">
-                          <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}}><img src={car.image} alt={car.name} className='md:w-[120px]' /></Link>
-                          <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}} className='text-sm text-red-600 cursor-pointer'>{car.name}</Link>
+                          <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} ><img src={car.image} alt={car.name} className='md:w-[120px]' /></div>
+                          <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='text-sm text-red-600 cursor-pointer'>{car.name}</div>
                         </div>
                         <div className="col-span-7 mt-2 md:mt-0 md:col-span-2 flex md:ml-[1px] items-center md:-ml-6">
                             <div className='flex flex-col'>
@@ -594,7 +608,7 @@ return (
                         </div>
                         <div className="col-span-7 md:col-span-2 mt-1 md:mt-0 md:ml-9 -mt-1">
                             <p className='text-4xl font-medium mb-4 text-gray-600'>{formatPrice(convertPrice(car.price, 'MAD dh', currencyCode), currencyCode)} <span className='text-lg -ml-2 font-light'>/jour</span></p>
-                            <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}} className='bg-red-600 text-white py-2 mt-2 rounded hover:bg-red-500 duration-150 px-3'>Sélectionner</Link>
+                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='bg-red-600 text-white py-2 mt-2 rounded hover:bg-red-500 duration-150 px-3'>Sélectionner</div>
                         </div>
                     </div>
                 ))}
