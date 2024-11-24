@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Header = ({ selectedCurrency, onCurrencyChange, openFromCheckout }) => {
+const Header = ({ selectedCurrency, onCurrencyChange }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['csrftoken', 'sessionid']);
     const buttonRef = useRef(null); // Ref for the button
 
@@ -925,7 +925,7 @@ useEffect(() => {
             {openRegisterPage &&
                 <Dialog
                 ref={dialogRef}
-                open={openRegisterPage || openFromCheckout}
+                open={openRegisterPage}
                 onClose={HandleOpenRegisterPage}
                 fullWidth // Make the dialog take the full width
                 maxWidth="3xl" // Set the maximum width to large (or you can use "xl" for extra large)

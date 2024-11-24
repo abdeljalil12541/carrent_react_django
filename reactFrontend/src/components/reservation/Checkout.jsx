@@ -50,7 +50,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 
-const Checkout = ({ selectedCurrency, openFromCheckout, setOpenFromCheckout }) => {
+const Checkout = ({ selectedCurrency }) => {
     axios.defaults.withCredentials = true;
     axios.defaults.xsrfCookieName = 'csrftoken';
     axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -351,9 +351,9 @@ const CreateBoking = async (e) => {
 
 };
 
-const handleOpenRegister = () => {
-    setOpenFromCheckout(true); // This will set the state to true
-  };
+handleOpenRegister = () => {
+    setOpenRegisterPageFromAnotherCom(true)
+}
 
 
   return (

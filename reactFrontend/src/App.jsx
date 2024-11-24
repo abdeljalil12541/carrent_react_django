@@ -21,7 +21,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [selectedCurrency, setSelectedCurrency] = useState('MAD dh');
-  const [openFromCheckout, setOpenFromCheckout] = useState(false); // This state controls the open/close
 
   const handleCurrencyChange = (currency) => {
     setSelectedCurrency(currency);
@@ -30,11 +29,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header 
-          selectedCurrency={selectedCurrency} 
-          onCurrencyChange={handleCurrencyChange} 
-          openFromCheckout={openFromCheckout}
-        />
+        <Header selectedCurrency={selectedCurrency} onCurrencyChange={handleCurrencyChange} />
       </div>
       
       <Routes>
@@ -48,7 +43,7 @@ function App() {
         <Route path="/page-user-setting" element={<Dashboard selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/location-de-voitures/:slug" element={<CarDetail selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/panier" element={<CheckoutCart selectedCurrency={selectedCurrency} />}></Route>
-        <Route path="/checkout" element={<Checkout openFromCheckout={openFromCheckout} setOpenFromCheckout={setOpenFromCheckout} selectedCurrency={selectedCurrency} />}></Route>
+        <Route path="/checkout" element={<Checkout selectedCurrency={selectedCurrency} />}></Route>
         <Route path="/success-booking" element={<SuccessBooking selectedCurrency={selectedCurrency} />}></Route>
       </Routes>
 
