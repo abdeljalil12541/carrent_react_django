@@ -64,7 +64,7 @@ const LatestOffers = ({ selectedCurrency }) => {
             } catch (error) {
                 console.error('Error fetching latest offers:', error);
             }finally{
-                setLoader(true);
+                setLoader(false);
             }
         };
         fetchLatestOffers();
