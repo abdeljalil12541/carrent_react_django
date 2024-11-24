@@ -465,9 +465,7 @@ useEffect(() => {
     setLoader(true);
       setTimeout(() => {
         setNoCarsAvailable(true);
-        setLoader(false);
       }, 2000);
-
       
   } else {
       setNoCarsAvailable(false);
@@ -477,7 +475,13 @@ useEffect(() => {
   console.log('Available cars:', currentCars.length);
 }, [currentCars, dataFetched]);
 
-  return (
+useEffect(() => {
+  if(noCarsAvailable) {
+    setLoader(false);
+  }
+})
+
+return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
           <div className="bg-neutral-950 w-full text-white relative pr-4">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start space-y-2 md:space-y-0">
