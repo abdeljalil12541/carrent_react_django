@@ -258,6 +258,8 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   const [priceArrowDown, setPriceArrowDown] = useState("#c53030"); 
   const itemsPerPage = 2;
   const [loader, setLoader] = useState(false);
+  const [noCarsAvailable, setNoCarsAvailable] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false); // Flag to control execution
 
 
   const [colsCards, setColsCards] = useState(false);
@@ -298,6 +300,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
               console.log('date time booking form from carspage in cars rent page...', finalDateTime);
               console.log('final destination in cars rent page...', finalDestination);
 
+              setDataFetched(true); // Set flag to true after fetching data
           } catch (error) {
               console.error('Error fetching cars:', error);
           } finally {
@@ -454,24 +457,25 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
     console.log('finalDateTime before Link:', finalDateTime);
 }, [finalDateTime]);
   
-const [noCarsAvailable, setNoCarsAvailable] = useState(false);
 useEffect(() => {
+  // Run this effect only after data is fetched
+  if (!dataFetched) return;
 
-    if(currentCars.length === 0) {
+  if (currentCars.length === 0) {
       setLoader(true);
-      setTimeout(() => {
-        setNoCarsAvailable(true);
-      }, 2000)
-    }else {
+      const timer = setTimeout(() => {
+          setNoCarsAvailable(true);
+          setLoader(false); // Ensure loader is stopped even if no cars are available
+      }, 2000);
+
+      return () => clearTimeout(timer); // Cleanup timeout on unmount
+  } else {
       setNoCarsAvailable(false);
       setLoader(false);
-    }
+  }
 
-    if(noCarsAvailable === true) {
-      setLoader(false);
-    }
-  console.log('available cars', currentCars.length)
-}, [currentCars])
+  console.log('Available cars:', currentCars.length);
+}, [currentCars, dataFetched]);
   return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
           <div className="bg-neutral-950 w-full text-white relative pr-4">
