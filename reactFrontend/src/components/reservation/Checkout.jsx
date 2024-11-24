@@ -351,9 +351,9 @@ const CreateBoking = async (e) => {
 
 };
 
-handleOpenRegister = () => {
-    setOpenRegisterPageFromAnotherCom(true)
-}
+const handleOpenRegister = () => {
+    setOpenRegisterPageFromAnotherCom(true);
+};
 
 
   return (
