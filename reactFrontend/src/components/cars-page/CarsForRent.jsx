@@ -251,13 +251,15 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeature, selectedDefaultEquipement, selectedFeatures, filteredCarPrice, availableCarsState, availableCarsFromBokkingForm, finalDateTime, finalDestination, setFilteredCarsLengthByCurrentLocation }) => {
   const [cars, setCars] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [filteredCars, setFilteredCars] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const [priceArrowTop, setPriceArrowTop] = useState("#c53030"); 
   const [priceArrowDown, setPriceArrowDown] = useState("#c53030"); 
   const itemsPerPage = 2;
+  
+  const [loader, setLoader] = useState(false);
+  const [noCarsAvailable, setNoCarsAvailable] = useState(false);
 
 
   const [colsCards, setColsCards] = useState(false);
@@ -275,7 +277,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   useEffect(() => {
       const fetchHomeCardCar = async () => {
           try {
-              setLoading(true);
+              setLoader(true);
               const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/home-car-card/');
               const formattedCars = response.data.data.map(car => ({
                   id: car.id,
@@ -301,7 +303,8 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
           } catch (error) {
               console.error('Error fetching cars:', error);
           } finally {
-              setLoading(false);
+              setLoader(false);
+              setNoCarsAvailable(false);
           }
       };
 
@@ -454,8 +457,6 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
     console.log('finalDateTime before Link:', finalDateTime);
 }, [finalDateTime]);
   
-const [noCarsAvailable, setNoCarsAvailable] = useState(false);
-const [loader, setLoader] = useState(false);
 useEffect(() => {
 
     if(currentCars.length === 0) {
