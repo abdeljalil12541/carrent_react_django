@@ -461,9 +461,7 @@ useEffect(() => {
 
     if(currentCars.length === 0) {
       setLoader(true);
-      setTimeout(() => {
-        setNoCarsAvailable(true);
-      }, 2000)
+      setNoCarsAvailable(true);
     }else {
       setNoCarsAvailable(false);
       setLoader(false);
