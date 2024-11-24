@@ -48,47 +48,46 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 const LatestOffers = ({ selectedCurrency }) => {
     const navigate = useNavigate();
     const [latestOffers, setLatestOffers] = useState([]);
-    const [loader, setLoader] = useState(true); // Start with loader visible
-    const [mounted, setMounted] = useState(false);
+    const [loader, setLoader] = useState(false);
+    const [mounted, setMounted] = useState(false); // Add mounted state
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setMounted(true); // Mark component as mounted
+        setMounted(true); // Set mounted to true
     }, []);
 
     useEffect(() => {
         const fetchLatestOffers = async () => {
-            if (!mounted) return; // Don't fetch if not mounted
-
+            if (!mounted) return; // Only fetch if mounted
             try {
                 setLoader(true);
-                // Add artificial delay to ensure loader is visible
+                // Add a small delay to ensure the loader is visible
                 await new Promise(resolve => setTimeout(resolve, 300));
-                
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
                 setLatestOffers(response.data);
+                console.log('data...', response.data);
             } catch (error) {
                 console.error('Error fetching latest offers:', error);
             } finally {
                 setLoader(false);
             }
         };
-
         fetchLatestOffers();
-    }, [mounted]); // Depend on mounted state
+    }, [mounted]); // Add mounted as dependency
+
+    // Rest of your code remains exactly the same...
+    const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
 
     const goToCarsPageBtn = (carDetails) => {
-        setLoader(true);
+        setLoader(true);  // Show loader when the button is clicked
         setTimeout(() => {
+            // Navigate to the car details page with slug
             navigate(`/location-de-voitures/${carDetails.slug}`, {
                 state: { finalDateTime: {}, car: carDetails }
             });
-            setLoader(false);
-        }, 300);
+            setLoader(false);  // Hide loader after the navigation delay
+        }, 300);  // 300ms delay before navigation
     };
-
-    // Only render content when mounted
-    if (!mounted) return null;
 
     return (
         <div className="container mx-auto py-4 px-2 sm:px-8 md:px-10 lg:px-14">
@@ -157,12 +156,10 @@ const LatestOffers = ({ selectedCurrency }) => {
                                 </button>
                             </div>
                         </div>
-                        {loader && (
-                            <div className="loaderPosition visible">
-                                <div className="loaderBg"></div>
-                                <span className="loader"></span>
-                            </div>
-                        )}
+                        <div className={`loaderPosition ${!loader ? 'invisible' : 'visible'}`}>
+                            <div className="loaderBg"></div>
+                            <span className="loader"></span>
+                        </div>
                     </div>
                 );
             })}
