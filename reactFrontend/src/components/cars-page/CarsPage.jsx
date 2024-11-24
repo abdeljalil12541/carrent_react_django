@@ -834,7 +834,10 @@ const CarsPage = ({ selectedCurrency }) => {
 
         </Dialog>
         }
-
+        <div className={`loaderPosition ${!loader ? 'invisible': 'visible'}`}>
+            <div className="loaderBg"></div>
+            <span class="loader"></span>
+        </div>
     </section>
     );
 }
