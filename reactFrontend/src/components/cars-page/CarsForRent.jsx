@@ -249,7 +249,7 @@ const convertPrice = (price, fromCurrency, toCurrency) => {
 
 
 
-const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeature, selectedDefaultEquipement, selectedFeatures, filteredCarPrice, availableCarsState, availableCarsFromBokkingForm, loader, finalDateTime, finalDestination, setFilteredCarsLengthByCurrentLocation }) => {
+const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeature, selectedDefaultEquipement, selectedFeatures, filteredCarPrice, availableCarsState, availableCarsFromBokkingForm, finalDateTime, finalDestination, setFilteredCarsLengthByCurrentLocation }) => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredCars, setFilteredCars] = useState([]);
