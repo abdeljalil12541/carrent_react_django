@@ -457,14 +457,19 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
 const [noCarsAvailable, setNoCarsAvailable] = useState(false);
 const [loader, setLoader] = useState(false);
 useEffect(() => {
-  setLoader(true);
   setTimeout(() => {
     if(currentCars.length === 0) {
-      setNoCarsAvailable(true);
-      setLoader(false);
+      setLoader(true);
+      setTimeout(() => {
+        setNoCarsAvailable(true);
+        setLoader(false);
+      }, 2000);
     }else {
-      setNoCarsAvailable(false);
-      setLoader(false);
+      setLoader(true);
+      setTimeout(() => {
+        setNoCarsAvailable(false);
+        setLoader(false);
+      }, 2000);
     }
 }, 3000);
 
