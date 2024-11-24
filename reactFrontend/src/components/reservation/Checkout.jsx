@@ -352,7 +352,7 @@ const CreateBoking = async (e) => {
 };
 
 handleOpenRegister = () => {
-    handleOpenRegister(true)
+    setOpenRegisterPage(true)
 }
 
 
