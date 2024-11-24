@@ -261,6 +261,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   const [noCarsAvailable, setNoCarsAvailable] = useState(false);
   const [dataFetched, setDataFetched] = useState(false); // Flag to control execution
   const navigate = useNavigate();
+  const [isNavigating, setIsNavigating] = useState(false);
 
 
   const [colsCards, setColsCards] = useState(false);
@@ -462,8 +463,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
 }, [finalDateTime]);
   
 useEffect(() => {
-  // Run this effect only after data is fetched
-  if (!dataFetched) return;
+  if (!dataFetched || isNavigating) return; // Skip if navigating
 
   if (currentCars.length === 0) {
       setLoader(true);
@@ -479,26 +479,23 @@ useEffect(() => {
   }
 
   console.log('Available cars:', currentCars.length);
-}, [currentCars, dataFetched]);
+}, [currentCars, dataFetched, isNavigating]);
 
-useEffect(() => {
-  if(noCarsAvailable) {
-    setLoader(false);
-  }
-})
 
 const goToCarDetail = ({ car, finalDateTime, finalDestination }) => {
-    setLoader(true);
-    setTimeout(() => {
-        navigate(`/location-de-voitures/${car.slug}`, {
-          state: {
-            car: car,
-            finalDateTime: finalDateTime,
-            finalDestination: finalDestination
-          }
-        });
-    }, 1000);
-}
+  setIsNavigating(true); // Indicate navigation is in progress
+  setLoader(true); // Start loader
+  setTimeout(() => {
+      navigate(`/location-de-voitures/${car.slug}`, {
+        state: {
+          car: car,
+          finalDateTime: finalDateTime,
+          finalDestination: finalDestination,
+        },
+      });
+      setIsNavigating(false); // Stop navigating state when navigation completes
+  }, 10000);
+};
 
 return (
       <div className="col-span-3 mt-4 md:mt-9 md:ml-4">
