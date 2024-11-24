@@ -260,6 +260,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
   const [loader, setLoader] = useState(false);
   const [noCarsAvailable, setNoCarsAvailable] = useState(false);
   const [dataFetched, setDataFetched] = useState(false); // Flag to control execution
+  const navigate = useNavigate();
 
 
   const [colsCards, setColsCards] = useState(false);
