@@ -465,7 +465,8 @@ useEffect(() => {
     setLoader(true);
       setTimeout(() => {
         setNoCarsAvailable(true);
-      }, 1500);
+        setLoader(false);
+    }, 2000);
       
   } else {
       setNoCarsAvailable(false);
