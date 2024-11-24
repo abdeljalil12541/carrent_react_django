@@ -497,8 +497,7 @@ const goToCarDetail = ({ car, finalDateTime, finalDestination }) => {
             finalDestination: finalDestination
           }
         });
-    setLoader(true);
-    }, 300);
+    }, 1000);
 }
 
 return (
@@ -580,7 +579,7 @@ return (
               {currentCars.map((car, index) => (
                     <div key={index} className="border hover:border-red-600 hover:shadow-lg duration-300 border-sm pl-4 py-4 border-gray-200 mt-4 w-full grid grid-cols-7">
                         <div className="col-span-7 md:col-span-2 pl-2">
-                          <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} ><img src={car.image} alt={car.name} className='md:w-[120px]' /></div>
+                          <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} ><img src={car.image} alt={car.name} className='md:w-[120px] cursor-pointer' /></div>
                           <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='text-sm text-red-600 cursor-pointer'>{car.name}</div>
                         </div>
                         <div className="col-span-7 mt-2 md:mt-0 md:col-span-2 flex md:ml-[1px] items-center md:-ml-6">
@@ -609,7 +608,7 @@ return (
                         </div>
                         <div className="col-span-7 md:col-span-2 mt-1 md:mt-0 md:ml-9 -mt-1">
                             <p className='text-4xl font-medium mb-4 text-gray-600'>{formatPrice(convertPrice(car.price, 'MAD dh', currencyCode), currencyCode)} <span className='text-lg -ml-2 font-light'>/jour</span></p>
-                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='bg-red-600 text-white py-2 mt-2 rounded hover:bg-red-500 duration-150 px-3'>Sélectionner</div>
+                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='cursor-pointer bg-red-600 text-white py-2 mt-2 rounded hover:bg-red-500 duration-150 px-3'>Sélectionner</div>
                         </div>
                     </div>
                 ))}
@@ -621,8 +620,8 @@ return (
                 <div className='grid grid-cols-3 lg:-mr-9 lg:ml-4 mt-6 pt-8'>
                 {currentCars.map((car, index) => (
                   <div key={index} className='col-span-3 lg:col-span-1 mb-6 mx-2'>
-                            <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}}><img className='cursor-pointer h-56 sm:h-96 lg:h-40 object-cover w-full' src={car.image} alt="Car 1" /></Link>
-                            <Link to={`/location-de-voitures/${car.slug}`} state={{car, finalDateTime, finalDestination}} className='text-xl text-gray-800 hover:text-gray-950 duration-300 font-semibold'>{car.name}</Link>
+                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} ><img className='cursor-pointer h-56 sm:h-96 lg:h-40 object-cover w-full' src={car.image} alt="Car 1" /></div>
+                            <div onClick={() => goToCarDetail({car, finalDateTime, finalDestination })} className='text-xl text-gray-800 hover:text-gray-950 duration-300 font-semibold'>{car.name}</div>
                             <p className='text-sm text-gray-500'>{car.category.name}</p>
                             <p className='font-semibold text-red-600'>{formatPrice(convertPrice(car.price, 'MAD dh', currencyCode), currencyCode)} <span className='text-sm text-gray-500'>/jour</span></p>
                         </div>
