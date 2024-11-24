@@ -92,10 +92,12 @@ const Dashboard = ({ selectedCurrency }) => {
 
 
     const [avatarDashboar, setavAtarDashboar] = useState('');
+    const [loader, setLoader] = useState(false);
     const [usernameDashboar, setavUsernameDashboar] = useState('');
     useEffect(() => {
         const FetchUserDashboar = async () => {
             try{
+                setLoader(true);
                 const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/user-dashboard/', { withCredentials: true })
                 .then((response) => {
                     console.log('response user dashboard', response.data)
@@ -106,6 +108,8 @@ const Dashboard = ({ selectedCurrency }) => {
                 
             }catch(error){
                 console.error('Error fetching user dashboard data', error)
+            }finally{
+                setLoader(false);
             }
         };
 
@@ -195,6 +199,11 @@ const Dashboard = ({ selectedCurrency }) => {
                     <InboxDashboard />
                 </div>
 
+            </div>
+
+            <div className={`loaderPosition ${!loader ? 'invisible' : 'visible'}`}>
+                <div className="loaderBg"></div>
+                <span className="loader"></span>
             </div>
         </section>
     )
