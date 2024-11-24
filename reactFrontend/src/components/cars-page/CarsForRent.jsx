@@ -308,8 +308,11 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
           }
       };
 
-      fetchHomeCardCar();
-  }, [availableCarsState]);
+      // Only fetch data if not already fetched
+      if (!dataFetched) {
+        fetchHomeCardCar();
+      }
+  }, [availableCarsState, dataFetched]);
 
   useEffect(() => {
     // Call filtering function every time the filtered price range changes
@@ -461,13 +464,14 @@ useEffect(() => {
   // Run this effect only after data is fetched
   if (!dataFetched) return;
 
-  if (currentCars.length === 0 && dataFetched) {
-    setLoader(true);
-      setTimeout(() => {
-        setNoCarsAvailable(true);
-        setLoader(false);
-    }, 2000);
-      
+  if (currentCars.length === 0) {
+      setLoader(true);
+      const timer = setTimeout(() => {
+          setNoCarsAvailable(true);
+          setLoader(false);
+      }, 2000);
+
+      return () => clearTimeout(timer); // Cleanup timeout on unmount
   } else {
       setNoCarsAvailable(false);
       setLoader(false);
