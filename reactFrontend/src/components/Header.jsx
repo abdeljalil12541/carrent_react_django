@@ -428,9 +428,10 @@ useEffect(() => {
   };
 
   const handleGoToHomePage = () => {
-    setLoader(true)
+    setLoader(true);
     setTimeout(() => {
         navigate('/')
+        setLoader(false);
     }, 300)
   }
     
@@ -438,7 +439,7 @@ useEffect(() => {
         <header>
             <div className="w-full items-center border-b border-b-red-600 lg:border-none px-2 sm:px-8 lg:px-20 lg:px-28 bg-[#111] h-20 flex justify-between">
                 <div className="flex mb-2.5 -ml-11 sm:-ml-14">
-                    <img onClick={handleGoToHomePage} src={logo} className='ml-2 sm:ml-0 w-[200px] sm:w-[240px] mt-[78px] sm:mt-[88px]' />
+                    <img onClick={handleGoToHomePage} src={logo} className='cursor-pointer ml-2 sm:ml-0 w-[200px] sm:w-[240px] mt-[78px] sm:mt-[88px]' />
 
                 </div>
 
