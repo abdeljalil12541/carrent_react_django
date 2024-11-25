@@ -613,9 +613,9 @@ const handleGoToContactPage = () => {
                     type="text" 
                     className="hidden" 
                     value={
-                        `${isAddon1 ? 'GPS' : ''}` + 
-                        (isAddon2 ? `, Conducteur supplémentaire` : '') + 
-                        (isAddon3 ? `, Siège bébé` : '') || 'sans extensions'
+                        (isAddon1 ? 'GPS' : '') + 
+                        (isAddon1 && isAddon2 ? `, Conducteur supplémentaire` : '') + 
+                        (isAddon1 && (isAddon2 || isAddon3) ? `, Siège bébé` : '') || 'sans extensions'
                     } 
                     name="addons" 
                 />
