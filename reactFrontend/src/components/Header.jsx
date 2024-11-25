@@ -922,8 +922,8 @@ useEffect(() => {
                             Connectez-vous
                             </button>
                         </div>
-                        <div className="mt-4">
-                            <a href="#" className="text-red-500 hover:underline">Privacy Policy</a>
+                        <div className="mt-4 text-sm sm:text-[16px]">
+                            <p>You don't have an account?<a onClick={() => {setOpenRegisterPage(true); setOpen(false)}} className="cursor-pointer text-red-500 hover:underline"> Sign up here.</a></p>
                         </div>
                     </form>
                 </div>
@@ -939,7 +939,7 @@ useEffect(() => {
                 onClose={HandleOpenRegisterPage}
                 fullWidth // Make the dialog take the full width
                 maxWidth="3xl" // Set the maximum width to large (or you can use "xl" for extra large)
-                className="fixed inset-0 flex items-center justify-center bg-none bg-opacity-.1" // Center the dialog with background opacity
+                className="-mx-4 -mr-[5px] sm:-mr-auto fixed inset-0 flex items-center justify-center bg-none bg-opacity-.1" // Center the dialog with background opacity
                 animate={{
                   mount: { scale: 1, y: 0 },
                   unmount: { scale: 0.9, y: -100 },
@@ -1024,13 +1024,8 @@ useEffect(() => {
                     </div>
               
                     {/* Terms and Privacy Checkbox */}
-                    <div className="mb-4">
-                      <label className="inline-flex items-center">
-                        <input type="checkbox" required className="form-checkbox h-5 w-5 text-red-600" />
-                        <span className="ml-2 text-gray-700">
-                          J'ai lu et j'accepte les <a href="#" className="text-red-500 hover:underline">conditions générales de vente</a> et <a href="#" className="text-red-500 hover:underline">Privacy Policy</a>
-                        </span>
-                      </label>
+                    <div className="mb-4 flex">
+                        <p className='ml-2 text-sm sm:text-[16px]'>Already have an account with us?<a onClick={() => {setOpenRegisterPage(false); setOpen(true)}} className="cursor-pointer text-red-500 hover:underline"> Please log in here.</a></p>
                     </div>
               
                     {/* Submit Button */}
