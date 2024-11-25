@@ -64,7 +64,7 @@ const Checkout = ({ selectedCurrency }) => {
   const finalDestination = state?.finalDestination
   const totalPrice = state?.totalPrice
   const selectedAddOns = state?.selectedAddOns
-  const form = useRef();
+  const form = useRef(null);
 
   // Extract currency code from selectedCurrency or default to MAD
   const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
@@ -250,9 +250,12 @@ const getCSRFToken = () => {
 const sendEmail = (e) => {
     e.preventDefault();
     emailjs
-        .sendForm('service_aoddrhn', 'template_sz33o2f', form.current, {
-            publicKey: 'Rm8oyL6FStTFHX7uW',
-        })
+        .sendForm(
+            'service_aoddrhn',
+            'template_sz33o2f',
+            form.current, // Pass the form reference
+            'Rm8oyL6FStTFHX7uW'
+        )
         .then(
             () => {
                 console.log('SUCCESS!');
