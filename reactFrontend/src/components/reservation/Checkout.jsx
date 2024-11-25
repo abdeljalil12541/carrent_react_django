@@ -367,7 +367,8 @@ const CreateBoking = async (e) => {
                 } catch (error) {
                     console.error("Failed to send email:", error);
                 }
-
+                console.log("Pickup Date:", pickupDatetime);
+                console.log("Dropoff Date:", dropoffDatetime);
                 
                 // If the newsletter checkbox is checked, submit the email
                 if (isNewsletterChecked) {
