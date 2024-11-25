@@ -422,6 +422,7 @@ const handleGoToContactPage = () => {
                         Prénom
                     </label>
                     <input
+                        name='firstName'
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         type="text"
@@ -540,6 +541,7 @@ const handleGoToContactPage = () => {
                     Adresse de messagerie
                     </label>
                     <input
+                    name='emailAddress'
                     value={emailAddress}
                     onChange={(e) => setEmailAddress(e.target.value)}
                     type="email"
@@ -564,6 +566,7 @@ const handleGoToContactPage = () => {
                     Notes de commande (facultatif)
                     </label>
                     <textarea
+                    name='message'
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     className="w-full p-2 border outline-none focus:border-red-600 duration-300 min-h-[100px]"
