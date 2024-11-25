@@ -394,10 +394,10 @@ useEffect(() => {
                 closeSlider(); // Close the slider if clicked outside
                 console.log('slider closing...');
             }
-            if (accountRef.current && !accountRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
+            if (accountRef.current && !accountRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
                 setIsOpen(false); // Close the dropdown when clicking outside
             }
-            if (currencyRef.current && !currencyRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
+            if (currencyRef.current && !currencyRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
                 setIsCurrencyOpen(false); // Close the dropdown when clicking outside
             }
             if (accountRefLg.current && !accountRefLg.current.contains(event.target)) {
