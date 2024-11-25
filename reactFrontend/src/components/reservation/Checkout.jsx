@@ -235,8 +235,7 @@ const formatDate = (dateString) => {
 };
 
 
-const [pickUpForEmail, setPickUpForEmail] = useState(pickupDatetime);
-const [dropOffForEmail, setDropOffForEmail] = useState(dropoffDatetime);
+
 // Simplified useEffect to handle just pickup and dropoff datetime formatting
 useEffect(() => {
     if (DateTimeStateFrom?.pickupDate && DateTimeStateFrom?.pickupHour) {
@@ -261,7 +260,9 @@ console.log('selected add-ons on checkout...', selectedAddOns)
 console.log('pickupdatetime...', pickupDatetime)
 console.log('dropoffdatetime...', dropoffDatetime)
 console.log('destination...', finalDestination)
-
+const [pickUpForEmail, setPickUpForEmail] = useState(pickupDatetime);
+const [dropOffForEmail, setDropOffForEmail] = useState(dropoffDatetime);
+console.log('destdsqdqsdsqination...', dropOffForEmail)
 
 const getCSRFToken = () => {
     const name = 'csrftoken'; // This should match the name of your CSRF cookie
@@ -367,8 +368,7 @@ const CreateBoking = async (e) => {
                 } catch (error) {
                     console.error("Failed to send email:", error);
                 }
-                console.log("Pickup Date:", pickupDatetime);
-                console.log("Dropoff Date:", dropoffDatetime);
+
                 
                 // If the newsletter checkbox is checked, submit the email
                 if (isNewsletterChecked) {
