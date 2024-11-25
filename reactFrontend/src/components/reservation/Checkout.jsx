@@ -235,7 +235,8 @@ const formatDate = (dateString) => {
 };
 
 
-const [pickUpAndDropOff, setPickUpAndDropOff] = useState(`${pickupDatetime} to ${dropoffDatetime}`);
+const [pickUpForEmail, setPickUpForEmail] = useState(pickupDatetime);
+const [dropOffForEmail, setDropOffForEmail] = useState(dropoffDatetime);
 // Simplified useEffect to handle just pickup and dropoff datetime formatting
 useEffect(() => {
     if (DateTimeStateFrom?.pickupDate && DateTimeStateFrom?.pickupHour) {
@@ -600,7 +601,8 @@ const handleGoToContactPage = () => {
                 <input type="text" className='hidden' value={carName} name='carName' />
                 <input type="text" className='hidden' value={imgForMail} name='imgForMail' />
                 <input type="text" className='hidden' value={destinationFormEmailJs} name='destinationFormEmailJs' />
-                <input type="text" className='hidden' value={pickUpAndDropOff} name='pickUpAndDropOff' />
+                <input type="text" className='hidden' value={pickUpForEmail} name='pickUpForEmail' />
+                <input type="text" className='hidden' value={dropOffForEmail} name='dropOffForEmail' />
 
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
