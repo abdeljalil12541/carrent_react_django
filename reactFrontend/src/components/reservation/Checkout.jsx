@@ -609,6 +609,18 @@ const handleGoToContactPage = () => {
                 <input type="text" className='hidden' value={pickUpForEmail} name='pickUpForEmail' />
                 <input type="text" className='hidden' value={dropOffForEmail} name='dropOffForEmail' />
 
+
+                <input 
+                    type="text" 
+                    className='hidden' 
+                    value={
+                        `${isAddon1 ? isAddon1 : ''}` + 
+                        (isAddon2 ? `, ${isAddon2}` : '') + 
+                        (isAddon3 ? `, ${isAddon3}` : '')
+                    } 
+                    name='addons' 
+                    />
+
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
                 </div>
