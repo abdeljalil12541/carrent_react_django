@@ -139,6 +139,7 @@ const formatForDjango = (date, time) => {
 const [carName, setCarName] = useState(car.name);
 const [imgForMail, setImgForMail] = useState(car.image);
 const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`'${finalDestination.destination1.label}' à '${finalDestination.destination2.label}'`);
+const [totalPriceForEmailjs, setTotalPriceForEmailjs] = useState(totalPrice);
 
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
@@ -608,18 +609,17 @@ const handleGoToContactPage = () => {
                 <input type="text" className='hidden' value={destinationFormEmailJs} name='destinationFormEmailJs' />
                 <input type="text" className='hidden' value={pickUpForEmail} name='pickUpForEmail' />
                 <input type="text" className='hidden' value={dropOffForEmail} name='dropOffForEmail' />
-
-
+                <input type="text" className='hidden' value={totalPriceForEmailjs} name='TotalPriceForEmailjs' />
                 <input 
                     type="text" 
-                    className='hidden' 
+                    className="hidden" 
                     value={
-                        `${isAddon1 ? isAddon1 : ''}` + 
-                        (isAddon2 ? `, ${isAddon2}` : '') + 
-                        (isAddon3 ? `, ${isAddon3}` : '')
+                        `${isAddon1 ? 'GPS' : ''}` + 
+                        (isAddon2 ? `, Conducteur supplémentaire` : '') + 
+                        (isAddon3 ? `, Siège bébé` : '')
                     } 
-                    name='addons' 
-                    />
+                    name="addons" 
+                />
 
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
