@@ -236,6 +236,8 @@ const formatDate = (dateString) => {
 
 
 
+const [pickUpForEmail, setPickUpForEmail] = useState(pickupDatetime);
+const [dropOffForEmail, setDropOffForEmail] = useState(dropoffDatetime);
 // Simplified useEffect to handle just pickup and dropoff datetime formatting
 useEffect(() => {
     if (DateTimeStateFrom?.pickupDate && DateTimeStateFrom?.pickupHour) {
@@ -245,6 +247,7 @@ useEffect(() => {
         );
         console.log("Formatted Pickup Datetime:", formattedPickupDateTime); // Debug
         setPickupDatetime(formattedPickupDateTime);
+        setPickUpForEmail(formattedPickupDateTime);
     }
 
     if (DateTimeStateFrom?.dropoffDate && DateTimeStateFrom?.tempDropoffHour) {
@@ -254,14 +257,14 @@ useEffect(() => {
         );
         console.log("Formatted Dropoff Datetime:", formattedDropoffDateTime); // Debug
         setDropoffDatetime(formattedDropoffDateTime);
+        setDropOffForEmail(formattedDropoffDateTime);
     }
 }, [DateTimeStateFrom]);
 console.log('selected add-ons on checkout...', selectedAddOns)
 console.log('pickupdatetime...', pickupDatetime)
 console.log('dropoffdatetime...', dropoffDatetime)
 console.log('destination...', finalDestination)
-const [pickUpForEmail, setPickUpForEmail] = useState(pickupDatetime);
-const [dropOffForEmail, setDropOffForEmail] = useState(dropoffDatetime);
+
 console.log('destdsqdqsdsqination...', dropOffForEmail)
 
 const getCSRFToken = () => {
