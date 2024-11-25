@@ -235,7 +235,7 @@ const formatDate = (dateString) => {
 };
 
 
-const [pickUpAndDropOff, setPickUpAndDropOff] = useState(`${formatDate(pickupDatetime)} to ${formatDate(dropoffDatetime)}`);
+const [pickUpAndDropOff, setPickUpAndDropOff] = useState(`${pickupDatetime} to ${dropoffDatetime}`);
 // Simplified useEffect to handle just pickup and dropoff datetime formatting
 useEffect(() => {
     if (DateTimeStateFrom?.pickupDate && DateTimeStateFrom?.pickupHour) {
