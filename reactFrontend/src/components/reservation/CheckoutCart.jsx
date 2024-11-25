@@ -101,7 +101,7 @@ const CheckoutCart = ({ selectedCurrency }) => {
             </div>
             
             <div className='grid grid-cols-4'>
-                <div className="pl-2 p-1 WidthLgCheckoutCartRes sm:p-6 col-span-4 md:col-span-3 lg:col-span-2">
+                <div className="p-2 WidthLgCheckoutCartRes sm:p-6 col-span-4 md:col-span-3 lg:col-span-2">
                     {/* List item */}
                     <p className='text-[39.99px] font-light text-gray-600 mb-4'>Panier</p>
                     <div className='w-24'>
