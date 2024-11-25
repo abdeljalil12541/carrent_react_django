@@ -138,6 +138,8 @@ const formatForDjango = (date, time) => {
 
 const [carName, setCarName] = useState(car.name);
 const [imgForMail, setImgForMail] = useState(car.image);
+const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`${finalDestination.destination1.value} to ${finalDestination.destination2.value}`);
+
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const [companyName, setCompanyName] = useState('');
@@ -250,7 +252,18 @@ const getCSRFToken = () => {
     const parts = cookieValue.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+      });
+    };
 
+const [pickUpAndDropOff, setPickUpAndDropOff] = useState(`${formatDate(pickupDatetime)} to ${formatDate(dropoffDatetime)}`);
 
 const sendEmail = (e) => {
     e.preventDefault();
@@ -582,6 +595,8 @@ const handleGoToContactPage = () => {
 
                 <input type="text" className='hidden' value={carName} name='carName' />
                 <input type="text" className='hidden' value={imgForMail} name='imgForMail' />
+                <input type="text" className='hidden' value={destinationFormEmailJs} name='destinationFormEmailJs' />
+                <input type="text" className='hidden' value={pickUpAndDropOff} name='pickUpAndDropOff' />
 
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
