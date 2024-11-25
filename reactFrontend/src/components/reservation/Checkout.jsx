@@ -247,7 +247,7 @@ useEffect(() => {
         );
         console.log("Formatted Pickup Datetime:", formattedPickupDateTime); // Debug
         setPickupDatetime(formattedPickupDateTime);
-        setPickUpForEmail(formattedPickupDateTime);
+        setPickUpForEmail(formatDate(formattedPickupDateTime));
     }
 
     if (DateTimeStateFrom?.dropoffDate && DateTimeStateFrom?.tempDropoffHour) {
@@ -257,7 +257,7 @@ useEffect(() => {
         );
         console.log("Formatted Dropoff Datetime:", formattedDropoffDateTime); // Debug
         setDropoffDatetime(formattedDropoffDateTime);
-        setDropOffForEmail(formattedDropoffDateTime);
+        setDropOffForEmail(formatDate(formattedDropoffDateTime));
     }
 }, [DateTimeStateFrom]);
 console.log('selected add-ons on checkout...', selectedAddOns)
