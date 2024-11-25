@@ -462,6 +462,7 @@ const handleGoToContactPage = () => {
                         Nom
                     </label>
                     <input
+                        name='lastName'
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         type="text"
