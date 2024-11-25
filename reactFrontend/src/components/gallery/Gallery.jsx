@@ -107,7 +107,7 @@ const Gallery = () => {
                         <div key={category.id} className="relative inline-block">
                         {activeCategory === category.id ? (
                             <div className="">
-                            <div className="bg-red-500 text-white  px-6 py-2 rounded">
+                            <div className="bg-red-500 text-white cursor-default px-6 py-2 rounded">
                             {category.label}
                             </div>
                             <div className="absolute left-1/2 transform -translate-x-1/2 mt-[-4px] w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-red-500"></div>
