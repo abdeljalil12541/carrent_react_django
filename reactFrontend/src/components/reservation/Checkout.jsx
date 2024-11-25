@@ -138,7 +138,7 @@ const formatForDjango = (date, time) => {
 
 const [carName, setCarName] = useState(car.name);
 const [imgForMail, setImgForMail] = useState(car.image);
-const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`${finalDestination.destination1.label} to ${finalDestination.destination2.label}`);
+const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`'${finalDestination.destination1.label}' à '${finalDestination.destination2.label}'`);
 
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
