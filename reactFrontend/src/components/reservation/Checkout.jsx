@@ -1,10 +1,11 @@
 import { ChevronRight } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaCalendar } from 'react-icons/fa'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import countries from '../../countries-list/countries.json';
+import emailjs from '@emailjs/browser';
 
 // Currency conversion rates object
 const CURRENCY_RATES = {
@@ -63,6 +64,7 @@ const Checkout = ({ selectedCurrency }) => {
   const finalDestination = state?.finalDestination
   const totalPrice = state?.totalPrice
   const selectedAddOns = state?.selectedAddOns
+  const form = useRef();
 
   // Extract currency code from selectedCurrency or default to MAD
   const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
@@ -244,6 +246,23 @@ const getCSRFToken = () => {
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
 
+
+const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+        .sendForm('service_aoddrhn', 'template_sz33o2f', form.current, {
+            publicKey: 'Rm8oyL6FStTFHX7uW',
+        })
+        .then(
+            () => {
+                console.log('SUCCESS!');
+            },
+            (error) => {
+                console.log('FAILED...', error.text);
+            }
+        );
+};
+
 const CreateBoking = async (e) => {
     e.preventDefault();
 
@@ -316,6 +335,14 @@ const CreateBoking = async (e) => {
                 const createdBooking = await response.json();
                 console.log("Booking created successfully:", createdBooking);
 
+                // Send the email notification
+                try {
+                    sendEmail(e);
+                } catch (error) {
+                    console.error("Failed to send email:", error);
+                }
+
+                
                 // If the newsletter checkbox is checked, submit the email
                 if (isNewsletterChecked) {
                     try {
@@ -385,7 +412,7 @@ const handleGoToContactPage = () => {
           <h2 className="text-2xl font-normal text-gray-700 mb-6">
             Détails de facturation
           </h2>
-            <form onSubmit={CreateBoking} className="space-y-4 mb-9">
+            <form ref={form} onSubmit={CreateBoking} className="space-y-4 mb-9">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                     <label className="block text-sm text-gray-600 mb-2">

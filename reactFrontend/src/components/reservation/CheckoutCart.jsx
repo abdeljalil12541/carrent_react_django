@@ -135,7 +135,7 @@ const CheckoutCart = ({ selectedCurrency }) => {
                     </div>
                 </div>
 
-                <div className='col-span-4 md:col-span-1 -mt-9 sm:-mt-0 ml-2 md:ml-0 mb-6 lg:ml-2'>
+                <div className='col-span-4 md:col-span-1 -mt-9 sm:-mt-0 ml-2 mr-1 md:ml-0 mb-6 lg:ml-2'>
                     <p className='text-2xl font-md sm:text-[39.99px] sm:text-[34.99px] lg:text-[39.99px] sm:font-light text-gray-600 mt-8'>Total panier</p>
                         
                     <div className='mr-1 md:mr-0 lg:mr-10 mt-2 md:mt-4 lg:mt-3'>
