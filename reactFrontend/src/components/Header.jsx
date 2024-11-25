@@ -394,10 +394,10 @@ useEffect(() => {
                 closeSlider(); // Close the slider if clicked outside
                 console.log('slider closing...');
             }
-            if (accountRef.current && !accountRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
+            if (accountRef.current && !accountRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
                 setIsOpen(false); // Close the dropdown when clicking outside
             }
-            if (currencyRef.current && !currencyRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
+            if (currencyRef.current && !currencyRef.current.contains(e.target) && buttonRef.current && !buttonRef.current.contains(e.target)) {
                 setIsCurrencyOpen(false); // Close the dropdown when clicking outside
             }
             if (accountRefLg.current && !accountRefLg.current.contains(event.target)) {
@@ -777,8 +777,7 @@ useEffect(() => {
                                                     <div
                                                         onClick={() => {
                                                             handleCurrencyChange(currency.value);
-                                                            setIsCurrencyOpen(!isCurrencyOpen);
-                                                            setIsOpen(false);
+                                                            setIsCurrencyOpen(false);
                                                         }}
                                                         className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
                                                     >

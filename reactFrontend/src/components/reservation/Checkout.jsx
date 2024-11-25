@@ -137,6 +137,7 @@ const formatForDjango = (date, time) => {
 };
 
 const [carName, setCarName] = useState(car.name);
+const [imgForMail, setImgForMail] = useState(car.image);
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const [companyName, setCompanyName] = useState('');
@@ -161,7 +162,7 @@ const [isAddon3, setIsAddon3] = useState('');
 const [totalPriceToBook, setTotalPriceToBook] = useState(totalPrice);
 
 useEffect(() => {
-    console.log('car name ::', carName)
+    console.log('car image ::', imgForMail)
 })
 
 useEffect(() => {
@@ -580,6 +581,7 @@ const handleGoToContactPage = () => {
                 </div>
 
                 <input type="text" className='hidden' value={carName} name='carName' />
+                <input type="text" className='hidden' value={imgForMail} name='imgForMail' />
 
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
