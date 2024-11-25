@@ -236,8 +236,8 @@ const formatDate = (dateString) => {
 
 
 
-const [pickUpForEmail, setPickUpForEmail] = useState(pickupDatetime);
-const [dropOffForEmail, setDropOffForEmail] = useState(dropoffDatetime);
+const [pickUpForEmail, setPickUpForEmail] = useState('');
+const [dropOffForEmail, setDropOffForEmail] = useState('');
 // Simplified useEffect to handle just pickup and dropoff datetime formatting
 useEffect(() => {
     if (DateTimeStateFrom?.pickupDate && DateTimeStateFrom?.pickupHour) {
