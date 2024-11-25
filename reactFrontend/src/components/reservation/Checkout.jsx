@@ -138,7 +138,7 @@ const formatForDjango = (date, time) => {
 
 const [carName, setCarName] = useState(car.name);
 const [imgForMail, setImgForMail] = useState(car.image);
-const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`${finalDestination.destination1.value} to ${finalDestination.destination2.value}`);
+const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`${finalDestination.destination1.label} to ${finalDestination.destination2.label}`);
 
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
@@ -219,27 +219,43 @@ useEffect(() => {
     }
 }, [selectedAddOns]);
 
+const formatDate = (dateString) => {
+    if (!dateString) return "Invalid Date"; // Return a default message for invalid input
+
+    const date = new Date(dateString);
+    if (isNaN(date)) return "Invalid Date"; // Handle parsing failure
+
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
+
+
+const [pickUpAndDropOff, setPickUpAndDropOff] = useState(`${formatDate(pickupDatetime)} to ${formatDate(dropoffDatetime)}`);
 // Simplified useEffect to handle just pickup and dropoff datetime formatting
 useEffect(() => {
-    // Handle pickup datetime
     if (DateTimeStateFrom?.pickupDate && DateTimeStateFrom?.pickupHour) {
         const formattedPickupDateTime = formatForDjango(
             DateTimeStateFrom.pickupDate,
             DateTimeStateFrom.pickupHour
         );
+        console.log("Formatted Pickup Datetime:", formattedPickupDateTime); // Debug
         setPickupDatetime(formattedPickupDateTime);
     }
 
-    // Handle dropoff datetime
     if (DateTimeStateFrom?.dropoffDate && DateTimeStateFrom?.tempDropoffHour) {
         const formattedDropoffDateTime = formatForDjango(
             DateTimeStateFrom.dropoffDate,
             DateTimeStateFrom.tempDropoffHour
         );
+        console.log("Formatted Dropoff Datetime:", formattedDropoffDateTime); // Debug
         setDropoffDatetime(formattedDropoffDateTime);
     }
 }, [DateTimeStateFrom]);
-
 console.log('selected add-ons on checkout...', selectedAddOns)
 console.log('pickupdatetime...', pickupDatetime)
 console.log('dropoffdatetime...', dropoffDatetime)
@@ -252,18 +268,6 @@ const getCSRFToken = () => {
     const parts = cookieValue.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 };
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-      });
-    };
-
-const [pickUpAndDropOff, setPickUpAndDropOff] = useState(`${formatDate(pickupDatetime)} to ${formatDate(dropoffDatetime)}`);
 
 const sendEmail = (e) => {
     e.preventDefault();
