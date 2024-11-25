@@ -214,10 +214,7 @@ const HomeCardSlider = ({ selectedCurrency }) => {
     const [loader, setLoader] = useState(false)
 
     const goToCarsPageBtn = () => {
-        setLoader(true)
-        setTimeout(() => {
-            navigate('/location-de-voitures');
-        }, 300);
+        navigate('/location-de-voitures');
     }
 
     return (
