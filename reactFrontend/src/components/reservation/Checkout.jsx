@@ -66,6 +66,7 @@ const Checkout = ({ selectedCurrency }) => {
   const selectedAddOns = state?.selectedAddOns
   const form = useRef(null);
 
+  
   // Extract currency code from selectedCurrency or default to MAD
   const currencyCode = selectedCurrency ? selectedCurrency.split(' ')[0] : 'MAD dh';
 
@@ -135,7 +136,7 @@ const formatForDjango = (date, time) => {
     return dateObj.toISOString();
 };
 
-
+const [carName, setCarName] = useState(car.name);
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const [companyName, setCompanyName] = useState('');
@@ -159,6 +160,9 @@ const [isAddon2, setIsAddon2] = useState('');
 const [isAddon3, setIsAddon3] = useState('');
 const [totalPriceToBook, setTotalPriceToBook] = useState(totalPrice);
 
+useEffect(() => {
+    console.log('car name ::', carName)
+})
 
 useEffect(() => {
     const getCountries = async () => {
@@ -528,6 +532,7 @@ const handleGoToContactPage = () => {
                     Téléphone
                     </label>
                     <input
+                    name='phoneNumber'
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     type="tel"
@@ -573,6 +578,8 @@ const handleGoToContactPage = () => {
                     placeholder="Notes de commande (facultatif)"
                     ></textarea>
                 </div>
+
+                <input type="text" className='hidden' value={carName} name='carName' />
 
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
