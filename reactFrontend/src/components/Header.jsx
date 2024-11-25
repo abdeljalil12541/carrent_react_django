@@ -777,7 +777,8 @@ useEffect(() => {
                                                     <div
                                                         onClick={() => {
                                                             handleCurrencyChange(currency.value);
-                                                            setIsCurrencyOpen(false);
+                                                            setIsCurrencyOpen(!isCurrencyOpen);
+                                                            setIsOpen(false);
                                                         }}
                                                         className="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-gray-100"
                                                     >
