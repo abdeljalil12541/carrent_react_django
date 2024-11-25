@@ -139,7 +139,6 @@ const formatForDjango = (date, time) => {
 const [carName, setCarName] = useState(car.name);
 const [imgForMail, setImgForMail] = useState(car.image);
 const [destinationFormEmailJs, setDestinationFormEmailJs] = useState(`'${finalDestination.destination1.label}' à '${finalDestination.destination2.label}'`);
-const [totalPriceForEmailjs, setTotalPriceForEmailjs] = useState(totalPrice);
 
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
@@ -609,7 +608,7 @@ const handleGoToContactPage = () => {
                 <input type="text" className='hidden' value={destinationFormEmailJs} name='destinationFormEmailJs' />
                 <input type="text" className='hidden' value={pickUpForEmail} name='pickUpForEmail' />
                 <input type="text" className='hidden' value={dropOffForEmail} name='dropOffForEmail' />
-                <input type="text" className='hidden' value={totalPriceForEmailjs} name='TotalPriceForEmailjs' />
+                <input type="text" className='hidden' value={totalPriceToBook} name='totalPriceToBook' />
                 <input 
                     type="text" 
                     className="hidden" 
