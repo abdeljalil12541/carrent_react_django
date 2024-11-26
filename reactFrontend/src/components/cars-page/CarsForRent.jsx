@@ -292,7 +292,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
                   car_features: car.car_features.map(feature => feature.name),
                   default_equipements: car.default_equipment.map(equipement => equipement.name),
                   category: car.category.name,
-                  brand: `http://127.0.0.1:8000${car.brand}`,
+                  brand: `https://carrentreactdjango-production.up.railway.app${car.brand}`,
                   pickup_features: car.pickup_features.map((pickup_feature) => pickup_feature.name),
                   current_location: car.current_location.name,
               }));
