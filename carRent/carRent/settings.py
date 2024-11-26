@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),  # Ensure this matches your .env file
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'NAME': 'railway',  # Ensure this matches your .env file
+        'USER': 'postgres',
+        'PASSWORD': 'rboAUFFVOQRhUILSbLpodRuDxmxnjNAT',
+        'HOST': 'postgres.railway.internal',
+        'PORT': '5432',
     }
 }
 
