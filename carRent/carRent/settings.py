@@ -90,7 +90,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'rboAUFFVOQRhUILSbLpodRuDxmxnjNAT',
         'HOST': 'postgres.railway.internal',
-        'PORT': '5432',
+        'SSL_CERT_DAYS': '820',
     }
 }
 
