@@ -80,8 +80,13 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 
 import dj_database_url
 
+# Use the DB_PASSWORD environment variable from Railway
 DATABASES = {
-    'default': dj_database_url.parse(f'postgresql://postgres:{env("DB_PASSWORD")}@junction.proxy.rlwy.net:15603/railway', conn_max_age=600, ssl_require=True)
+    'default': dj_database_url.parse(
+        f'postgresql://postgres:{os.getenv("DB_PASSWORD")}@junction.proxy.rlwy.net:15603/railway',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
