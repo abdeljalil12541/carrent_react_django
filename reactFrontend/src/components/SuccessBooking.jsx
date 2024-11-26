@@ -192,19 +192,19 @@ const SuccessBooking = ({ selectedCurrency }) => {
                     <tr className={`bg-white ${!bookingData.is_addon_1 && !bookingData.is_addon_2 && !bookingData.is_addon_3 ? 'hidden': '' }`}>
                       <th className="py-4 px-6 text-left bg-gray-50">Add-ons: </th>
                       <td className="py-4 px-6">
-                        <span>
-                          {bookingData.is_addon_1 ? 'GPS' : ''}
-                        </span>
-                        <span>
-                          {bookingData.is_addon_1 && bookingData.is_addon_2 ? ', Conducteur supplémentaire' : ''}
-                        </span>
-                        <span>
-                          {bookingData.is_addon_1 && (bookingData.is_addon_2 || bookingData.is_addon_3) ? ', Siège bébé' : ''}
-                        </span>
-                        <span>
-                          {!bookingData.is_addon_1 && !bookingData.is_addon_2 && !bookingData.is_addon_3 ? 'sans extensions' : ''}
-                        </span>
-                      </td>
+  <span>
+    {bookingData.is_addon_1 ? 'GPS' : ''}
+  </span>
+  <span>
+    {bookingData.is_addon_2 ? `${bookingData.is_addon_1 ? ', ' : ''}Conducteur supplémentaire` : ''}
+  </span>
+  <span>
+    {bookingData.is_addon_3 ? `${(bookingData.is_addon_1 || bookingData.is_addon_2) ? ', ' : ''}Siège bébé` : ''}
+  </span>
+  <span>
+    {(!bookingData.is_addon_1 && !bookingData.is_addon_2 && !bookingData.is_addon_3) ? 'sans extensions' : ''}
+  </span>
+</td>
                     </tr>
                     <tr className='bg-white'>
                       <th className="py-4 px-6 text-left bg-gray-50">Email: </th>
