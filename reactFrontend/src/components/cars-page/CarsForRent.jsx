@@ -620,6 +620,9 @@ return (
 
             {/* CARS WITH 3 ITEMS FOR EACH LINE */}
             <div className={`${rowsCards ? "hidden": ""}`}>
+                <span className={`${noCarsAvailable? '' : 'hidden'} flex justify-center text-red-600 font-light text-2xl sm:text-4xl mt-20 mb-24 md:mb-0 md:mt-36`}>
+                  {noCarsAvailable? 'Aucune voiture': ''}
+                </span>
                 <div className='grid grid-cols-3 lg:-mr-9 lg:ml-4 mt-6 pt-8'>
                 {currentCars.map((car, index) => (
                   <div key={index} className='col-span-3 lg:col-span-1 mb-6 mx-2'>
