@@ -170,6 +170,9 @@ class LatestOffers(models.Model):
     price_per_day = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     
+    class Meta:
+        verbose_name_plural = 'Offers'
+    
     def __str__(self):
         return self.title
     
