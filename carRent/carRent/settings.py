@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-
+import dj_database_url
+import environ
+env = environ.Env()
+environ.Env.read_env()  # Reads the .env file
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -78,7 +81,7 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.parse('postgresql://postgres:rboAUFFVOQRhUILSbLpodRuDxmxnjNAT@junction.proxy.rlwy.net:15603/railway', conn_max_age=600, ssl_require=True)
+    'default': dj_database_url.parse(f'postgresql://postgres:{env("DB_PASSWORD")}@junction.proxy.rlwy.net:15603/railway', conn_max_age=600, ssl_require=True)
 }
 
 
