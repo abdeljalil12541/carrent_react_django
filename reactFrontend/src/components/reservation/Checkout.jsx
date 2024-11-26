@@ -610,16 +610,16 @@ const handleGoToContactPage = () => {
                 <input type="text" className='hidden' value={dropOffForEmail} name='dropOffForEmail' />
                 <input type="text" className='hidden' value={totalPriceToBook} name='totalPriceToBook' />
                 <input 
-  type="text" 
-  className="hidden" 
-  value={
-    (isAddon1 ? 'GPS' : '') + 
-    (isAddon2 ? `${isAddon1 ? ', ' : ''}Conducteur supplémentaire` : '') + 
-    (isAddon3 ? `${(isAddon1 || isAddon2) ? ', ' : ''}Siège bébé` : '') || 'sans extensions'
-  } 
-  name="addons" 
-/>
-
+                    type="text" 
+                    className="hidden" 
+                    value={
+                        (isAddon1 ? 'GPS' : '') + 
+                        (isAddon2 ? `${isAddon1 ? ', ' : ''}Conducteur supplémentaire` : '') + 
+                        (isAddon3 ? `${(isAddon1 || isAddon2) ? ', ' : ''}Siège bébé` : '') || 
+                        (isAddon1 || isAddon2 || isAddon3 ? '' : 'sans extensions')
+                    } 
+                    name="addons" 
+                />
                 <div>
                     <button type='submit' className='bg-red-600 text-white font-semibold rounded px-4 py-2'>Commander</button>
                 </div>
