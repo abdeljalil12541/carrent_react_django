@@ -75,7 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'carRent.wsgi.application'
 
-
+ 
 # Database
 
 import dj_database_url
