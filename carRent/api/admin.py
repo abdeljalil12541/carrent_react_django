@@ -18,6 +18,9 @@ admin.site.register(GalleryCategory)
 admin.site.register(Contact)
 admin.site.register(Inbox)
 
+admin.site.site_title = "FN Drive"
+admin.site.site_header = "FN Drive admin"
+admin.site.index_title = "Welcome to the Admin Panel"
 
 # Car Admin
 class CarAdmin(admin.ModelAdmin):

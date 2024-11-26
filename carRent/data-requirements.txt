@@ -1,0 +1,55 @@
+car feature:
+Manual
+Jusqu'à 5 passagers
+Jusqu'à 4 passagers
+Jusqu'à 2 passagers
+Hybrid
+Petrol
+Diesel
+Automatique
+6 Portes
+5 Portes
+3 Portes
+2 Portes
+2 Bagages
+
+
+
+default equipment:
+Vitres électriques
+Stéréo CD / MP3
+Radio FM
+Contrôle du climat
+Serrures de porte électrique
+
+
+
+pickup feature:
+Marakkesh Agence
+El jadida Agence
+Casablanca Agence
+
+
+category:
+Voitures 4x4 & 4wd
+voitures-4x4-4wd
+
+Voitures berlines
+voitures-berlines
+
+Voitures citadines
+voitures-citadines
+
+Voitures compactes
+voitures-compactes
+
+Voitures du sport
+voitures-du-sport
+
+
+
+gallery category:
+Steering
+Suspension
+Wheels
+Brakes
