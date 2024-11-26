@@ -83,17 +83,11 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 
 # Database
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',  # Ensure this matches your .env file
-        'USER': 'postgres',
-        'PASSWORD': 'rboAUFFVOQRhUILSbLpodRuDxmxnjNAT',
-        'HOST': 'postgres.railway.internal',
-        'SSL_CERT_DAYS': '820',
-    }
-}
+import dj_database_url
 
+DATABASES = {
+    'default': dj_database_url.parse('postgresql://postgres:rboAUFFVOQRhUILSbLpodRuDxmxnjNAT@junction.proxy.rlwy.net:15603/railway', conn_max_age=600, ssl_require=True)
+}
 
 
 # DATABASES = {
