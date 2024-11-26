@@ -126,16 +126,16 @@ const HomePageBooking = ({ selectedCurrency }) => {
 
     const fetchAvailableCars = async () => {
         const pickupDateTime = formatInTimeZone(
-            new Date(pickupDate), 
-            'UTC', 
+            new Date(pickupDate),
+            'UTC',
             'yyyy-MM-dd\'T\'HH:mm:ss.SSSXXX'
         );
         const dropoffDateTime = formatInTimeZone(
-            new Date(dropoffDate), 
-            'UTC', 
+            new Date(dropoffDate),
+            'UTC',
             'yyyy-MM-dd\'T\'HH:mm:ss.SSSXXX'
         );
-
+    
         try {
             const response = await axios.get("https://carrentreactdjango-production.up.railway.app/api/available-cars/", {
                 params: {
@@ -144,7 +144,7 @@ const HomePageBooking = ({ selectedCurrency }) => {
                 },
             });
             console.log("Response Data:", response.data);
-            setAvailableCars(response.data.available_cars); // Ensure this is the correct path in the response
+            setAvailableCars(response.data.available_cars); // Update the state with the fetched cars
         } catch (error) {
             console.error("Error fetching available cars:", error);
         }
@@ -210,50 +210,47 @@ const options = pickupFeatures.map((pickupFeature) => ({
     );
   };
   
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Combine date and hour to create full datetime strings
     const pickup_datetime = `${pickupDate}T${pickupHour}:00.000Z`;
     const dropoff_datetime = `${dropoffDate}T${dropoffHour}:00.000Z`;
-
     setLoader(true);
 
     console.log('Submitting:', { pickup_datetime, dropoff_datetime });
 
-    // Fetch available cars directly
-    await fetchAvailableCars();
+    // Fetch available cars when form is submitted
+    await fetchAvailableCars(); // This will update the `availableCars` state
 
-    // Prepare the Destination object without the icons
-    const cleanDestination = {
-        selectedOptionDestination1: {
-            value: selectedOptionDestination1.value,
-            label: selectedOptionDestination1.label
-        },
-        selectedOptionDestination2: {
-            value: selectedOptionDestination2.value,
-            label: selectedOptionDestination2.label
-        }
-    };
-
-    // Navigate after a successful fetch, based on the updated state
-    if (availableCars.length > 0) {
-        // Only navigate if there are available cars
-        navigate('/location-de-voitures', { 
-            state: { availableCars: availableCars, HomeBookingDateTime: HomeBookingDateTime, Destination: cleanDestination }
-        });
-    } else {
-        // Handle the case when no cars are available
-        console.log('No available cars found.');
-    }
+    // No need for setTimeout now; navigation is handled by the useEffect
 };
 
-// Watch for changes to availableCars and log after it updates
-useEffect(() => {
-    console.log('Updated availableCars:', availableCars);
-}, [availableCars]);
+
+  useEffect(() => {
+    if (availableCars.length > 0) {
+        const cleanDestination = {
+            selectedOptionDestination1: {
+                value: selectedOptionDestination1.value,
+                label: selectedOptionDestination1.label,
+            },
+            selectedOptionDestination2: {
+                value: selectedOptionDestination2.value,
+                label: selectedOptionDestination2.label,
+            },
+        };
+
+        navigate('/location-de-voitures', {
+            state: {
+                availableCars: availableCars,
+                HomeBookingDateTime: HomeBookingDateTime,
+                Destination: cleanDestination,
+            },
+        });
+    } else if (availableCars.length === 0) {
+        console.log('No available cars found.');
+    }
+}, [availableCars, selectedOptionDestination1, selectedOptionDestination2]); // Trigger navigation when availableCars changes
 
 
 useEffect(() => {
