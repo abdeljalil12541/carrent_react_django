@@ -7,6 +7,7 @@ Hybrid
 Petrol
 Diesel
 Automatique
+Electric
 6 Portes
 5 Portes
 3 Portes
