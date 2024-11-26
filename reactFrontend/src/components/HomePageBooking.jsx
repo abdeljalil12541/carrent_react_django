@@ -218,17 +218,13 @@ const options = pickupFeatures.map((pickupFeature) => ({
     // Combine date and hour to create full datetime strings
     const pickup_datetime = `${pickupDate}T${pickupHour}:00.000Z`;
     const dropoff_datetime = `${dropoffDate}T${dropoffHour}:00.000Z`;
-    setLoader(true)
+
+    setLoader(true);
 
     console.log('Submitting:', { pickup_datetime, dropoff_datetime });
 
-    setTimeout(async () => {
-
-    // Fetch available cars
-    await fetchAvailableCars(); // No need to assign this to a variable
-
-    // After fetching, log available cars
-    console.log('Available Cars:', availableCars); // This may log the previous state
+    // Fetch available cars directly
+    await fetchAvailableCars();
 
     // Prepare the Destination object without the icons
     const cleanDestination = {
@@ -241,20 +237,24 @@ const options = pickupFeatures.map((pickupFeature) => ({
             label: selectedOptionDestination2.label
         }
     };
-    
 
     // Navigate after a successful fetch, based on the updated state
-        if (availableCars.length > 0) {
-            // Only navigate if there are available cars
-            navigate('/location-de-voitures', { 
-                state: { availableCars: availableCars, HomeBookingDateTime: HomeBookingDateTime, Destination: cleanDestination }
-            });
-        } else {
-            // Handle the case when no cars are available
-            console.log('No available cars found.');
-        }
-    }, 1000)
+    if (availableCars.length > 0) {
+        // Only navigate if there are available cars
+        navigate('/location-de-voitures', { 
+            state: { availableCars: availableCars, HomeBookingDateTime: HomeBookingDateTime, Destination: cleanDestination }
+        });
+    } else {
+        // Handle the case when no cars are available
+        console.log('No available cars found.');
+    }
 };
+
+// Watch for changes to availableCars and log after it updates
+useEffect(() => {
+    console.log('Updated availableCars:', availableCars);
+}, [availableCars]);
+
 
 useEffect(() => {
     console.log('destination', Destination)
