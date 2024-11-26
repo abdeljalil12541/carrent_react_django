@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+import environ
+
+# Initialize environment variables
+env = environ.Env()
+environ.Env.read_env()  # Load environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,18 +82,11 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 
 
 # Database
-import environ
-
-# Initialize environment variables
-env = environ.Env()
-
-# Take environment variables from .env file
-environ.Env.read_env()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
+        'NAME': env('DB_NAME'),  # Ensure this matches your .env file
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
         'HOST': env('DB_HOST'),
