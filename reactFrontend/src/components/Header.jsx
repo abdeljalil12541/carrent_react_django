@@ -371,6 +371,8 @@ useEffect(() => {
   // Function to toggle the dropdown on button click
   const toggleCurrencyDropdown = (e) => {
     e.stopPropagation(); // Prevent the event from bubbling up
+
+    setIsOpen(false);
     setIsCurrencyOpen((prev) => !prev); // Toggle dropdown visibility
 };
 
