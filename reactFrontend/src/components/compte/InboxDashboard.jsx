@@ -9,7 +9,7 @@ const InboxDashboard = () => {
   useEffect(() => {
     const FetchInboxObjects = async () => {
       try {
-        const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-inboxs/');
+        const response = await axios.get('https://admin.fn-drive.com/api/get-inboxs/');
         console.log('fetching inboxs successfully...', response.data);
         setInboxs(response.data);
 
@@ -27,7 +27,7 @@ const InboxDashboard = () => {
   useEffect(() => {
     const FetchInboxCount = async () => {
       try {
-        const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/get-notif-count/');
+        const response = await axios.get('https://admin.fn-drive.com/api/get-notif-count/');
         console.log('fetching inbox count successfully...', response.data.notif_count);
         setInboxsCount(response.data.notif_count);
       } catch (error) {

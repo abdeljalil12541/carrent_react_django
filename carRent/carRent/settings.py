@@ -156,15 +156,18 @@ CSRF_COOKIE_NAME = 'csrftoken'
 
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',  # Production React App
+    # 'https://carrent-react-django.vercel.app',  # Production React App
+    'https://www.fn-drive.com',
     # 'http://127.0.0.1:5173',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://carrent-react-django.vercel.app',
-    'https://carrentreactdjango-production.up.railway.app',  # Add this for the new origin
+    # 'https://carrent-react-django.vercel.app',
+    # 'https://admin.fn-drive.com',  # Add this for the new origin
     # 'http://127.0.0.1:5173',
-    # 'https://carrentreactdjango-production.up.railway.app',
+    # 'https://admin.fn-drive.com',
+    'https://www.fn-drive.com',
+    'https://admin.fn-drive.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
 

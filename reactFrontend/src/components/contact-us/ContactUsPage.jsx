@@ -46,7 +46,7 @@ const ContactUsPage = () => {
                 message: message,
             });
 
-            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/contact-us/', 
+            const response = await axios.post('https://admin.fn-drive.com/api/contact-us/', 
                 {
                     first_name: firstName,
                     last_name: lastName,

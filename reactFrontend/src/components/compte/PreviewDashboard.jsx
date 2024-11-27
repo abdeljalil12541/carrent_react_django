@@ -8,7 +8,7 @@ const PreviewDashboard = () => {
     useEffect(() => {
         const fetchBookingInfo = async () => {
           try {
-            const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/booking-info/');
+            const response = await axios.get('https://admin.fn-drive.com/api/booking-info/');
             setBookingCarsLength(response.data.length)
             console.log('response dashboard preview...', response.data.length);
           } catch (error) {

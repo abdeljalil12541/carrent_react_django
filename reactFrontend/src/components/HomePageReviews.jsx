@@ -57,7 +57,7 @@ const Ratings = () => {
         setLoader(true);
         
         try {
-            const response = await axios.post('https://carrentreactdjango-production.up.railway.app/api/add-review/', 
+            const response = await axios.post('https://admin.fn-drive.com/api/add-review/', 
             { name, review, stars, country },
             {
                 withCredentials: true,
@@ -143,7 +143,7 @@ const Ratings = () => {
                         <SwiperSlide>
                             <div className='col-span-1 flex px-8 w-full justify-center flex-col rounded mx-4 commentBg'>
                                 <div className='flex justify-center'>
-                                    <FaStar color='yellow' /><FaStar color='yellow' /><FaStar color='yellow' />
+                                    <FaStar color='yellow' /><FaStar color='yellow' /><FaStar color='yellow' /><FaStar color='yellow' />
                                 </div>
                                 <span className='text-white text-center mt-2'>
                                     I had rented maki's hyundai i10 on Mauritius for great price and it was delivered at the airport with slight delay though but apart of that everything was absolutely fine and no extra hassle. Thanks

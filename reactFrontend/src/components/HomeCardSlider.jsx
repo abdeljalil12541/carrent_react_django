@@ -176,15 +176,15 @@ const HomeCardSlider = ({ selectedCurrency }) => {
         const fetchHomeCardCar = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/home-car-card/');
+                const response = await axios.get('https://admin.fn-drive.com/api/home-car-card/');
                 // Map the fetched data to the structure expected by the Card component
                 const formattedCars = response.data.data.map(car => ({
                     id: car.id,
                     name: car.name,
                     category: car.category.name,
-                    brand: `https://carrentreactdjango-production.up.railway.app${car.brand}`,
+                    brand: `https://admin.fn-drive.com${car.brand}`,
                     slug: car.slug,
-                    image: `https://carrentreactdjango-production.up.railway.app${car.image}`,
+                    image: `https://admin.fn-drive.com${car.image}`,
                     is_available: car.is_available,
                     model: car.model,
                     car_size: car.car_size,

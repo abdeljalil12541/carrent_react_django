@@ -58,7 +58,7 @@ const LatestOffers = ({ selectedCurrency }) => {
         const fetchLatestOffers = async () => {
             try {
                 setLoader(true);
-                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/latest-offers/');
+                const response = await axios.get('https://admin.fn-drive.com/api/latest-offers/');
                 setLatestOffers(response.data);
                 console.log('data...', response.data);
             } catch (error) {
@@ -114,8 +114,8 @@ const LatestOffers = ({ selectedCurrency }) => {
                     default_equipements: offer.car.default_equipment ? offer.car.default_equipment.map(equipement => equipement.name) : [],
                     pickup_features: offer.car.pickup_features ? offer.car.pickup_features.map(pickup_feature => pickup_feature.name) : [],
                     price: offer.car.price_per_day,
-                    image: `https://carrentreactdjango-production.up.railway.app${offer.car.image}`,
-                    brand: `https://carrentreactdjango-production.up.railway.app${offer.car.brand}`,
+                    image: `https://admin.fn-drive.com${offer.car.image}`,
+                    brand: `https://admin.fn-drive.com${offer.car.brand}`,
                     current_location: offer.car.current_location.name,
                     car_size: offer.car.car_size
                 };
@@ -128,7 +128,7 @@ const LatestOffers = ({ selectedCurrency }) => {
                             
                             {/* Main background image */}
                             <img
-                                src={`https://carrentreactdjango-production.up.railway.app${offer.image}`}
+                                src={`https://admin.fn-drive.com${offer.image}`}
                                 alt={offer.title}
                                 className="w-full h-full object-cover scale-x-[-1]"
                             />

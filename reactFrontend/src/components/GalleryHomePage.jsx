@@ -28,7 +28,7 @@ const GalleryHomePage = () => {
     useEffect(() => {
         const Gellery = async () => {
             try{
-                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/gallery/')
+                const response = await axios.get('https://admin.fn-drive.com/api/gallery/')
                 setGalleries(response.data)
                 console.log('galleries', response.data)
             }
@@ -40,7 +40,7 @@ const GalleryHomePage = () => {
     }, [])
 
     const gallery_imgs = galleries.map((gallery) => ({
-        gallery_img: `https://carrentreactdjango-production.up.railway.app${gallery.image}`, gallery_img_alt: gallery.title,
+        gallery_img: `https://admin.fn-drive.com${gallery.image}`, gallery_img_alt: gallery.title,
 
     }));
 

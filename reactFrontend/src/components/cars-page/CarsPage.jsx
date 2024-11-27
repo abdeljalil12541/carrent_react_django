@@ -278,7 +278,7 @@ const CarsPage = ({ selectedCurrency }) => {
         );
 
         try {
-            const response = await axios.get("https://carrentreactdjango-production.up.railway.app/api/available-cars/", {
+            const response = await axios.get("https://admin.fn-drive.com/api/available-cars/", {
                 params: {
                     pickup_datetime: pickupDateTime,
                     dropoff_datetime: dropoffDateTime,
@@ -379,7 +379,7 @@ const CarsPage = ({ selectedCurrency }) => {
     useEffect(() => {
         const fetchPickupFeatures = async () => {
             try{
-                const response = await axios.get('https://carrentreactdjango-production.up.railway.app/api/pick-up-features/')
+                const response = await axios.get('https://admin.fn-drive.com/api/pick-up-features/')
                 setPickupFeatures(response.data.data)
                 console.log("pickup features id:", response.data.data);
             }
