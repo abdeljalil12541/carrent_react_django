@@ -228,17 +228,17 @@ const options = pickupFeatures.map((pickupFeature) => ({
   
 // Handle form submission
 const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Combine date and hour to create full datetime strings
-    const pickup_datetime = `${pickupDate}T${pickupHour}:00.000Z`;
-    const dropoff_datetime = `${dropoffDate}T${dropoffHour}:00.000Z`;
-  
-    console.log('Submitting:', { pickup_datetime, dropoff_datetime });
-  
-    // Fetch available cars and handle navigation
-    await fetchAvailableCars();
-  };
+  e.preventDefault();
+
+  // Combine date and hour to create full datetime strings
+  const pickup_datetime = `${pickupDate}T${pickupHour}:00.000Z`;
+  const dropoff_datetime = `${dropoffDate}T${dropoffHour}:00.000Z`;
+
+  console.log('Submitting:', { pickup_datetime, dropoff_datetime });
+
+  // Fetch available cars and handle navigation
+  await fetchAvailableCars();
+};
 
 
 
