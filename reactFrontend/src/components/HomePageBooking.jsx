@@ -145,6 +145,27 @@ const HomePageBooking = ({ selectedCurrency }) => {
             });
             console.log("Response Data:", response.data);
             setAvailableCars(response.data.available_cars); // Update the state with the fetched cars
+
+            // Navigate after availableCars are fetched
+    const cleanDestination = {
+        selectedOptionDestination1: {
+          value: selectedOptionDestination1.value,
+          label: selectedOptionDestination1.label,
+        },
+        selectedOptionDestination2: {
+          value: selectedOptionDestination2.value,
+          label: selectedOptionDestination2.label,
+        },
+      };
+  
+      navigate('/location-de-voitures', {
+        state: {
+          availableCars: response.data.available_cars,
+          HomeBookingDateTime: HomeBookingDateTime,
+          Destination: cleanDestination,
+        },
+      });
+  
         } catch (error) {
             console.error("Error fetching available cars:", error);
         }
@@ -220,31 +241,8 @@ const handleSubmit = async (e) => {
   
     console.log('Submitting:', { pickup_datetime, dropoff_datetime });
   
-    // Fetch available cars when form is submitted
-    await fetchAvailableCars(); // This will update the `availableCars` state
-  
-    if (availableCars.length > 0) {
-      const cleanDestination = {
-        selectedOptionDestination1: {
-          value: selectedOptionDestination1.value,
-          label: selectedOptionDestination1.label,
-        },
-        selectedOptionDestination2: {
-          value: selectedOptionDestination2.value,
-          label: selectedOptionDestination2.label,
-        },
-      };
-  
-      navigate('/location-de-voitures', {
-        state: {
-          availableCars: availableCars,
-          HomeBookingDateTime: HomeBookingDateTime,
-          Destination: cleanDestination,
-        },
-      });
-    } else {
-      console.log('No available cars found.');
-    }
+    // Fetch available cars and handle navigation
+    await fetchAvailableCars();
   };
 
 
