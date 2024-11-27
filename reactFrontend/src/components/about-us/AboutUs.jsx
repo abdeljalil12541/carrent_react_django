@@ -208,7 +208,6 @@ const AboutUs = () => {
                     </div>
             </div>
 
-            <HomePageMoroccoBaner />
             <HomePageReviews />
             
             
