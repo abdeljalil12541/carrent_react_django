@@ -171,11 +171,6 @@ const HomePageBooking = ({ selectedCurrency }) => {
         }
     };
 
-    useEffect(() => {
-        if (pickupDate && dropoffDate && pickupHour && dropoffHour) {
-            fetchAvailableCars();
-        }
-    }, [pickupDate, dropoffDate, pickupHour, dropoffHour]);
 
     
 
