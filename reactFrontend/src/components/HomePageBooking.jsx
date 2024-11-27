@@ -210,47 +210,43 @@ const options = pickupFeatures.map((pickupFeature) => ({
     );
   };
   
-  const handleSubmit = async (e) => {
+// Handle form submission
+const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Combine date and hour to create full datetime strings
     const pickup_datetime = `${pickupDate}T${pickupHour}:00.000Z`;
     const dropoff_datetime = `${dropoffDate}T${dropoffHour}:00.000Z`;
-    setLoader(true);
-
+  
     console.log('Submitting:', { pickup_datetime, dropoff_datetime });
-
+  
     // Fetch available cars when form is submitted
     await fetchAvailableCars(); // This will update the `availableCars` state
-
-    // No need for setTimeout now; navigation is handled by the useEffect
-};
-
-
-  useEffect(() => {
+  
     if (availableCars.length > 0) {
-        const cleanDestination = {
-            selectedOptionDestination1: {
-                value: selectedOptionDestination1.value,
-                label: selectedOptionDestination1.label,
-            },
-            selectedOptionDestination2: {
-                value: selectedOptionDestination2.value,
-                label: selectedOptionDestination2.label,
-            },
-        };
-
-        navigate('/location-de-voitures', {
-            state: {
-                availableCars: availableCars,
-                HomeBookingDateTime: HomeBookingDateTime,
-                Destination: cleanDestination,
-            },
-        });
-    } else if (availableCars.length === 0) {
-        console.log('No available cars found.');
+      const cleanDestination = {
+        selectedOptionDestination1: {
+          value: selectedOptionDestination1.value,
+          label: selectedOptionDestination1.label,
+        },
+        selectedOptionDestination2: {
+          value: selectedOptionDestination2.value,
+          label: selectedOptionDestination2.label,
+        },
+      };
+  
+      navigate('/location-de-voitures', {
+        state: {
+          availableCars: availableCars,
+          HomeBookingDateTime: HomeBookingDateTime,
+          Destination: cleanDestination,
+        },
+      });
+    } else {
+      console.log('No available cars found.');
     }
-}, [availableCars, selectedOptionDestination1, selectedOptionDestination2]); // Trigger navigation when availableCars changes
+  };
+
 
 
 useEffect(() => {
