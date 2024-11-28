@@ -82,7 +82,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(
-        f'postgresql://postgres:rboAUFFVOQRhUILSbLpodRuDxmxnjNAT@junction.proxy.rlwy.net:15603/railway',
+        f'postgresql://postgres:{env.str("DB_PASSWORD")}@junction.proxy.rlwy.net:15603/railway',
         conn_max_age=600,
         ssl_require=True
     )
@@ -167,7 +167,6 @@ CSRF_TRUSTED_ORIGINS = [
     # 'http://127.0.0.1:5173',
     # 'https://admin.fn-drive.com',
     'https://www.fn-drive.com',
-    'https://carrent.fly.dev',
     'https://admin.fn-drive.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
