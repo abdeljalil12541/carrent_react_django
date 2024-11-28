@@ -8,7 +8,7 @@ const PreviewDashboard = () => {
     useEffect(() => {
         const fetchBookingInfo = async () => {
           try {
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/booking-info/');
+            const response = await axios.get('https://admin.fn-drive.com/api/booking-info/');
             setBookingCarsLength(response.data.length)
             console.log('response dashboard preview...', response.data.length);
           } catch (error) {

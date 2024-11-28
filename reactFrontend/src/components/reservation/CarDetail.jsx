@@ -439,7 +439,7 @@ const handleChangeOptionDestination2 = (option) => {
   useEffect(() => {
     const fetchPickupFeatures = async () => {
         try{
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/pick-up-features/')
+            const response = await axios.get('https://admin.fn-drive.com/api/pick-up-features/')
             setPickupFeatures(response.data.data)
         }
         catch(error) {
@@ -607,7 +607,7 @@ const [loader, setLoader] = useState(false);
 useEffect(() => {
     const checkAuthStatus = async () => {
         try {
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/check_authentication/', { withCredentials: true });
+            const response = await axios.get('https://admin.fn-drive.com/api/check_authentication/', { withCredentials: true });
             setIsAuthenticated(response.data.isAuthenticated);
             if (response.data.isAuthenticated) {
                 getUserInfo(); // Fetch user info if authenticated
@@ -623,7 +623,7 @@ useEffect(() => {
 // Fetch authenticated user info
 const getUserInfo = async () => {
     try {
-        const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-info/', { withCredentials: true });
+        const response = await axios.get('https://admin.fn-drive.com/api/user-info/', { withCredentials: true });
         setAuthenticatedUser(response.data.user);
     } catch (error) {
         console.error('Error fetching user info:', error);
@@ -640,7 +640,7 @@ const getCSRFToken = () => {
 useEffect(() => {
     const fetchWishlistStatus = async () => {
         try {
-            const response = await axios.get(`https://carrent-polished-shadow-812.fly.dev/api/get-wishlist-status/${car.id}/${authenticatedUser.id}/`, {
+            const response = await axios.get(`https://admin.fn-drive.com/api/get-wishlist-status/${car.id}/${authenticatedUser.id}/`, {
                 withCredentials: true,
                 headers: {
                     "X-CSRFToken": getCSRFToken(),
@@ -664,7 +664,7 @@ const addWishlist = async () => {
     try {
         if (!isAdded) {
             // Add to wishlist
-            const response = await axios.post('https://carrent-polished-shadow-812.fly.dev/api/add-wishlist/', {
+            const response = await axios.post('https://admin.fn-drive.com/api/add-wishlist/', {
                 user: authenticatedUser.id,
                 car: car.id,
                 is_added: true,
@@ -679,7 +679,7 @@ const addWishlist = async () => {
             toast.success('Added to wishlist!');
         } else {
             // Remove from wishlist
-            await axios.delete(`https://carrent-polished-shadow-812.fly.dev/api/remove-wishlist/${car.id}/${authenticatedUser.id}/`, {
+            await axios.delete(`https://admin.fn-drive.com/api/remove-wishlist/${car.id}/${authenticatedUser.id}/`, {
                 withCredentials: true,
                 headers: {
                     "X-CSRFToken": getCSRFToken(),
@@ -736,7 +736,7 @@ useEffect(() => {
             
                 <div className="grid grid-cols-4">
                     <div className="col-span-4 sm:col-span-1 mb-4 border border-red-600 rounded mx-2 sm:mx-0 lg:mr-0">
-                    {car.brand !== 'https://carrent-polished-shadow-812.fly.devnull' && car.brand ? (
+                    {car.brand !== 'https://admin.fn-drive.comnull' && car.brand ? (
                             <div className="flex justify-center w-full">
                                 <img src={car.brand} className="w-32 -mb-6" alt="Car Brand" />
                             </div>

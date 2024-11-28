@@ -55,7 +55,7 @@ const ReservationHistoryDashboard = ({ selectedCurrency }) => {
   const fetchBookingHistoriesInfo = async () => {
     try {
       const apiStatus = STATUS_MAP[selectedStatus];
-      const response = await axios.get(`https://carrent-polished-shadow-812.fly.dev/api/booking-info/`, {
+      const response = await axios.get(`https://admin.fn-drive.com/api/booking-info/`, {
         params: { status: apiStatus }
       });
       setBookingCarsHistories(response.data);

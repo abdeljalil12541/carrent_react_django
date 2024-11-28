@@ -7,7 +7,7 @@ const PickupFeatures = ({ activeIndices, contentRef4, showFilter, onPickupFeatur
     useEffect(() => {
         const fetchPickupFeatures = async () => {
             try {
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/pick-up-features/');
+                const response = await axios.get('https://admin.fn-drive.com/api/pick-up-features/');
                 setPickUpFeatures(response.data.data.map((pickUpFeatures) => pickUpFeatures.name))
                 } catch (error) {
                 console.error('Error fetching pick up features:', error);

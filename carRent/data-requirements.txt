@@ -13,7 +13,8 @@ Electric
 3 Portes
 2 Portes
 2 Bagages
-
+Electric
+CVT
 
 
 default equipment:

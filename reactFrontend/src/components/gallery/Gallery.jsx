@@ -18,7 +18,7 @@ const Gallery = () => {
     useEffect(() => {
         const GelleryCategory = async () => {
             try{
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/gallery-categroy/')
+                const response = await axios.get('https://admin.fn-drive.com/api/gallery-categroy/')
                 setGalleriesCategory(response.data)
                 console.log('galleries category', response.data)
             }
@@ -33,7 +33,7 @@ const Gallery = () => {
         const Gellery = async () => {
             try{
                 setLoader(true);
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/gallery/')
+                const response = await axios.get('https://admin.fn-drive.com/api/gallery/')
                 setGalleries(response.data)
                 console.log('galleries', response.data)
             }
@@ -60,7 +60,7 @@ const Gallery = () => {
 
     const images = galleries.map(gallery => ({
         id: gallery.id,
-        src: `https://carrent-polished-shadow-812.fly.dev${gallery.image}`,
+        src: `https://admin.fn-drive.com${gallery.image}`,
         category: gallery.category.title,
         alt: gallery.title,
     }))

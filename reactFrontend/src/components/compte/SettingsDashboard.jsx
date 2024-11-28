@@ -30,13 +30,13 @@ const SettingsDashboard = () => {
     useEffect(() => {
     const FetchUserDashboard = async () => {
         try {
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-dashboard/', { withCredentials: true });
+            const response = await axios.get('https://admin.fn-drive.com/api/user-dashboard/', { withCredentials: true });
             console.log('response user dashboard', response.data);
 
             setUsername(response.data.user_data.username);
             setEmail(response.data.user_data.email);
             setPhoneNumber(response.data.user_data.user_profile.phone_number);
-            setAvatar(`https://carrent-polished-shadow-812.fly.dev${response.data.user_data.user_profile.avatar}`);
+            setAvatar(`https://admin.fn-drive.com${response.data.user_data.user_profile.avatar}`);
             setBio(response.data.user_data.user_profile.bio);
 
             setUsernameId(response.data.user_data.username);
@@ -61,7 +61,7 @@ const UpdateUser = async (e) => {
     e.preventDefault();
     try {
         const response = await axios.put(
-            `https://carrent-polished-shadow-812.fly.dev/api/user-update/${usernameId}/`,
+            `https://admin.fn-drive.com/api/user-update/${usernameId}/`,
             { username, email },
             {
                 headers: { 'X-CSRFToken': getCSRFToken() },
@@ -93,7 +93,7 @@ const UpdateProfile = async (e) => {
         }
         
         const response = await axios.put(
-            `https://carrent-polished-shadow-812.fly.dev/api/update-profile/${usernameId}/`,
+            `https://admin.fn-drive.com/api/update-profile/${usernameId}/`,
             formData,
             {
                 headers: { 
@@ -127,7 +127,7 @@ const UpdatePassword = async (e) => {
     setLoader(true);
     try {
         const response = await axios.put(
-            'https://carrent-polished-shadow-812.fly.dev/api/update-password/',  // Note: no username in URL
+            'https://admin.fn-drive.com/api/update-password/',  // Note: no username in URL
             {
                 old_password: currentPassword,
                 new_password: newPassword

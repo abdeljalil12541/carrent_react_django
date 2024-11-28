@@ -10,7 +10,7 @@ const CarsCategory = ({ activeIndices, contentRef3, showFilter, onCategoryChange
         const fetchCategories = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/categories/');
+                const response = await axios.get('https://admin.fn-drive.com/api/categories/');
                 setCategories(response.data.data.map((category) => category.name));
             } catch (error) {
                 console.error('Error fetching categories:', error);

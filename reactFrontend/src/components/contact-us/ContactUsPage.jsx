@@ -46,7 +46,7 @@ const ContactUsPage = () => {
                 message: message,
             });
 
-            const response = await axios.post('https://carrent-polished-shadow-812.fly.dev/api/contact-us/', 
+            const response = await axios.post('https://admin.fn-drive.com/api/contact-us/', 
                 {
                     first_name: firstName,
                     last_name: lastName,

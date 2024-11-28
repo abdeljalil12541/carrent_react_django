@@ -8,7 +8,7 @@ const FeaturesFilter = ({ activeIndices, contentRef1, showFilter, onFeatureChang
     useEffect(() => {
         const fetchFeatures = async () => {
             try {
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/features/');
+                const response = await axios.get('https://admin.fn-drive.com/api/features/');
                 setFeatures(response.data.data.map((feature) => feature.name))
                 } catch (error) {
                 console.error('Error fetching features:', error);

@@ -164,12 +164,11 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = [
     # 'https://carrent-react-django.vercel.app',
-    # 'https://carrent-polished-shadow-812.fly.dev',  # Add this for the new origin
+    # 'https://admin.fn-drive.com',  # Add this for the new origin
     # 'http://127.0.0.1:5173',
-    # 'https://carrent-polished-shadow-812.fly.dev',
+    # 'https://admin.fn-drive.com',
     'https://www.fn-drive.com',
-    'https://carrent-polished-shadow-812.fly.dev',
-    'https://carrent-polished-shadow-812.fly.dev'
+    'https://admin.fn-drive.com',
 ]
 CORS_ALLOW_CREDENTIALS = True
 

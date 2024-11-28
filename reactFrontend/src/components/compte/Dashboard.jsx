@@ -19,7 +19,7 @@ const Dashboard = ({ selectedCurrency }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             try {
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/check_authentication/', { withCredentials: true });
+                const response = await axios.get('https://admin.fn-drive.com/api/check_authentication/', { withCredentials: true });
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
@@ -35,7 +35,7 @@ const Dashboard = ({ selectedCurrency }) => {
     // Fetch authenticated user info
     const getUserInfo = async () => {
         try {
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-info/', { withCredentials: true });
+            const response = await axios.get('https://admin.fn-drive.com/api/user-info/', { withCredentials: true });
             setAuthenticatedUser(response.data.user);
         } catch (error) {
             console.error('Error fetching user info:', error);
@@ -45,7 +45,7 @@ const Dashboard = ({ selectedCurrency }) => {
     useEffect(() => {
         const FetchInboxCount = async () => {
         try{
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/get-notif-count/')
+            const response = await axios.get('https://admin.fn-drive.com/api/get-notif-count/')
             console.log('fetching inboxs successfully...', response.data.notif_count)
             setInboxsCount(response.data.notif_count)
         }catch(error) {
@@ -70,7 +70,7 @@ const Dashboard = ({ selectedCurrency }) => {
     
         try {
             const response = await axios.post(
-                `https://carrent-polished-shadow-812.fly.dev/api/reset-notif-count/${authenticatedUser.id}/`,
+                `https://admin.fn-drive.com/api/reset-notif-count/${authenticatedUser.id}/`,
                 {}, // Pass an empty object as the body
                 {
                     withCredentials: true,
@@ -98,12 +98,12 @@ const Dashboard = ({ selectedCurrency }) => {
         const FetchUserDashboar = async () => {
             try{
                 setLoader(true);
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-dashboard/', { withCredentials: true })
+                const response = await axios.get('https://admin.fn-drive.com/api/user-dashboard/', { withCredentials: true })
                 .then((response) => {
                     console.log('response user dashboard', response.data)
 
                     setavUsernameDashboar(response.data.user_data.username)
-                    setavAtarDashboar(`https://carrent-polished-shadow-812.fly.dev${response.data.user_data.user_profile.avatar}`)
+                    setavAtarDashboar(`https://admin.fn-drive.com${response.data.user_data.user_profile.avatar}`)
                 })
                 
             }catch(error){

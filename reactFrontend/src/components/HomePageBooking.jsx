@@ -137,7 +137,7 @@ const HomePageBooking = ({ selectedCurrency }) => {
         );
     
         try {
-            const response = await axios.get("https://carrent-polished-shadow-812.fly.dev/api/available-cars/", {
+            const response = await axios.get("https://admin.fn-drive.com/api/available-cars/", {
                 params: {
                     pickup_datetime: pickupDateTime,
                     dropoff_datetime: dropoffDateTime,
@@ -197,7 +197,7 @@ const handleChangeOptionDestination2 = (option) => {
   useEffect(() => {
     const fetchPickupFeatures = async () => {
         try{
-            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/pick-up-features/')
+            const response = await axios.get('https://admin.fn-drive.com/api/pick-up-features/')
             setPickupFeatures(response.data.data)
         }
         catch(error) {
@@ -250,7 +250,7 @@ const [minPrice, setMinPrice] = useState(0);
 useEffect(() => {
     const fetchPriceFilter = async () => {
       try {
-        const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/price-filter/');
+        const response = await axios.get('https://admin.fn-drive.com/api/price-filter/');
         setMinPrice(response.data.min_price);
       } catch (error) {
         console.error('Error fetching features:', error);
@@ -273,7 +273,7 @@ useEffect(() => {
     useEffect(() => {
         const fetchCarsCount = async () => {
             try {
-                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/home-car-card/');
+                const response = await axios.get('https://admin.fn-drive.com/api/home-car-card/');
                 // Map the fetched data to the structure expected by the Card component
                 setCarsCount(response.data.cars_count);
                 console.log('home car cards data', response.data.cars_count);

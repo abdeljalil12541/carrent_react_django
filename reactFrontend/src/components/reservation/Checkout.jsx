@@ -98,7 +98,7 @@ const Checkout = ({ selectedCurrency }) => {
   useEffect(() => {
       const checkAuthStatus = async () => {
           try {
-              const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/check_authentication/', { withCredentials: true });
+              const response = await axios.get('https://admin.fn-drive.com/api/check_authentication/', { withCredentials: true });
               setIsAuthenticated(response.data.isAuthenticated);
               if (response.data.isAuthenticated) {
                   getUserInfo(); // Fetch user info if authenticated
@@ -114,7 +114,7 @@ const Checkout = ({ selectedCurrency }) => {
   // Fetch authenticated user info
   const getUserInfo = async () => {
       try {
-          const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-info/', { withCredentials: true });
+          const response = await axios.get('https://admin.fn-drive.com/api/user-info/', { withCredentials: true });
           setAuthenticatedUser(response.data.user);
       } catch (error) {
           console.error('Error fetching user info:', error);
@@ -342,7 +342,7 @@ const CreateBoking = async (e) => {
 
     setTimeout(async () => {
         try {
-            const response = await fetch("https://carrent-polished-shadow-812.fly.dev/api/create-booking/", {
+            const response = await fetch("https://admin.fn-drive.com/api/create-booking/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -377,7 +377,7 @@ const CreateBoking = async (e) => {
                 if (isNewsletterChecked) {
                     try {
                         const newsletterResponse = await axios.post(
-                            'https://carrent-polished-shadow-812.fly.dev/api/add-news-letter/',
+                            'https://admin.fn-drive.com/api/add-news-letter/',
                             { email: emailAddress },
                             { withCredentials: true }
                         );
