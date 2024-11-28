@@ -82,11 +82,12 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(
-        f'postgresql://postgres:rboAUFFVOQRhUILSbLpodRuDxmxnjNAT@junction.proxy.rlwy.net:15603/railway',
+        f'postgresql://fn-drive-database_owner:VyJjPlIA4WD1@ep-billowing-poetry-a5yclt2z.us-east-2.aws.neon.tech/fn-drive-database',
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=False  # Disable SSL requirement here
     )
 }
+
 
 
 # DATABASES = {
@@ -163,11 +164,12 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = [
     # 'https://carrent-react-django.vercel.app',
-    # 'https://admin.fn-drive.com',  # Add this for the new origin
+    # 'https://carrent-polished-shadow-812.fly.dev',  # Add this for the new origin
     # 'http://127.0.0.1:5173',
-    # 'https://admin.fn-drive.com',
+    # 'https://carrent-polished-shadow-812.fly.dev',
     'https://www.fn-drive.com',
-    'https://admin.fn-drive.com'
+    'https://carrent-polished-shadow-812.fly.dev',
+    'https://carrent-polished-shadow-812.fly.dev'
 ]
 CORS_ALLOW_CREDENTIALS = True
 

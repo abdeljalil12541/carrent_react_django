@@ -280,11 +280,11 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
       const fetchHomeCardCar = async () => {
           try {
               setLoader(true);
-              const response = await axios.get('https://admin.fn-drive.com/api/home-car-card/');
+              const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/home-car-card/');
               const formattedCars = response.data.data.map(car => ({
                   id: car.id,
                   name: car.name,
-                  image: `https://admin.fn-drive.com${car.image}`,
+                  image: `https://carrent-polished-shadow-812.fly.dev${car.image}`,
                   is_available: car.is_available,
                   slug: car.slug,
                   car_size: car.car_size_display,
@@ -292,7 +292,7 @@ const CarsForRent = ({ selectedCurrency, selectedCategories, selectedPickupFeatu
                   car_features: car.car_features.map(feature => feature.name),
                   default_equipements: car.default_equipment.map(equipement => equipement.name),
                   category: car.category.name,
-                  brand: `https://admin.fn-drive.com${car.brand}`,
+                  brand: `https://carrent-polished-shadow-812.fly.dev${car.brand}`,
                   pickup_features: car.pickup_features.map((pickup_feature) => pickup_feature.name),
                   current_location: car.current_location.name,
               }));

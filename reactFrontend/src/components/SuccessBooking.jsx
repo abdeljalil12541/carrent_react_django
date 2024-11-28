@@ -78,7 +78,7 @@ const SuccessBooking = ({ selectedCurrency }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             try {
-                const response = await axios.get('https://admin.fn-drive.com/api/check_authentication/', { withCredentials: true });
+                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/check_authentication/', { withCredentials: true });
                 setIsAuthenticated(response.data.isAuthenticated);
                 if (response.data.isAuthenticated) {
                     getUserInfo(); // Fetch user info if authenticated
@@ -93,7 +93,7 @@ const SuccessBooking = ({ selectedCurrency }) => {
 
     const getUserInfo = async () => {
         try {
-            const response = await axios.get('https://admin.fn-drive.com/api/user-info/', { withCredentials: true });
+            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-info/', { withCredentials: true });
             setAuthenticatedUser(response.data.user);
         } catch (error) {
             console.log('Error fetching user info:', error);

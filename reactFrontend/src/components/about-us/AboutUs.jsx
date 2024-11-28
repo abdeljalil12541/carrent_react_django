@@ -83,7 +83,7 @@ const AboutUs = () => {
         setLoader(true);
         
         try {
-            const response = await axios.post('https://admin.fn-drive.com/api/add-review/', 
+            const response = await axios.post('https://carrent-polished-shadow-812.fly.dev/api/add-review/', 
             {
                 name: name,
                 review: review,

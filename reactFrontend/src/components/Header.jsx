@@ -34,7 +34,7 @@ const Header = ({ selectedCurrency, onCurrencyChange }) => {
      // Function to fetch CSRF token from the backend
      const getCSRFToken = async () => {
         try {
-            const response = await axios.get('https://admin.fn-drive.com/api/get-csrf-token/', { withCredentials: true });
+            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/get-csrf-token/', { withCredentials: true });
             const csrfToken = response.data.csrfToken;
             if (csrfToken) {
                 setCookie('csrftoken', csrfToken, { path: '/', sameSite: 'None', secure: true });
@@ -129,7 +129,7 @@ useEffect(() => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             try {
-                const response = await axios.get('https://admin.fn-drive.com/api/check_authentication/', { withCredentials: true });
+                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/check_authentication/', { withCredentials: true });
                 console.log('CSRF Token:', getCookie('csrftoken'));
                 console.log('Session ID:', getCookie('sessionid'));
                 setIsAuthenticated(response.data.isAuthenticated);
@@ -152,13 +152,13 @@ useEffect(() => {
 
     const getUserInfo = async () => {
         try {
-            const response = await axios.get('https://admin.fn-drive.com/api/user-info/', { withCredentials: true });
+            const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/user-info/', { withCredentials: true });
             setAuthenticatedUser(response.data.user);
             console.log('Authenticated User:', response.data.user); // Log user info
 
             // Check if profile and avatar exist before setting the URL
             if (response.data.user.user_profile?.avatar) {
-                setUserAvatar(`https://admin.fn-drive.com${response.data.user.user_profile.avatar}`);
+                setUserAvatar(`https://carrent-polished-shadow-812.fly.dev${response.data.user.user_profile.avatar}`);
             }
         } catch (error) {
             console.log('Error fetching user info:', error);
@@ -196,7 +196,7 @@ useEffect(() => {
         }
 
         try {
-            const response = await axios.post('https://admin.fn-drive.com/api/user-creation/',
+            const response = await axios.post('https://carrent-polished-shadow-812.fly.dev/api/user-creation/',
             { username, email, password, full_name },
             { headers: { 'X-CSRFToken': getCSRFToken() }, withCredentials: true }
             );
@@ -241,7 +241,7 @@ useEffect(() => {
 
         try {
             // The CSRF token will automatically be included in the headers
-            const response = await axios.post('https://admin.fn-drive.com/api/user-login/', 
+            const response = await axios.post('https://carrent-polished-shadow-812.fly.dev/api/user-login/', 
                 { loginEmail, loginPassword }
             );
             console.log('User Login', response.data);
@@ -317,7 +317,7 @@ useEffect(() => {
 
                 // Perform the logout request with CSRF token
                 const response = await axios.post(
-                    'https://admin.fn-drive.com/api/logout/', 
+                    'https://carrent-polished-shadow-812.fly.dev/api/logout/', 
                     {}, 
                     { 
                         headers: {

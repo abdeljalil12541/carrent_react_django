@@ -18,7 +18,7 @@ const Footer = () => {
         e.preventDefault();
         setLoader(true)
         try{
-            const response = await axios.post('https://admin.fn-drive.com/api/add-news-letter/', {email}, {withCredentials: true})
+            const response = await axios.post('https://carrent-polished-shadow-812.fly.dev/api/add-news-letter/', {email}, {withCredentials: true})
             console.log('news letter added successfully', response.data);
             toast.success('news letter added successfully')
             setEmail('')

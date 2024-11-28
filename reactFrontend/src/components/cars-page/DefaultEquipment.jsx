@@ -7,7 +7,7 @@ const DefaultEquipment = ({ activeIndices, contentRef5, showFilter, onDefaultEqu
     useEffect(() => {
         const fetchDefaultEquipments = async () => {
             try {
-                const response = await axios.get('https://admin.fn-drive.com/api/default-equipment/');
+                const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/default-equipment/');
                 setDefaultEquipments(response.data.data.map((defaultEquipment) => defaultEquipment.name))
                 } catch (error) {
                 console.error('Error fetching categories:', error);

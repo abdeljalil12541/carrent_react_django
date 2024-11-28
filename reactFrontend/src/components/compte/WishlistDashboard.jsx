@@ -59,15 +59,15 @@ const WishlistDashboard = ({ selectedCurrency }) => {
   useEffect(() => {
     const FetchWishlistObjects = async () => {
       try{
-        const response = await axios.get('https://admin.fn-drive.com/api/get-wishlist-objects/')
+        const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/get-wishlist-objects/')
 
         const formattedWishlistCars = response.data.map(item => ({
           id: item.car.id,
           name: item.car.name,
           category: item.car.category.name,
           slug: item.car.slug,
-          image: `https://admin.fn-drive.com${item.car.image}`,
-          brand: `https://admin.fn-drive.com${item.car.brand}`,
+          image: `https://carrent-polished-shadow-812.fly.dev${item.car.image}`,
+          brand: `https://carrent-polished-shadow-812.fly.dev${item.car.brand}`,
           is_available: item.car.is_available,
           model: item.car.model,
           car_size: item.car.car_size,

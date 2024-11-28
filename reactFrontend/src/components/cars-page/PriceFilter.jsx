@@ -63,7 +63,7 @@ const PriceFilter = ({ activeIndices, contentRef2, showFilter, onFilterPriceChan
   useEffect(() => {
     const fetchPriceFilter = async () => {
       try {
-        const response = await axios.get('https://admin.fn-drive.com/api/price-filter/');
+        const response = await axios.get('https://carrent-polished-shadow-812.fly.dev/api/price-filter/');
         setMinPrice(response.data.min_price);
         setMaxPrice(response.data.max_price);
       } catch (error) {
