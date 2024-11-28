@@ -82,7 +82,7 @@ import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(
-        f'postgresql://postgres:{env.str("DB_PASSWORD")}@junction.proxy.rlwy.net:15603/railway',
+        f'postgresql://postgres:{env.str("DATABASE_URL")}@junction.proxy.rlwy.net:15603/railway',
         conn_max_age=600,
         ssl_require=True
     )
