@@ -167,6 +167,7 @@ CSRF_TRUSTED_ORIGINS = [
     # 'http://127.0.0.1:5173',
     # 'https://admin.fn-drive.com',
     'https://www.fn-drive.com',
+    'https://carrent.fly.dev',
     'https://admin.fn-drive.com'
 ]
 CORS_ALLOW_CREDENTIALS = True
