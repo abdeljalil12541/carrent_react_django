@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 import environ
+
 env = environ.Env()
 environ.Env.read_env()  # Reads the .env file
 
@@ -77,12 +78,11 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 
  
 # Database
-
-import dj_database_url
+db_password = os.getenv('DB_PASSWORD')
 
 DATABASES = {
     'default': dj_database_url.parse(
-        f'postgresql://fn-drive-database_owner:VyJjPlIA4WD1@ep-billowing-poetry-a5yclt2z.us-east-2.aws.neon.tech/fn-drive-database',
+        f'postgresql://postgres:{db_password}@junction.proxy.rlwy.net:15603/railway',
         conn_max_age=600,
         ssl_require=False  # Disable SSL requirement here
     )
