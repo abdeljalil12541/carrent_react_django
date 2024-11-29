@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'carRent.wsgi.application'
 
  
 # Database
-db_password = os.getenv('DB_PASSWORD')
+db_password = os.getenv('DB_PASgfdSWORD')
 
 DATABASES = {
     'default': dj_database_url.parse(
