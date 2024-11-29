@@ -75,15 +75,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'carRent.wsgi.application'
 
-import dj_database_url
-
+ 
 # Database
-DATABASE_URL = os.getenv('DATABASE_URL')
 
+import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(
-        DATABASE_URL,
+        f'postgresql://fn-drive-database_owner:VyJjPlIA4WD1@ep-billowing-poetry-a5yclt2z.us-east-2.aws.neon.tech/fn-drive-database',
         conn_max_age=600,
         ssl_require=False  # Disable SSL requirement here
     )
@@ -201,3 +200,4 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = '/data/media'  # Path where media will be stored on Fly.io
